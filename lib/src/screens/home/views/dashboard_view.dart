@@ -16,47 +16,55 @@ class _DashboardViewState extends State<DashboardView> {
         iconTheme: const IconThemeData(color: colorName.primary),
         backgroundColor: colorName.background,
         elevation: 0,
-        title: Row(
-          children: [
-            "Selamat Datang, "
-                .richText
-                .color(colorName.black)
-                .fontFamily('nunito')
-                .bold
-                .size(14)
-                .make(),
-            "User Name"
-                .text
-                .size(14)
-                .fontFamily('nunito')
-                .color(colorName.secondary)
-                .bold
-                .make(),
-            " !".richText.size(20).color(colorName.black).make(),
-          ],
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_active_outlined),
-            color: colorName.black,
+        title: Row(children: [
+          BlocBuilder<UserBloc, UserState>(
+            builder: (context, state) {
+              if (state is UserIsSuccess) {
+                return HStack(
+                  [
+                    "Hello, "
+                        .text
+                        .fontFamily('nunito')
+                        .color(colorName.black)
+                        .size(16)
+                        .bold
+                        .make(),
+                    state.data.username!.text
+                        .fontFamily('nunito')
+                        .color(colorName.secondary)
+                        .size(16)
+                        .bold
+                        .make(),
+                    " ! "
+                        .text
+                        .fontFamily('nunito')
+                        .color(colorName.black)
+                        .size(16)
+                        .bold
+                        .make()
+                  ],
+                );
+              }
+              return 0.heightBox;
+            },
           ),
-        ],
+        ]),
       ),
       body: SafeArea(
         child: VStack([
           10.heightBox,
-          _buildText().pOnly(left: 20, right: 20),
+          _buildText(),
           10.heightBox,
-          _buildSearch(context).pOnly(left: 20, right: 20),
+          //_buildSearch(context),
           20.heightBox,
-          _buildAlamat(context).pOnly(left: 20, right: 20),
+          _buildAlamat(context),
           20.heightBox,
-          //  _buildPromo(),
-          15.heightBox,
-          _buildText1().pOnly(left: 20, right: 20),
+          _buildPromo(),
+          25.heightBox,
+          _buildText1(),
+          5.heightBox,
           _buildListProduct(),
-        ]),
+        ]).pOnly(left: 20, right: 20),
       ).scrollVertical(),
     );
   }
@@ -66,21 +74,28 @@ class _DashboardViewState extends State<DashboardView> {
       children: [
         Row(
           children: [
-            "Lorem Ipsum Dolor "
+            "Selamat Datang "
                 .richText
-                .size(16)
-                .fontFamily('nunito')
+                .size(18)
+                .fontFamily('nunitoexb')
+                .color(colorName.button)
                 .bold
                 .make(),
           ],
         ),
         Row(
           children: [
-            "at ".richText.size(16).fontFamily('nunito').make(),
+            "di "
+                .richText
+                .size(18)
+                .fontFamily('nunitoexb')
+                .color(colorName.button)
+                .bold
+                .make(),
             "Lestari Laundry!"
                 .richText
-                .size(16)
-                .fontFamily('nunito')
+                .size(18)
+                .fontFamily('nunitoexb')
                 .bold
                 .color(colorName.primary)
                 .make(),
@@ -157,7 +172,13 @@ class _DashboardViewState extends State<DashboardView> {
       children: [
         Row(
           children: [
-            "Our services ".richText.size(16).fontFamily('nunito').bold.make(),
+            "Our services "
+                .richText
+                .size(18)
+                .fontFamily('nunitoexb')
+                .color(colorName.button)
+                .bold
+                .make(),
           ],
         ),
       ],
@@ -166,11 +187,10 @@ class _DashboardViewState extends State<DashboardView> {
 
   Widget _buildListProduct() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Card(
           color: colorName.secondary,
-          margin: const EdgeInsets.all(25),
           child: InkWell(
             onTap: () {
               context.goNamed('kilogram');
@@ -189,7 +209,6 @@ class _DashboardViewState extends State<DashboardView> {
         ),
         Card(
           color: colorName.secondary,
-          margin: const EdgeInsets.all(10),
           child: InkWell(
             onTap: () {
               context.goNamed('satuan');
@@ -207,6 +226,6 @@ class _DashboardViewState extends State<DashboardView> {
           ),
         ),
       ],
-    ).scrollHorizontal();
+    );
   }
 }

@@ -6,21 +6,22 @@ class UserService {
       FirebaseFirestore.instance.collection(usersCollectionName);
 
   Future<Either<String, UserModel>> registerWithEmail(
-      {String? email, String? password, String? name, String? mobile}) async {
+      {String? email,
+      String? password,
+      String? username,
+      String? mobile}) async {
     try {
       final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email!, password: password!);
 
-      //Kumpulkan Data
       final userData = UserModel(
           admin: false,
           email: userCredential.user!.email,
           mobile: mobile,
           photoProfile: '',
           uid: userCredential.user!.uid,
-          username: name);
+          username: username);
 
-      //Uplload Data ke firebase firestore
       usersCollection.doc(userCredential.user!.uid).set(userData.toMap());
 
       return right(userData);

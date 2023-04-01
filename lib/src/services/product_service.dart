@@ -81,23 +81,6 @@ class ProductService {
     }
   }
 
-  Future<Either<String, int>> getCartItemCount() async {
-    try {
-      String uid = await Commons().getUID();
-      final querySnapshot =
-          await usersCollection.doc(uid).collection(cartCollectionName).get();
-      final data = querySnapshot.docs
-          .map((e) => ProductModel.fromMap(e.data()))
-          .toList();
-      final dataFiltered = <dynamic>{}; //variabel penampung untuk hasil filter
-      data.retainWhere(
-          (x) => dataFiltered.add(x.variant![0])); //mengahpus data yang kembar
-      return right(dataFiltered.length);
-    } catch (e) {
-      return left(e.toString());
-    }
-  }
-
   Future<Either<String, String>> removeCartItemCount(ProductModel model) async {
     try {
       String uid = await Commons().getUID();

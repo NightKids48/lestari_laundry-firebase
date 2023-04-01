@@ -53,6 +53,9 @@ dependencies:
   quickalert: ^1.0.1
   alert_dialog: ^1.0.0
   art_sweetalert: ^0.0.5
+  flutter_easyloading: ^3.0.5
+  snippet_coder_utils: ^1.0.13
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:
@@ -111,11 +114,18 @@ flutter:
     - images/min.png
     - images/plus.png
     - images/frame.png
+    - images/id.png
+    - images/cod.png
+    - images/qris.png
+    - images/seru.png
 
   fonts:
     - family: nunito
       fonts:
         - asset: fonts/nunito.ttf
+    - family: nunitoexb
+      fonts:
+        - asset: fonts/nunitoexb.ttf
 
   #
   # For details regarding fonts from package dependencies,

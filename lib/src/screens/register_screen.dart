@@ -8,241 +8,197 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: BlocListener<RegisterBloc, RegisterState>(
-          listener: (context, state) {
-            if (state is RegisterIsFailed) {
-              Commons().showSnackBar(context, state.message);
-            } else if (state is RegisterIsSuccess) {}
-          },
-          child: VStack(
-            [
-              _buildLogo().pOnly(left: 15),
-              _buildText(),
-              5.heightBox,
-              Container(
-                alignment: Alignment.centerRight,
-                height: 55,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: colorName.primary,
-                ),
-                child: TextField(
-                  controller: usernameController,
-                  keyboardType: TextInputType.name,
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    prefixIcon: Icon(Icons.person_outline, color: Colors.white),
-                    hintText: 'Masukan Nama',
-                    hintStyle: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ).wFull(context).pOnly(right: 15, left: 15),
-              5.heightBox,
-              Container(
-                alignment: Alignment.centerRight,
-                height: 55,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: colorName.primary,
-                ),
-                child: TextField(
-                  controller: emailController,
-                  keyboardType: TextInputType.name,
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    prefixIcon: Icon(Icons.email_outlined, color: Colors.white),
-                    hintText: 'Masukan Email',
-                    hintStyle: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ).wFull(context).pOnly(right: 15, left: 15),
-              5.heightBox,
-              Container(
-                alignment: Alignment.centerRight,
-                height: 55,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: colorName.primary,
-                ),
-                child: TextField(
-                  controller: mobileController,
-                  keyboardType: TextInputType.name,
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    prefixIcon: Icon(Icons.mobile_friendly_outlined,
-                        color: Colors.white),
-                    hintText: 'Masukan No Handphone',
-                    hintStyle: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ).wFull(context).pOnly(right: 15, left: 15),
-              5.heightBox,
-              Container(
-                alignment: Alignment.centerRight,
-                height: 55,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: colorName.primary,
-                ),
-                child: TextField(
-                  controller: passController,
-                  keyboardType: TextInputType.visiblePassword,
-                  style: TextStyle(color: Colors.black),
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    prefixIcon:
-                        Icon(Icons.lock_outline_rounded, color: Colors.white),
-                    hintText: 'Masukan Password',
-                    hintStyle: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ).wFull(context).pOnly(right: 15, left: 15),
-              Row(
-                children: [
-                  Checkbox(
-                    value: false,
-                    onChanged: (value) {},
-                  ),
-                  Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        text: "Dengan mendaftar saya menyetujui",
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 10),
-                        children: [
-                          TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                ('klik syarat');
-                              },
-                            text: ' syarat',
-                            style: const TextStyle(
-                                color: colorName.primary,
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold),
-                            children: [
-                              TextSpan(
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    ('klik ketentuan');
-                                  },
-                                text: ' ketentuan',
-                                style: const TextStyle(
-                                    color: colorName.primary, fontSize: 11),
-                                children: [
-                                  TextSpan(
-                                    text: ' dan',
-                                    style: const TextStyle(
-                                        color: colorName.primary, fontSize: 10),
-                                    children: [
-                                      TextSpan(
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () {
-                                            ('klik privasi');
-                                          },
-                                        text: ' privasi',
-                                        style: const TextStyle(
-                                            color: colorName.primary,
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ).pOnly(right: 25, left: 25),
-              10.heightBox,
-              BlocBuilder<RegisterBloc, RegisterState>(
-                builder: (context, state) {
-                  return ButtonWidget(
-                    onPressed: () {
-                      BlocProvider.of<RegisterBloc>(context).add(
-                        RegisterUser(
-                            username: usernameController.text,
-                            mobile: mobileController.text,
-                            email: emailController.text,
-                            password: passController.text),
-                      );
-                    },
-                    text: 'DAFTAR',
-                    color: colorName.button,
-                  );
-                },
-              ).pOnly(left: 15, right: 15),
-              25.heightBox,
-              "Sudah punya akun?"
-                  .richText
-                  .size(15)
-                  .withTextSpanChildren(
-                    [" Masuk Disini".textSpan.size(15).bold.blue500.make()],
-                  )
-                  .makeCentered()
-                  .onTap(
-                    () {
-                      context.goNamed('login');
-                    },
-                  )
-            ],
-          ),
-        ).scrollVertical().p16(),
+        bottomNavigationBar: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            "Have an account?"
+                .text
+                .bold
+                .size(16)
+                .color(colorName.black)
+                .fontFamily('nunito')
+                .make(),
+            TextButton(
+              onPressed: () {
+                context.goNamed("login");
+              },
+              child: "Login "
+                  .text
+                  .bold
+                  .size(16)
+                  .color(colorName.primary)
+                  .fontFamily('nunito')
+                  .make(),
+            )
+          ],
+        ).pOnly(bottom: 50),
+        body: SafeArea(
+          child: BlocListener<RegisterBloc, RegisterState>(
+            listener: (context, state) {
+              if (state is RegisterIsFailed) {
+                Commons().showSnackbarError(
+                    context, "Harap lengkapi data diri anda");
+              } else if (state is RegisterIsSuccess) {}
+            },
+            child: VStack(
+              [
+                _buildText(context),
+                25.heightBox,
+                _buildRegisterForm(),
+              ],
+            ),
+          ).scrollVertical(),
+        ));
+  }
+
+  Widget _buildText(context) {
+    return VStack([
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          "Masukan data diri anda"
+              .text
+              .bold
+              .size(20)
+              .color(colorName.black)
+              .fontFamily('nunito')
+              .make(),
+        ],
       ),
-    );
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          "Lorem ipsum dolor sit amet "
+              .text
+              .size(14)
+              .color(colorName.black)
+              .fontFamily('nunito')
+              .make(),
+        ],
+      )
+    ]).wFull(context).expand().pOnly(top: 30);
   }
 
-  Widget _buildLogo() {
-    return Column(
-      children: const [
-        Image(
-          image: AssetImage('images/logo.png'),
-        )
-      ],
-    );
-  }
-
-  Widget _buildText() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            "Selamat Datang!".richText.size(25).make().onTap(
-                  () {},
+  Widget _buildRegisterForm() {
+    return VStack([
+      HStack([
+        "User Name "
+            .text
+            .bold
+            .size(16)
+            .color(colorName.black)
+            .fontFamily('nunito')
+            .make(),
+      ]).pOnly(left: 20),
+      TextFormField(
+        controller: usernameController,
+        keyboardType: TextInputType.name,
+        decoration: const InputDecoration(
+          hintText: 'Masukan User Name Anda',
+          hintStyle: TextStyle(
+            color: colorName.grey,
+            fontFamily: 'nunito',
+            fontSize: 15,
+          ),
+          border: OutlineInputBorder(),
+        ),
+      ).pOnly(left: 20, right: 20),
+      8.heightBox,
+      HStack([
+        "Email "
+            .text
+            .bold
+            .size(16)
+            .color(colorName.black)
+            .fontFamily('nunito')
+            .make(),
+      ]).pOnly(left: 20),
+      TextFormField(
+        controller: emailController,
+        keyboardType: TextInputType.emailAddress,
+        decoration: const InputDecoration(
+          hintText: 'Masukan Email Anda',
+          hintStyle: TextStyle(
+            color: colorName.grey,
+            fontFamily: 'nunito',
+            fontSize: 15,
+          ),
+          border: OutlineInputBorder(),
+        ),
+      ).pOnly(left: 20, right: 20),
+      8.heightBox,
+      HStack([
+        "Nomor Handphone "
+            .text
+            .bold
+            .size(16)
+            .color(colorName.black)
+            .fontFamily('nunito')
+            .make(),
+      ]).pOnly(left: 20),
+      TextFormField(
+        controller: mobileController,
+        keyboardType: TextInputType.number,
+        decoration: const InputDecoration(
+          hintText: 'Masukan Nomor Handphone Anda',
+          hintStyle: TextStyle(
+            color: colorName.grey,
+            fontFamily: 'nunito',
+            fontSize: 15,
+          ),
+          border: OutlineInputBorder(),
+        ),
+      ).pOnly(left: 20, right: 20),
+      8.heightBox,
+      HStack([
+        "Password "
+            .text
+            .bold
+            .size(16)
+            .color(colorName.black)
+            .fontFamily('nunito')
+            .make(),
+      ]).pOnly(left: 20),
+      TextFormField(
+        controller: passController,
+        obscureText: true,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          hintText: 'Masukan password',
+          hintStyle: TextStyle(
+            color: colorName.grey,
+            fontFamily: 'nunito',
+            fontSize: 15,
+          ),
+        ),
+      ).pOnly(left: 20, right: 20),
+      50.heightBox,
+      BlocBuilder<RegisterBloc, RegisterState>(
+        builder: (context, state) {
+          return ButtonWidget(
+            onPressed: () {
+              BlocProvider.of<RegisterBloc>(context).add(
+                RegisterUser(
+                  username: usernameController.text,
+                  mobile: mobileController.text,
+                  email: emailController.text,
+                  password: passController.text,
                 ),
-          ],
-        ).pOnly(right: 25, left: 25, top: 5),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            "Silahkan isi data kamu untuk buat akun"
-                .richText
-                .size(15)
-                .make()
-                .onTap(
-                  () {},
-                ),
-          ],
-        ).pOnly(right: 50, left: 25, top: 5, bottom: 5),
-      ],
-    );
+              );
+            },
+            text: 'DAFTAR',
+            color: colorName.button,
+          );
+        },
+      ).pOnly(left: 15, right: 15),
+    ]);
   }
 }

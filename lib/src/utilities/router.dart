@@ -3,15 +3,8 @@ part of 'utilities.dart';
 mixin routeName {
   static const login = '/login';
   static const onboard = '/onboard';
-  static const splash = 'splash';
   static const register = '/register';
   static const home = '/home';
-  static const admin = 'admin';
-  static const adminPath = '/home/admin';
-  static const cart = 'cart';
-  static const cartPath = '/home/cart';
-  static const detail = 'detail';
-  static const detailPath = '/home/detail';
 }
 
 final GoRouter router = GoRouter(routes: [
@@ -38,6 +31,20 @@ final GoRouter router = GoRouter(routes: [
     },
   ),
   GoRoute(
+    path: '/email',
+    name: 'email',
+    builder: (context, state) {
+      return const RegisterEmail();
+    },
+  ),
+  GoRoute(
+    path: '/name',
+    name: 'name',
+    builder: (context, state) {
+      return const RegisterName();
+    },
+  ),
+  GoRoute(
     path: '/login',
     name: 'login',
     builder: (context, state) {
@@ -56,45 +63,102 @@ final GoRouter router = GoRouter(routes: [
     name: 'home',
     builder: (context, state) {
       BlocProvider.of<UserBloc>(context).add(LoadUserData());
-      BlocProvider.of<UserBloc>(context).add(LoadUserData());
-      BlocProvider.of<ListProductBloc>(context).add(FetchListProduct());
       return const HomeScreen();
     },
     routes: [
       GoRoute(
-        path: routeName.cart,
+        path: 'detailorder',
+        name: 'detailorder',
         builder: (context, state) {
-          BlocProvider.of<ListCartBloc>(context).add(FetchListCart());
-          return const CartScreen();
+          return const DetailOrder();
         },
       ),
       GoRoute(
-        path: 'kilogram',
-        name: 'kilogram',
-        builder: (context, state) {
-          return const KilogramScreen();
-        },
-      ),
+          path: 'kilogram',
+          name: 'kilogram',
+          builder: (context, state) {
+            return const KilogramScreen();
+          },
+          routes: [
+            GoRoute(
+              path: 'orderkg',
+              name: 'orderkg',
+              builder: (context, state) {
+                return const DetailOrderKilogram();
+              },
+              routes: [
+                GoRoute(
+                  path: 'kgsumary',
+                  name: 'kgsumary',
+                  builder: (context, state) {
+                    return const KgSumary();
+                  },
+                  routes: [
+                    GoRoute(
+                      path: 'kgpayment',
+                      name: 'kgpayment',
+                      builder: (context, state) {
+                        return const KgPayment();
+                      },
+                      routes: [
+                        GoRoute(
+                            path: 'codkg',
+                            name: 'codkg',
+                            builder: (context, state) {
+                              return const CodKg();
+                            },
+                            routes: [
+                              GoRoute(
+                                path: 'orderdetailkg',
+                                name: 'orderdetailkg',
+                                builder: (context, state) {
+                                  return const OrderDetailkg();
+                                },
+                              ),
+                            ]),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            GoRoute(
+              path: 'registerkg',
+              name: 'registerkg',
+              builder: (context, state) {
+                return const DetailRegisterKg();
+              },
+            ),
+          ]),
       GoRoute(
         path: 'satuan',
         name: 'satuan',
         builder: (context, state) {
           return const SatuanScreen();
         },
-      ),
-      GoRoute(
-        path: 'order',
-        name: 'order',
-        builder: (context, state) {
-          return const DetailOrder();
-        },
         routes: [
           GoRoute(
-            path: 'registered',
-            name: 'registered',
+            path: 'satuanservice',
+            name: 'satuanservice',
             builder: (context, state) {
-              return const DetailRegistered();
+              return const SatuanService();
             },
+            routes: [
+              GoRoute(
+                path: 'ordersatuan',
+                name: 'ordersatuan',
+                builder: (context, state) {
+                  return const DetailOrderSatuan();
+                },
+              ),
+              GoRoute(
+                path: 'registersatuan',
+                name: 'registersatuan',
+                builder: (context, state) {
+                  return const DetailRegisterSatuan();
+                },
+              ),
+            ],
           ),
         ],
       ),

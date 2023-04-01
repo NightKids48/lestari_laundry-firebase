@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildLoginForm() {
     return VStack([
       HStack([
-        "Phone Number "
+        "Email "
             .text
             .bold
             .size(16)
@@ -101,9 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
           controller: emailController,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
-            hintText: 'Masukan nomer HP anda',
+            hintText: 'Masukan Email Anda',
             hintStyle: TextStyle(
-              color: colorName.silver,
+              color: colorName.grey,
               fontFamily: 'nunito',
               fontSize: 15,
             ),
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
           border: OutlineInputBorder(),
           hintText: 'Masukan password',
           hintStyle: TextStyle(
-            color: colorName.silver,
+            color: colorName.grey,
             fontFamily: 'nunito',
             fontSize: 15,
           ),
@@ -150,26 +150,18 @@ class _LoginScreenState extends State<LoginScreen> {
       16.heightBox,
       BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
+          if (state is LoginIsLoading) {
+            return CircularProgressIndicator();
+          }
           return ButtonWidget(
             onPressed: () {
-              QuickAlert.show(
-                context: context,
-                type: QuickAlertType.confirm,
-                title: 'Informasi yang anda masukan sudah benar?',
-                confirmBtnText: 'Sudah',
-                cancelBtnText: 'Belum',
-                confirmBtnColor: colorName.primary,
-                onConfirmBtnTap: () {
-                  BlocProvider.of<LoginBloc>(context).add(
-                    LoginUser(
-                      email: emailController.text,
-                      password: passController.text,
-                    ),
-                  );
-                },
+              BlocProvider.of<LoginBloc>(context).add(
+                LoginUser(
+                  email: emailController.text,
+                  password: passController.text,
+                ),
               );
             },
-            isLoading: (state is LoginIsLoading) ? true : false,
             text: 'Log In',
             color: colorName.button,
           ).wFull(context);

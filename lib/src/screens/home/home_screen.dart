@@ -10,19 +10,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _container = [
-    const DashboardView(),
-    const CartScreen(),
-    const ActivityScreen(),
-    const UserView(),
+    DashboardView(),
+    OrderScreen(),
+    ActivityScreen(),
+    UserView(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: colorName.primary,
-        onPressed: () {},
+        onPressed: () {
+          context.goNamed('detailorder');
+        },
         child: const Icon(Icons.add),
-      ).pOnly(bottom: 35, top: 20),
+      ).pOnly(bottom: 40, top: 20),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: _container[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(

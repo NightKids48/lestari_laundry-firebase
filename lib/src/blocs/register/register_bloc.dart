@@ -11,7 +11,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<RegisterUser>((event, emit) async {
       emit(RegisterIsLoading());
       final result = await UserService().registerWithEmail(
-          email: event.email, name: event.username, password: event.password);
+        email: event.email,
+        mobile: event.mobile,
+        username: event.username,
+        password: event.password,
+      );
       emit(
         result.fold(
           (l) => RegisterIsFailed(message: l),

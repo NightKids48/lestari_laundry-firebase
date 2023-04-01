@@ -6,8 +6,6 @@ class ProductModel {
   final String? name;
   final double? price;
   final List<String>? pictures;
-  final String? desc;
-  final List<String>? variant;
 
   ProductModel({
     this.id,
@@ -15,8 +13,6 @@ class ProductModel {
     this.name,
     this.price,
     this.pictures,
-    this.desc,
-    this.variant,
   });
 
   ProductModel copyWith({
@@ -25,8 +21,6 @@ class ProductModel {
     String? name,
     double? price,
     List<String>? pictures,
-    String? desc,
-    List<String>? variant,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -34,8 +28,6 @@ class ProductModel {
       name: name ?? this.name,
       price: price ?? this.price,
       pictures: pictures ?? this.pictures,
-      desc: desc ?? this.desc,
-      variant: variant ?? this.variant,
     );
   }
 
@@ -46,8 +38,6 @@ class ProductModel {
       'name': name,
       'price': price,
       'pictures': pictures,
-      'desc': desc,
-      'variant': variant,
     };
   }
 
@@ -60,8 +50,6 @@ class ProductModel {
       name: map['name'] != null ? map['name'] as String : null,
       price: map['price'] != null ? map['price'] as double : null,
       pictures: map['pictures'] != null ? List.from(map['pictures']) : [],
-      desc: map['desc'] != null ? map['desc'] as String : null,
-      variant: map['variant'] != null ? List.from(map['variant']) : [],
     );
   }
 

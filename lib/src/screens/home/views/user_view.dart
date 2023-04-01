@@ -6,12 +6,11 @@ class UserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: colorName.layer,
       appBar: AppBar(
         backgroundColor: colorName.primary,
         elevation: 0,
-        title: const Text(
-          'Profilku',
-        ),
+        title: "Profilku".text.fontFamily('nunitoexb').make().centered(),
       ),
       body: SafeArea(
         child: BlocBuilder<UserBloc, UserState>(
@@ -37,8 +36,6 @@ class UserView extends StatelessWidget {
                                         )
                                       : null,
                             ),
-                            title:
-                                state.data.username!.text.size(20).bold.make(),
                             trailing: const Icon(
                               Icons.mode_edit_outline_outlined,
                               color: colorName.maroon,
@@ -48,10 +45,13 @@ class UserView extends StatelessWidget {
                                   .add(ChangePhoto());
                             },
                           ).p12(),
-                          const Text(
-                            'Akun',
-                            style: TextStyle(fontSize: 20),
-                          ).pOnly(left: 30, top: 10),
+                          HStack([
+                            state.data.username!.text
+                                .fontFamily('nunitoexb')
+                                .size(20)
+                                .bold
+                                .make(),
+                          ]).pOnly(left: 20, right: 20),
                           5.heightBox,
                           Container(
                             decoration: BoxDecoration(
@@ -66,7 +66,7 @@ class UserView extends StatelessWidget {
                                   ),
                                   title: state.data.email!.text
                                       .size(15)
-                                      .bold
+                                      .fontFamily('nunito')
                                       .make(),
                                   trailing: const Icon(
                                     Icons.arrow_forward_ios,
@@ -81,7 +81,7 @@ class UserView extends StatelessWidget {
                                   ),
                                   title: state.data.mobile!.text
                                       .size(15)
-                                      .bold
+                                      .fontFamily('nunito')
                                       .make(),
                                   trailing: const Icon(
                                     Icons.arrow_forward_ios,
@@ -94,11 +94,11 @@ class UserView extends StatelessWidget {
                                     Icons.home_outlined,
                                     color: colorName.maroon,
                                   ),
-                                  title: const Text('Alamat'),
-                                  trailing: const Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: colorName.maroon,
-                                  ),
+                                  title: "Alamat"
+                                      .text
+                                      .size(15)
+                                      .fontFamily('nunito')
+                                      .make(),
                                   onTap: () {},
                                 ),
                                 ListTile(
@@ -106,7 +106,12 @@ class UserView extends StatelessWidget {
                                     Icons.logout_outlined,
                                     color: colorName.maroon,
                                   ),
-                                  title: const Text('Keluar'),
+                                  title: "Log Out"
+                                      .text
+                                      .size(15)
+                                      .bold
+                                      .fontFamily('nunito')
+                                      .make(),
                                   trailing: const Icon(
                                     Icons.arrow_forward_ios,
                                     color: colorName.maroon,
