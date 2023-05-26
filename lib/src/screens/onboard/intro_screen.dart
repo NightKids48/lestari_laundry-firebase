@@ -10,7 +10,7 @@ class IntroScreen extends StatelessWidget {
       bottomNavigationBar: VStack([
         ElevatedButton(
           onPressed: () {
-            context.goNamed('register');
+            Get.off(RegisterScreen());
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: colorName.background,
@@ -18,7 +18,7 @@ class IntroScreen extends StatelessWidget {
             shape: const StadiumBorder(),
           ),
           child: const Text(
-            "I'm new here",
+            "Saya Baru Di Sini",
             style: TextStyle(
               color: Colors.black,
               fontSize: 16,
@@ -27,7 +27,7 @@ class IntroScreen extends StatelessWidget {
         ).wFull(context).pOnly(left: 20, right: 20, bottom: 10),
         ElevatedButton(
           onPressed: () {
-            context.goNamed('login');
+            Get.off(LoginScreen());
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: colorName.button,
@@ -35,7 +35,7 @@ class IntroScreen extends StatelessWidget {
             shape: const StadiumBorder(),
           ),
           child: const Text(
-            "I've been here before",
+            "Sudah Pernah Di Sini",
             style: TextStyle(
               color: Colors.white,
               fontSize: 16,

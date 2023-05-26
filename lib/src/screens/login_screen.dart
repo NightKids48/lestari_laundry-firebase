@@ -8,15 +8,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          "Don't have an account?"
+          "Belum punya akun?"
               .text
               .bold
               .size(16)
@@ -25,9 +25,9 @@ class _LoginScreenState extends State<LoginScreen> {
               .make(),
           TextButton(
             onPressed: () {
-              context.goNamed("register");
+              Get.to(RegisterScreen());
             },
-            child: "Register "
+            child: "Daftar Disini"
                 .text
                 .bold
                 .size(16)
@@ -38,24 +38,14 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ).pOnly(bottom: 50),
       body: SafeArea(
-        child: BlocListener<LoginBloc, LoginState>(
-          listener: (context, state) {
-            if (state is LoginIsFailed) {
-              Commons()
-                  .showSnackbarError(context, "No HP atau Password anda salah");
-            } else if (state is LoginIsSuccess) {
-              context.goNamed('location');
-            }
-          },
-          child: VStack(
-            [
-              _buildText(context),
-              50.heightBox,
-              _buildLoginForm(),
-            ],
-          ),
-        ).scrollVertical(),
-      ),
+        child: VStack(
+          [
+            _buildText(context),
+            50.heightBox,
+            _buildLoginForm(),
+          ],
+        ),
+      ).scrollVertical(),
     );
   }
 
@@ -63,11 +53,11 @@ class _LoginScreenState extends State<LoginScreen> {
     return VStack([
       Row(
         children: [
-          "Let's Get Started"
+          "Silahkan Log In"
               .text
               .bold
               .size(30)
-              .color(colorName.black)
+              .color(colorName.button)
               .fontFamily('nunito')
               .make(),
         ],
@@ -78,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
               .text
               .bold
               .size(16)
-              .color(colorName.black)
+              .color(colorName.button)
               .fontFamily('nunito')
               .make(),
         ],
@@ -98,17 +88,18 @@ class _LoginScreenState extends State<LoginScreen> {
             .make(),
       ]).pOnly(left: 20),
       TextFormField(
-          controller: emailController,
-          keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
-            hintText: 'Masukan Email Anda',
-            hintStyle: TextStyle(
-              color: colorName.grey,
-              fontFamily: 'nunito',
-              fontSize: 15,
-            ),
-            border: OutlineInputBorder(),
-          )).pOnly(left: 20, right: 20),
+        controller: emailController,
+        keyboardType: TextInputType.emailAddress,
+        decoration: const InputDecoration(
+          hintText: 'Masukan Email Anda',
+          hintStyle: TextStyle(
+            color: colorName.grey,
+            fontFamily: 'nunito',
+            fontSize: 15,
+          ),
+          border: OutlineInputBorder(),
+        ),
+      ).pOnly(left: 20, right: 20),
       8.heightBox,
       HStack([
         "Password "
@@ -120,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
             .make(),
       ]).pOnly(left: 20),
       TextFormField(
-        controller: passController,
+        controller: passwordController,
         obscureText: true,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
@@ -136,8 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           TextButton(
-            onPressed: () {},
-            child: "Forgot Password "
+            onPressed: () {
+              Get.off(ForgotPassword());
+            },
+            child: "Lupa Password "
                 .text
                 .bold
                 .size(14)
@@ -148,25 +141,31 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ).pOnly(right: 20),
       16.heightBox,
-      BlocBuilder<LoginBloc, LoginState>(
-        builder: (context, state) {
-          if (state is LoginIsLoading) {
-            return CircularProgressIndicator();
-          }
-          return ButtonWidget(
-            onPressed: () {
-              BlocProvider.of<LoginBloc>(context).add(
-                LoginUser(
-                  email: emailController.text,
-                  password: passController.text,
-                ),
-              );
-            },
-            text: 'Log In',
-            color: colorName.button,
-          ).wFull(context);
-        },
-      ).wFull(context).pOnly(right: 35, left: 35, top: 35),
+      ButtonWidget(
+              onPressed: () async {
+                try {
+                  await FirebaseAuthService().login(emailController.text.trim(),
+                      passwordController.text.trim());
+                  if (FirebaseAuth.instance.currentUser != null) {
+                    if (!mounted) return;
+                    Get.off(LocationScreen());
+                  }
+                } on FirebaseException catch (e) {
+                  debugPrint("error is ${e.message}");
+                  showDialog(
+                    context: context,
+                    builder: (context) => const AlertDialog(
+                      title: Text(
+                        "Email atau password salah",
+                        style: TextStyle(fontFamily: 'nunito'),
+                      ),
+                    ),
+                  );
+                }
+              },
+              text: 'Log In',
+              color: colorName.button)
+          .p(20),
     ]);
   }
 }

@@ -2,7 +2,6 @@ part of 'models.dart';
 
 class UserModel {
   final String? username;
-
   final String? email;
   final String? mobile;
   final String? uid;

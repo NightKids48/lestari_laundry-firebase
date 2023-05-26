@@ -11,7 +11,7 @@ class KgSumary extends StatelessWidget {
         iconTheme: IconThemeData(color: colorName.primary),
         elevation: 0,
         backgroundColor: colorName.background,
-        title: "Order Sumary"
+        title: "Ringkasan Order"
             .text
             .size(18)
             .fontFamily('nunitoexb')
@@ -45,7 +45,7 @@ class KgSumary extends StatelessWidget {
                     .color(colorName.button)
                     .size(14)
                     .make(),
-                ''
+                '18.000'
                     .text
                     .fontFamily('nunito')
                     .color(colorName.primary)
@@ -58,7 +58,7 @@ class KgSumary extends StatelessWidget {
           ButtonWidget(
             text: 'Payment',
             onPressed: () {
-              context.goNamed('kgpayment');
+              Get.off(KgPayment());
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
         ]),
@@ -89,7 +89,6 @@ class KgSumary extends StatelessWidget {
               ),
             ),
             Container(
-              height: 120,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: colorName.background,
@@ -102,7 +101,7 @@ class KgSumary extends StatelessWidget {
                     width: 60,
                   ).p(10),
                   VStack([
-                    "Full Service"
+                    "Cuci Lengkap"
                         .text
                         .size(14)
                         .color(colorName.primary)
@@ -111,36 +110,35 @@ class KgSumary extends StatelessWidget {
                     "IDR 5.000/KG".text.size(12).bold.make(),
                   ]).pOnly(left: 20),
                 ]),
-                VStack([
-                  Row(
-                    children: [
-                      "* "
-                          .text
-                          .size(14)
-                          .color(colorName.maroon)
-                          .bold
-                          .make()
-                          .pOnly(left: 10),
-                      "Price may cost more after our team calculate it in the store."
-                          .text
-                          .size(12)
-                          .make(),
-                    ],
-                  ),
-                  "We'll let you know by whatsapp."
-                      .text
-                      .size(12)
-                      .make()
-                      .pOnly(left: 10),
-                ]),
               ]),
+            ).pOnly(left: 20, right: 20).wFull(context),
+            10.heightBox,
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: colorName.background,
+              ),
+              child: VStack([
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    "Total Kilogram"
+                        .text
+                        .size(14)
+                        .color(colorName.primary)
+                        .bold
+                        .make(),
+                    "3 KG".text.size(14).color(colorName.black).bold.make(),
+                  ],
+                ),
+              ]).p(15),
             ).pOnly(left: 20, right: 20).wFull(context),
             Padding(
               padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  "Special instructions"
+                  "Instruksi tambahan"
                       .text
                       .size(18)
                       .fontFamily('nunitoexb')
@@ -175,7 +173,7 @@ class KgSumary extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  "Delivery details"
+                  "Detail pengiriman"
                       .text
                       .size(18)
                       .fontFamily('nunitoexb')
@@ -205,7 +203,7 @@ class KgSumary extends StatelessWidget {
                     .fontFamily('nunito')
                     .make(),
                 10.heightBox,
-                "More than 3km will be cost IDR 3.000/KG"
+                "Lokasi lebih dari 2KM akan di kenakan IDR 3.000/KG"
                     .text
                     .size(14)
                     .bold
@@ -271,18 +269,98 @@ class KgSumary extends StatelessWidget {
                       .color(colorName.primary)
                       .make(),
                 ]),
-                VxDivider().pOnly(top: 10, bottom: 20),
+              ]).pOnly(left: 10, right: 10, top: 20, bottom: 20),
+            ).pOnly(left: 20, right: 20).wFull(context),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  "Ringkasan pembayaran"
+                      .text
+                      .size(18)
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .make(),
+                ],
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: colorName.background,
+              ),
+              child: VStack([
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "Total Payment"
+                    "Cuci lengkap"
+                        .text
+                        .size(14)
+                        .bold
+                        .fontFamily('nunito')
+                        .color(colorName.button)
+                        .make(),
+                    "15.000"
+                        .text
+                        .size(14)
+                        .bold
+                        .fontFamily('nunito')
+                        .color(colorName.button)
+                        .make(),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    "Ongkos kirim"
+                        .text
+                        .size(14)
+                        .bold
+                        .fontFamily('nunito')
+                        .color(colorName.button)
+                        .make(),
+                    "3.000"
+                        .text
+                        .size(14)
+                        .bold
+                        .fontFamily('nunito')
+                        .color(colorName.button)
+                        .make(),
+                  ],
+                ),
+                Row(
+                  children: [
+                    "* "
+                        .text
+                        .size(12)
+                        .bold
+                        .fontFamily('nunito')
+                        .color(colorName.grey)
+                        .make()
+                        .pOnly(top: 10, bottom: 10),
+                    "Lokasi kamu lebih dari 2km"
+                        .text
+                        .size(12)
+                        .bold
+                        .fontFamily('nunito')
+                        .color(colorName.grey)
+                        .make()
+                        .pOnly(top: 10, bottom: 10)
+                  ],
+                ),
+                VxDivider().pOnly(top: 10, bottom: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    "Total Pembayaran"
                         .text
                         .size(14)
                         .color(colorName.primary)
                         .bold
                         .fontFamily('nunito')
                         .make(),
-                    "8.000"
+                    "18.000"
                         .text
                         .size(14)
                         .bold
@@ -292,8 +370,7 @@ class KgSumary extends StatelessWidget {
                   ],
                 )
               ]).pOnly(left: 10, right: 10, top: 20, bottom: 20),
-            ).pOnly(left: 20, right: 20).wFull(context),
-            20.heightBox,
+            ).pOnly(left: 20, right: 20, bottom: 20).wFull(context),
           ],
         ),
       ).scrollVertical(),

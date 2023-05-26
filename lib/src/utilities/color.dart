@@ -20,4 +20,5 @@ mixin colorName {
   static const Color rightone = Color(0xFFf1f2f6);
   static const Color layer = Color(0xFFE8E8E8);
   static const Color scndprimary = Color(0xFFEBF3FF);
+  static const Color wa = Color(0xFF60D669);
 }

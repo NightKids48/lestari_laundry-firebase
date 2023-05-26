@@ -8,55 +8,48 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController mobileController = TextEditingController();
-  TextEditingController passController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
+  final usernameController = TextEditingController();
+  final phonenumberController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            "Have an account?"
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          "Sudah punya akun?"
+              .text
+              .bold
+              .size(16)
+              .color(colorName.black)
+              .fontFamily('nunito')
+              .make(),
+          TextButton(
+            onPressed: () {
+              Get.off(LoginScreen());
+            },
+            child: "Login Disini"
                 .text
                 .bold
                 .size(16)
-                .color(colorName.black)
+                .color(colorName.primary)
                 .fontFamily('nunito')
                 .make(),
-            TextButton(
-              onPressed: () {
-                context.goNamed("login");
-              },
-              child: "Login "
-                  .text
-                  .bold
-                  .size(16)
-                  .color(colorName.primary)
-                  .fontFamily('nunito')
-                  .make(),
-            )
+          )
+        ],
+      ).pOnly(bottom: 50),
+      body: SafeArea(
+        child: VStack(
+          [
+            _buildText(context),
+            25.heightBox,
+            _buildRegisterForm(),
           ],
-        ).pOnly(bottom: 50),
-        body: SafeArea(
-          child: BlocListener<RegisterBloc, RegisterState>(
-            listener: (context, state) {
-              if (state is RegisterIsFailed) {
-                Commons().showSnackbarError(
-                    context, "Harap lengkapi data diri anda");
-              } else if (state is RegisterIsSuccess) {}
-            },
-            child: VStack(
-              [
-                _buildText(context),
-                25.heightBox,
-                _buildRegisterForm(),
-              ],
-            ),
-          ).scrollVertical(),
-        ));
+        ),
+      ).scrollVertical(),
+    );
   }
 
   Widget _buildText(context) {
@@ -145,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             .make(),
       ]).pOnly(left: 20),
       TextFormField(
-        controller: mobileController,
+        controller: phonenumberController,
         keyboardType: TextInputType.number,
         decoration: const InputDecoration(
           hintText: 'Masukan Nomor Handphone Anda',
@@ -168,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             .make(),
       ]).pOnly(left: 20),
       TextFormField(
-        controller: passController,
+        controller: passwordController,
         obscureText: true,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
@@ -181,24 +174,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ).pOnly(left: 20, right: 20),
       50.heightBox,
-      BlocBuilder<RegisterBloc, RegisterState>(
-        builder: (context, state) {
-          return ButtonWidget(
-            onPressed: () {
-              BlocProvider.of<RegisterBloc>(context).add(
-                RegisterUser(
-                  username: usernameController.text,
-                  mobile: mobileController.text,
-                  email: emailController.text,
-                  password: passController.text,
-                ),
-              );
-            },
-            text: 'DAFTAR',
-            color: colorName.button,
-          );
-        },
-      ).pOnly(left: 15, right: 15),
+      ButtonWidget(
+              onPressed: () async {
+                try {
+                  await FirebaseAuthService().signup(
+                      emailController.text.trim(),
+                      passwordController.text.trim());
+
+                  if (!mounted) return;
+
+                  Get.off(LoginScreen());
+                } on FirebaseException catch (e) {
+                  debugPrint("error is ${e.message}");
+
+                  showDialog(
+                    context: context,
+                    builder: (context) => const AlertDialog(
+                      title: Text(
+                        "Harap masukan data anda",
+                        style: TextStyle(fontFamily: 'nunito'),
+                      ),
+                    ),
+                  );
+                }
+              },
+              text: 'Register',
+              color: colorName.button)
+          .p(20),
     ]);
   }
 }

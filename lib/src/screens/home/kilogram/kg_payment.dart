@@ -17,7 +17,7 @@ class _KgPaymentState extends State<KgPayment> {
         elevation: 0,
         backgroundColor: colorName.background,
         iconTheme: IconThemeData(color: colorName.primary),
-        title: "Payment"
+        title: "Pembayaran"
             .text
             .size(18)
             .fontFamily('nunitoexb')
@@ -39,35 +39,53 @@ class _KgPaymentState extends State<KgPayment> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                'Total'
-                    .text
-                    .fontFamily('nunitoexb')
-                    .color(colorName.button)
-                    .size(14)
-                    .bold
-                    .make(),
-                220.widthBox,
-                'IDR '
-                    .text
-                    .fontFamily('nunitoexb')
-                    .color(colorName.button)
-                    .size(14)
-                    .bold
-                    .make(),
-                ''
-                    .text
-                    .fontFamily('nunito')
-                    .color(colorName.primary)
-                    .size(14)
-                    .bold
-                    .make()
+                Container(
+                  child: Row(
+                    children: [
+                      'Total Items: '
+                          .text
+                          .fontFamily('nunitoexb')
+                          .color(colorName.button)
+                          .size(14)
+                          .bold
+                          .make(),
+                      '1'
+                          .text
+                          .fontFamily('nunitoexb')
+                          .color(colorName.primary)
+                          .size(14)
+                          .bold
+                          .make(),
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      'IDR '
+                          .text
+                          .fontFamily('nunitoexb')
+                          .color(colorName.button)
+                          .size(14)
+                          .bold
+                          .make(),
+                      '18.000'
+                          .text
+                          .fontFamily('nunitoexb')
+                          .color(colorName.primary)
+                          .size(14)
+                          .bold
+                          .make(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
           ButtonWidget(
             text: 'Continue',
             onPressed: () {
-              context.goNamed('codkg');
+              Get.off(CodKg());
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
         ]),
@@ -79,7 +97,7 @@ class _KgPaymentState extends State<KgPayment> {
               padding: const EdgeInsets.all(20),
               child: Row(
                 children: [
-                  "Payment method"
+                  "Metode Pembayaran"
                       .text
                       .size(18)
                       .fontFamily('nunitoexb')
@@ -159,7 +177,7 @@ class _KgPaymentState extends State<KgPayment> {
               ),
               Row(
                 children: [
-                  "Payment summary"
+                  "Ringkasan Pembayaran"
                       .text
                       .size(18)
                       .fontFamily('nunitoexb')
@@ -178,7 +196,7 @@ class _KgPaymentState extends State<KgPayment> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "Full sertvice laundry"
+                    "Cuci lengkap"
                         .text
                         .size(12)
                         .bold
@@ -186,7 +204,7 @@ class _KgPaymentState extends State<KgPayment> {
                         .color(colorName.grey)
                         .make()
                         .p(10),
-                    "5.000"
+                    "15.000"
                         .text
                         .size(12)
                         .bold
@@ -227,7 +245,7 @@ class _KgPaymentState extends State<KgPayment> {
                         .color(colorName.grey)
                         .make()
                         .pOnly(left: 10, top: 10, bottom: 10),
-                    "Your location is more than 3km"
+                    "Lokasi kamu lebih dari 2km"
                         .text
                         .size(12)
                         .bold
@@ -241,14 +259,14 @@ class _KgPaymentState extends State<KgPayment> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "Total Payment"
+                    "Total Pembayaran"
                         .text
                         .size(14)
                         .bold
                         .fontFamily('nunito')
                         .color(colorName.primary)
                         .make(),
-                    "3.000"
+                    "18.000"
                         .text
                         .size(14)
                         .bold

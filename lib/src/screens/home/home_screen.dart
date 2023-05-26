@@ -11,20 +11,12 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _container = [
     DashboardView(),
-    OrderScreen(),
     ActivityScreen(),
     UserView(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: colorName.primary,
-        onPressed: () {
-          context.goNamed('detailorder');
-        },
-        child: const Icon(Icons.add),
-      ).pOnly(bottom: 40, top: 20),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: _container[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -33,10 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_chart),
-            label: 'Order',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.local_activity),

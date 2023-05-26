@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lestari_laundry/src/utilities/utilities.dart';
 import 'package:lestari_laundry/src/widgets/widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -11,7 +13,10 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../blocs/blocs.dart';
 import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:quickalert/quickalert.dart';
+import '../controller/controllers.dart';
 import '../models/models.dart';
+import '../services/services.dart';
+import 'package:provider/provider.dart';
 
 part 'onboard/onboard_screen.dart';
 part 'login_screen.dart';
@@ -45,3 +50,4 @@ part 'home/kilogram/kg_payment.dart';
 part 'home/kilogram/order_detail_kg.dart';
 part 'home/kilogram/cod_kg.dart';
 part 'detail_order.dart';
+part 'home/kilogram/kilogram_pickup.dart';

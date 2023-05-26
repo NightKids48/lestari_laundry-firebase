@@ -9,7 +9,7 @@ class LocationScreen extends StatelessWidget {
       backgroundColor: colorName.background,
       bottomNavigationBar: ButtonWidget(
         onPressed: () {
-          context.goNamed('home');
+          Get.off(HomeScreen());
         },
         text: 'Continue',
         color: colorName.button,

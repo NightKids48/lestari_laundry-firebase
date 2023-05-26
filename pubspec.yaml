@@ -48,7 +48,6 @@ dependencies:
   firebase_auth: ^4.2.6
   firebase_core: ^2.5.0
   firebase_storage: ^11.0.11
-  google_maps_flutter: ^2.2.3
   top_snackbar_flutter: ^2.1.1
   quickalert: ^1.0.1
   alert_dialog: ^1.0.0
@@ -56,6 +55,8 @@ dependencies:
   flutter_easyloading: ^3.0.5
   snippet_coder_utils: ^1.0.13
   get: ^4.6.5
+  http: ^0.13.5
+  google_fonts: 2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -118,6 +119,7 @@ flutter:
     - images/cod.png
     - images/qris.png
     - images/seru.png
+    - images/profil.png
 
   fonts:
     - family: nunito

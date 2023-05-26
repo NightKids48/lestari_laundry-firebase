@@ -11,6 +11,9 @@ class _KilogramScreenState extends State<KilogramScreen> {
   int _value = 1;
   bool isButtonActive = true;
   var count = 0.obs;
+  final MyController c = Get.put(MyController());
+  final OrderController o = Get.put(OrderController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,45 +21,51 @@ class _KilogramScreenState extends State<KilogramScreen> {
       bottomNavigationBar: ColoredBox(
         color: colorName.background,
         child: VStack([
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 20),
-            child: HStack([
-              'Total Items:'
-                  .text
-                  .fontFamily('nunitoexb')
-                  .color(colorName.button)
-                  .size(14)
-                  .bold
-                  .make(),
-              5.widthBox,
-              '${_value}'
-                  .text
-                  .fontFamily('nunito')
-                  .color(colorName.primary)
-                  .size(14)
-                  .bold
-                  .make(),
-              210.widthBox,
-              'IDR '
-                  .text
-                  .fontFamily('nunitoexb')
-                  .color(colorName.button)
-                  .size(14)
-                  .bold
-                  .make(),
-              '${_value}'
-                  .text
-                  .fontFamily('nunito')
-                  .color(colorName.primary)
-                  .size(14)
-                  .bold
-                  .make()
-            ]),
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: HStack([
+                  'Total Items: '
+                      .text
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .size(14)
+                      .bold
+                      .make(),
+                  '1'
+                      .text
+                      .fontFamily('nunito')
+                      .color(colorName.primary)
+                      .size(14)
+                      .bold
+                      .make(),
+                ]),
+              ),
+              Container(
+                child: HStack([
+                  'IDR '
+                      .text
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .size(14)
+                      .bold
+                      .make(),
+                  '${_value * 5000}'
+                      .text
+                      .fontFamily('nunito')
+                      .color(colorName.primary)
+                      .size(14)
+                      .bold
+                      .make(),
+                ]),
+              ),
+            ],
+          ).pOnly(left: 20, right: 20, top: 10),
           ButtonWidget(
             text: "Continue",
             onPressed: () {
-              context.goNamed('orderkg');
+              Get.off(DetailOrderKilogram());
             },
           ).p(20),
         ]),
@@ -65,7 +74,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
         iconTheme: IconThemeData(color: colorName.primary),
         elevation: 0,
         backgroundColor: colorName.background,
-        title: "Our Services"
+        title: "Layanan Kami"
             .text
             .size(18)
             .fontFamily('nunitoexb')
@@ -97,7 +106,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                           color: colorName.primary,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: "By Kilogram"
+                        child: "Kilogram"
                             .richText
                             .color(colorName.background)
                             .size(14)
@@ -105,10 +114,8 @@ class _KilogramScreenState extends State<KilogramScreen> {
                             .bold
                             .makeCentered()
                             .onTap(
-                          () {
-                            context.goNamed('kilogram');
-                          },
-                        ),
+                              () {},
+                            ),
                       ),
                       5.widthBox,
                       Container(
@@ -118,7 +125,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                           color: colorName.layer,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: "By Pieces"
+                        child: "Satuan"
                             .richText
                             .color(colorName.grey)
                             .size(14)
@@ -127,7 +134,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                             .makeCentered()
                             .onTap(
                           () {
-                            context.goNamed('satuan');
+                            Get.off(const SatuanScreen());
                           },
                         ),
                       ),
@@ -144,7 +151,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
               5.heightBox,
               Row(
                 children: [
-                  "Chosse the category"
+                  "Pilih Kategori"
                       .richText
                       .color(colorName.button)
                       .fontFamily('nunitoexb')
@@ -153,18 +160,6 @@ class _KilogramScreenState extends State<KilogramScreen> {
                       .makeCentered(),
                 ],
               ).pOnly(left: 20, right: 20, top: 20),
-              20.heightBox,
-              HStack([
-                IconButton(
-                  onPressed: () => count--,
-                  icon: Icon(Icons.add_box_outlined),
-                ),
-                Obx(() => Text("$count")),
-                IconButton(
-                  onPressed: () => count++,
-                  icon: Icon(Icons.add_box_outlined),
-                ),
-              ]),
               Container(
                 decoration: BoxDecoration(
                   color: colorName.background,
@@ -190,7 +185,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                         children: [
                           Row(
                             children: [
-                              "Dry Wash"
+                              "Cuci Kering"
                                   .text
                                   .size(14)
                                   .color(colorName.primary)
@@ -233,7 +228,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                         children: [
                           Row(
                             children: [
-                              "Iron Only"
+                              "Setrika Saja"
                                   .text
                                   .size(14)
                                   .color(colorName.primary)
@@ -276,7 +271,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                         children: [
                           Row(
                             children: [
-                              "Full Service"
+                              "Cuci Lengkap"
                                   .text
                                   .size(14)
                                   .color(colorName.primary)
@@ -287,7 +282,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                           ),
                           Row(
                             children: [
-                              "IDR 2.500/KG"
+                              "IDR 5.000/KG"
                                   .text
                                   .size(12)
                                   .fontFamily('nunito')
@@ -311,7 +306,68 @@ class _KilogramScreenState extends State<KilogramScreen> {
                   ],
                 ).pOnly(top: 20, bottom: 20),
               ).pOnly(left: 20, right: 20),
-              40.heightBox,
+              Row(
+                children: [
+                  "Jumlah Kilogram"
+                      .richText
+                      .color(colorName.button)
+                      .fontFamily('nunitoexb')
+                      .size(18)
+                      .bold
+                      .makeCentered(),
+                ],
+              ).pOnly(left: 20, right: 20, top: 20),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: colorName.background),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    VStack([
+                      "Kilogram"
+                          .richText
+                          .color(colorName.primary)
+                          .fontFamily('nunito')
+                          .size(16)
+                          .bold
+                          .makeCentered(),
+                      "Lorem Ipsum Dolor"
+                          .richText
+                          .color(colorName.button)
+                          .fontFamily('nunito')
+                          .size(14)
+                          .bold
+                          .makeCentered(),
+                    ]).p(10),
+                    Container(
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: () => c.shirtmin(),
+                            icon: Image(
+                              image: AssetImage('images/min.png'),
+                            ),
+                          ),
+                          5.widthBox,
+                          Obx(() => "${c.shirt.toString()}"
+                              .text
+                              .fontFamily('nunitoexb')
+                              .size(16)
+                              .make()),
+                          5.widthBox,
+                          IconButton(
+                            onPressed: () => c.shirtplus(),
+                            icon: Image(
+                              image: AssetImage('images/plus.png'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ).p(20),
             ],
           ),
         ),

@@ -8,6 +8,7 @@ class DetailOrder extends StatefulWidget {
 }
 
 class _DetailOrderState extends State<DetailOrder> {
+  final MyController c = Get.put(MyController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,54 +24,42 @@ class _DetailOrderState extends State<DetailOrder> {
             .size(18)
             .make(),
       ),
-      bottomNavigationBar: ColoredBox(
-        color: colorName.background,
-        child: VStack([
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-            child: HStack([
-              'Total items:'
-                  .text
-                  .fontFamily('nunitoexb')
-                  .color(colorName.button)
-                  .size(14)
-                  .bold
-                  .make(),
-              5.widthBox,
-              ''
-                  .text
-                  .fontFamily('nunito')
-                  .color(colorName.primary)
-                  .size(14)
-                  .bold
-                  .make(),
-              210.widthBox,
-              'IDR '
-                  .text
-                  .fontFamily('nunitoexb')
-                  .color(colorName.button)
-                  .size(14)
-                  .bold
-                  .make(),
-              ''
-                  .text
-                  .fontFamily('nunito')
-                  .color(colorName.primary)
-                  .size(14)
-                  .bold
-                  .make()
-            ]),
-          ),
-          ButtonWidget(
-            text: 'Continue',
-            onPressed: () {
-              context.goNamed('kgsumary');
-            },
-          ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
-        ]),
-      ),
       body: SafeArea(
-        child: VStack([]),
+        child: VStack([
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              "Order".text.fontFamily('nunitoexb').size(25).make(),
+              Container(
+                child: Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => c.decrement(),
+                      icon: Icon(
+                        Icons.remove_circle_outline_outlined,
+                        color: colorName.maroon,
+                      ),
+                    ),
+                    20.widthBox,
+                    Obx(() => "${c.order.toString()}"
+                        .text
+                        .fontFamily('nunitoexb')
+                        .size(25)
+                        .make()),
+                    20.widthBox,
+                    IconButton(
+                      onPressed: () => c.increment(),
+                      icon: Icon(
+                        Icons.add_circle_outline_outlined,
+                        color: colorName.maroon,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ).p(20)
+        ]),
       ),
     );
   }

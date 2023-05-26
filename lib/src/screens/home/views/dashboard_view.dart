@@ -12,44 +12,6 @@ class _DashboardViewState extends State<DashboardView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorName.background,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: colorName.primary),
-        backgroundColor: colorName.background,
-        elevation: 0,
-        title: Row(children: [
-          BlocBuilder<UserBloc, UserState>(
-            builder: (context, state) {
-              if (state is UserIsSuccess) {
-                return HStack(
-                  [
-                    "Hello, "
-                        .text
-                        .fontFamily('nunito')
-                        .color(colorName.black)
-                        .size(16)
-                        .bold
-                        .make(),
-                    state.data.username!.text
-                        .fontFamily('nunito')
-                        .color(colorName.secondary)
-                        .size(16)
-                        .bold
-                        .make(),
-                    " ! "
-                        .text
-                        .fontFamily('nunito')
-                        .color(colorName.black)
-                        .size(16)
-                        .bold
-                        .make()
-                  ],
-                );
-              }
-              return 0.heightBox;
-            },
-          ),
-        ]),
-      ),
       body: SafeArea(
         child: VStack([
           10.heightBox,
@@ -65,7 +27,7 @@ class _DashboardViewState extends State<DashboardView> {
           5.heightBox,
           _buildListProduct(),
         ]).pOnly(left: 20, right: 20),
-      ).scrollVertical(),
+      ),
     );
   }
 
@@ -172,7 +134,7 @@ class _DashboardViewState extends State<DashboardView> {
       children: [
         Row(
           children: [
-            "Our services "
+            "Lestari Laundry Service"
                 .richText
                 .size(18)
                 .fontFamily('nunitoexb')
@@ -193,7 +155,7 @@ class _DashboardViewState extends State<DashboardView> {
           color: colorName.secondary,
           child: InkWell(
             onTap: () {
-              context.goNamed('kilogram');
+              Get.to(KilogramScreen());
             },
             splashColor: colorName.primary,
             child: Center(
@@ -211,7 +173,7 @@ class _DashboardViewState extends State<DashboardView> {
           color: colorName.secondary,
           child: InkWell(
             onTap: () {
-              context.goNamed('satuan');
+              Get.to(const SatuanScreen());
             },
             splashColor: colorName.primary,
             child: Center(
@@ -228,4 +190,67 @@ class _DashboardViewState extends State<DashboardView> {
       ],
     );
   }
+}
+
+Widget _buildService(index) {
+  return Flexible(
+    child: ListView.builder(
+      itemCount: Product.products.length,
+      itemBuilder: (BuildContext context, int index) {
+        return _catalogProductCard(index);
+      },
+    ),
+  );
+}
+
+Widget _catalogProductCard(index) {
+  final cartController = Get.put(CartController());
+
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      SizedBox(
+        width: 100,
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 20,
+              backgroundColor: colorName.background,
+              backgroundImage: NetworkImage(
+                Product.products[index].imageUrl,
+              ),
+            ).p(5),
+          ],
+        ),
+      ),
+      SizedBox(
+        width: 100,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              Product.products[index].name,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              '${Product.products[index].price}',
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+      IconButton(
+        onPressed: () {
+          cartController.addProduct(Product.products[index]);
+        },
+        icon: const Image(image: AssetImage('images/plus.png')),
+      ),
+    ],
+  );
 }

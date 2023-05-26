@@ -8,7 +8,8 @@ class SatuanScreen extends StatefulWidget {
 }
 
 class _SatuanScreenState extends State<SatuanScreen> {
-  int _value = 1;
+  final MyController c = Get.put(MyController());
+  final OrderController o = Get.put(OrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -17,46 +18,54 @@ class _SatuanScreenState extends State<SatuanScreen> {
       bottomNavigationBar: ColoredBox(
         color: colorName.background,
         child: VStack([
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 20),
-            child: HStack([
-              'Total Items:'
-                  .text
-                  .fontFamily('nunitoexb')
-                  .color(colorName.button)
-                  .size(14)
-                  .bold
-                  .make(),
-              5.widthBox,
-              ''
-                  .text
-                  .fontFamily('nunito')
-                  .color(colorName.primary)
-                  .size(14)
-                  .bold
-                  .make(),
-              210.widthBox,
-              'IDR '
-                  .text
-                  .fontFamily('nunitoexb')
-                  .color(colorName.button)
-                  .size(14)
-                  .bold
-                  .make(),
-              ""
-                  .text
-                  .fontFamily('nunito')
-                  .color(colorName.primary)
-                  .size(14)
-                  .bold
-                  .make()
-            ]),
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: HStack([
+                  'Total Items: '
+                      .text
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .size(14)
+                      .bold
+                      .make(),
+                  Obx(
+                    () => "${c.sum.toString()}"
+                        .text
+                        .fontFamily('nunito')
+                        .color(colorName.primary)
+                        .size(14)
+                        .bold
+                        .make(),
+                  ),
+                ]),
+              ),
+              Container(
+                child: HStack([
+                  'IDR '
+                      .text
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .size(14)
+                      .bold
+                      .make(),
+                  Obx(
+                    () => "${c.sum.toString()}"
+                        .text
+                        .fontFamily('nunito')
+                        .color(colorName.primary)
+                        .size(14)
+                        .bold
+                        .make(),
+                  ),
+                ]),
+              ),
+            ],
+          ).pOnly(left: 20, right: 20, top: 10),
           ButtonWidget(
             text: "Continue",
-            onPressed: () {
-              context.goNamed('satuanservice');
-            },
+            onPressed: () {},
           ).p(20),
         ]),
       ),
@@ -64,7 +73,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
         iconTheme: IconThemeData(color: colorName.primary),
         elevation: 0,
         backgroundColor: colorName.background,
-        title: "Our Services"
+        title: "Service Kami"
             .text
             .size(18)
             .fontFamily('nunitoexb')
@@ -98,7 +107,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                           color: colorName.layer,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: "By Kilogram"
+                        child: "Kilogram"
                             .richText
                             .color(colorName.grey)
                             .size(14)
@@ -107,7 +116,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                             .makeCentered()
                             .onTap(
                           () {
-                            context.goNamed('kilogram');
+                            Get.off(const KilogramScreen());
                           },
                         ),
                       ),
@@ -119,7 +128,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                           color: colorName.primary,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: "By Pieces"
+                        child: "Satuan"
                             .richText
                             .color(colorName.background)
                             .size(14)
@@ -127,10 +136,8 @@ class _SatuanScreenState extends State<SatuanScreen> {
                             .bold
                             .makeCentered()
                             .onTap(
-                          () {
-                            context.goNamed('satuan');
-                          },
-                        ),
+                              () {},
+                            ),
                       ),
                     ],
                   ),
@@ -145,7 +152,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
               10.heightBox,
               Row(
                 children: [
-                  "Add Items"
+                  "Tambah Item"
                       .richText
                       .color(colorName.button)
                       .fontFamily('nunitoexb')
@@ -162,177 +169,207 @@ class _SatuanScreenState extends State<SatuanScreen> {
                 ),
                 child: Column(
                   children: [
-                    ListTile(
-                      leading: Image(
-                        image: AssetImage('images/shirt.png'),
-                        fit: BoxFit.cover,
-                        height: 45,
-                        width: 40,
-                      ),
-                      title: Column(
-                        children: [
-                          Row(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image(
+                          image: AssetImage('images/shirt.png'),
+                          fit: BoxFit.cover,
+                          height: 40,
+                          width: 40,
+                        ),
+                        VStack([
+                          "Shirt"
+                              .text
+                              .size(14)
+                              .color(colorName.primary)
+                              .fontFamily('nunito')
+                              .bold
+                              .make(),
+                          "IDR 7.000/Pieces"
+                              .text
+                              .size(12)
+                              .fontFamily('nunito')
+                              .bold
+                              .make(),
+                        ]),
+                        Container(
+                          child: Row(
                             children: [
-                              "Shirt"
+                              IconButton(
+                                onPressed: () => c.shirtmin(),
+                                icon: Image(
+                                  image: AssetImage('images/min.png'),
+                                ),
+                              ),
+                              5.widthBox,
+                              Obx(() => "${c.shirt.toString()}"
                                   .text
-                                  .size(14)
-                                  .color(colorName.primary)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
+                                  .fontFamily('nunitoexb')
+                                  .size(16)
+                                  .make()),
+                              5.widthBox,
+                              IconButton(
+                                onPressed: () => c.shirtplus(),
+                                icon: Image(
+                                  image: AssetImage('images/plus.png'),
+                                ),
+                              ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              "IDR 7.000/Pieces"
-                                  .text
-                                  .size(12)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                        ],
-                      ),
-                      trailing: Radio(
-                        value: 1,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value = value!;
-                          });
-                        },
-                      ),
-                    ),
+                        )
+                      ],
+                    ).pOnly(left: 20, right: 20),
                     15.heightBox,
-                    ListTile(
-                      leading: Image(
-                        image: AssetImage('images/tshirt.png'),
-                        fit: BoxFit.cover,
-                        height: 45,
-                        width: 35,
-                      ),
-                      title: Column(
-                        children: [
-                          Row(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image(
+                          image: AssetImage('images/tshirt.png'),
+                          fit: BoxFit.cover,
+                          height: 40,
+                          width: 35,
+                        ),
+                        VStack([
+                          "T-Shirt"
+                              .text
+                              .size(14)
+                              .color(colorName.primary)
+                              .fontFamily('nunito')
+                              .bold
+                              .make(),
+                          "IDR 5.000/Pieces"
+                              .text
+                              .size(12)
+                              .fontFamily('nunito')
+                              .bold
+                              .make(),
+                        ]),
+                        Container(
+                          child: Row(
                             children: [
-                              "T-Shirt"
+                              IconButton(
+                                onPressed: () => c.tshirtmin(),
+                                icon:
+                                    Image(image: AssetImage('images/min.png')),
+                              ),
+                              5.widthBox,
+                              Obx(() => "${c.tshirt.toString()}"
                                   .text
-                                  .size(14)
-                                  .color(colorName.primary)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
+                                  .fontFamily('nunitoexb')
+                                  .size(16)
+                                  .make()),
+                              5.widthBox,
+                              IconButton(
+                                onPressed: () => c.tshirtplus(),
+                                icon:
+                                    Image(image: AssetImage('images/plus.png')),
+                              ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              "IDR 5.000/Pieces"
-                                  .text
-                                  .size(12)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                        ],
-                      ),
-                      trailing: Radio(
-                        value: 2,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value = value!;
-                          });
-                        },
-                      ),
-                    ),
+                        )
+                      ],
+                    ).pOnly(left: 20, right: 20),
                     15.heightBox,
-                    ListTile(
-                      leading: Image(
-                        image: AssetImage('images/underwear.png'),
-                        fit: BoxFit.cover,
-                        height: 45,
-                        width: 35,
-                      ),
-                      title: Column(
-                        children: [
-                          Row(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image(
+                          image: AssetImage('images/underwear.png'),
+                          fit: BoxFit.cover,
+                          height: 40,
+                          width: 35,
+                        ),
+                        VStack([
+                          "Underwear"
+                              .text
+                              .size(14)
+                              .color(colorName.primary)
+                              .fontFamily('nunito')
+                              .bold
+                              .make(),
+                          "IDR 3.000/Pieces"
+                              .text
+                              .size(12)
+                              .fontFamily('nunito')
+                              .bold
+                              .make(),
+                        ]),
+                        Container(
+                          child: Row(
                             children: [
-                              "Underwear"
+                              IconButton(
+                                onPressed: () => c.underwearmin(),
+                                icon:
+                                    Image(image: AssetImage('images/min.png')),
+                              ),
+                              5.widthBox,
+                              Obx(() => "${c.underwear.toString()}"
                                   .text
-                                  .size(14)
-                                  .color(colorName.primary)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
+                                  .fontFamily('nunitoexb')
+                                  .size(16)
+                                  .make()),
+                              5.widthBox,
+                              IconButton(
+                                onPressed: () => c.underwearplus(),
+                                icon:
+                                    Image(image: AssetImage('images/plus.png')),
+                              ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              "IDR 3.000/Pieces"
-                                  .text
-                                  .size(12)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                        ],
-                      ),
-                      trailing: Radio(
-                        value: 3,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value = value!;
-                          });
-                        },
-                      ),
-                    ),
+                        )
+                      ],
+                    ).pOnly(left: 20, right: 20),
                     15.heightBox,
-                    ListTile(
-                      leading: Image(
-                        image: AssetImage('images/pants.png'),
-                        fit: BoxFit.cover,
-                        height: 45,
-                        width: 35,
-                      ),
-                      title: Column(
-                        children: [
-                          Row(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image(
+                          image: AssetImage('images/pants.png'),
+                          fit: BoxFit.cover,
+                          height: 40,
+                          width: 35,
+                        ),
+                        VStack([
+                          "Pants"
+                              .text
+                              .size(14)
+                              .color(colorName.primary)
+                              .fontFamily('nunito')
+                              .bold
+                              .make(),
+                          "IDR 8.000/Pieces"
+                              .text
+                              .size(12)
+                              .fontFamily('nunito')
+                              .bold
+                              .make(),
+                        ]),
+                        Container(
+                          child: Row(
                             children: [
-                              "Pants"
+                              IconButton(
+                                onPressed: () => c.pantsmin(),
+                                icon:
+                                    Image(image: AssetImage('images/min.png')),
+                              ),
+                              5.widthBox,
+                              Obx(() => "${c.pants.toString()}"
                                   .text
-                                  .size(14)
-                                  .color(colorName.primary)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
+                                  .fontFamily('nunitoexb')
+                                  .size(16)
+                                  .make()),
+                              5.widthBox,
+                              IconButton(
+                                onPressed: () => c.pantsplus(),
+                                icon:
+                                    Image(image: AssetImage('images/plus.png')),
+                              ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              "IDR 8.000/Pieces"
-                                  .text
-                                  .size(12)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                        ],
-                      ),
-                      trailing: Radio(
-                        value: 4,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value = value!;
-                          });
-                        },
-                      ),
-                    ),
+                        )
+                      ],
+                    ).pOnly(left: 20, right: 20),
                   ],
                 ).pOnly(top: 20, bottom: 20),
               ).pOnly(left: 20, right: 20, bottom: 20),

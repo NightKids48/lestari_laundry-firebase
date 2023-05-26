@@ -57,7 +57,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
           ButtonWidget(
             text: 'Continue',
             onPressed: () {
-              context.goNamed('kgsumary');
+              Get.off(KgSumary());
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
         ]),
@@ -65,7 +65,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: colorName.background,
-        title: 'Laundry by Kilogram'
+        title: 'Laundry Kilogram'
             .text
             .fontFamily('nunitoexb')
             .color(colorName.button)
@@ -85,7 +85,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
           children: [
             Row(
               children: [
-                'Receiver Details'
+                'Detail Penerima'
                     .text
                     .size(18)
                     .fontFamily('nunitoexb')
@@ -118,7 +118,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
                           setState(
                             () {
                               statusSwitch = !statusSwitch;
-                              context.goNamed('registerkg');
+                              Get.off(DetailRegisterKg());
                             },
                           );
                         },
@@ -213,7 +213,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
             ).wFull(context).pOnly(left: 20, right: 20),
             Row(
               children: [
-                'Select delivery type'
+                'Pilih pengiriman'
                     .text
                     .size(18)
                     .fontFamily('nunitoexb')
@@ -265,7 +265,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
             ).pOnly(left: 20, right: 20, bottom: 20),
             Row(
               children: [
-                'Any special instructions?  '
+                'Instruksi tambahan  '
                     .text
                     .size(18)
                     .fontFamily('nunitoexb')

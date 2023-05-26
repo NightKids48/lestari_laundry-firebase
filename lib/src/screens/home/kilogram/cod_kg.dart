@@ -38,35 +38,53 @@ class _CodKgState extends State<CodKg> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                'Total'
-                    .text
-                    .fontFamily('nunitoexb')
-                    .color(colorName.button)
-                    .size(14)
-                    .bold
-                    .make(),
-                220.widthBox,
-                'IDR '
-                    .text
-                    .fontFamily('nunitoexb')
-                    .color(colorName.button)
-                    .size(14)
-                    .bold
-                    .make(),
-                ''
-                    .text
-                    .fontFamily('nunito')
-                    .color(colorName.primary)
-                    .size(14)
-                    .bold
-                    .make()
+                Container(
+                  child: Row(
+                    children: [
+                      'Total Items: '
+                          .text
+                          .fontFamily('nunitoexb')
+                          .color(colorName.button)
+                          .size(14)
+                          .bold
+                          .make(),
+                      '1'
+                          .text
+                          .fontFamily('nunitoexb')
+                          .color(colorName.primary)
+                          .size(14)
+                          .bold
+                          .make(),
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      'IDR '
+                          .text
+                          .fontFamily('nunitoexb')
+                          .color(colorName.button)
+                          .size(14)
+                          .bold
+                          .make(),
+                      '18.000'
+                          .text
+                          .fontFamily('nunitoexb')
+                          .color(colorName.primary)
+                          .size(14)
+                          .bold
+                          .make(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
           ButtonWidget(
             text: 'Continue',
             onPressed: () {
-              context.goNamed('orderdetailkg');
+              Get.off(OrderDetailkg());
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
         ]),
@@ -81,14 +99,14 @@ class _CodKgState extends State<CodKg> {
                   color: colorName.scndprimary),
               child: Center(
                 child: VStack([
-                  "You can pay in cash when you receive the"
+                  "Siapkan jumlah uang yang tertera di bawah"
                       .text
                       .size(14)
                       .fontFamily('nunito')
                       .bold
                       .color(colorName.primary)
                       .makeCentered(),
-                  "finished laundry at the destination"
+                  "ketika kurir menjemput laundry kamu"
                       .text
                       .size(14)
                       .fontFamily('nunito')
@@ -112,7 +130,7 @@ class _CodKgState extends State<CodKg> {
               ),
               Row(
                 children: [
-                  "Payment summary"
+                  "Ringkasan pembayaran"
                       .text
                       .size(18)
                       .bold
@@ -132,7 +150,7 @@ class _CodKgState extends State<CodKg> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "Full sertvice laundry"
+                    "Cuci lengkap"
                         .text
                         .size(12)
                         .bold
@@ -140,7 +158,7 @@ class _CodKgState extends State<CodKg> {
                         .color(colorName.grey)
                         .make()
                         .p(10),
-                    "5.000"
+                    "15.000"
                         .text
                         .size(12)
                         .bold
@@ -153,7 +171,7 @@ class _CodKgState extends State<CodKg> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "Delivery fee"
+                    "Ongkos kirim"
                         .text
                         .size(12)
                         .bold
@@ -195,14 +213,14 @@ class _CodKgState extends State<CodKg> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "Total Payment"
+                    "Total Pembayaran"
                         .text
                         .size(14)
                         .bold
                         .fontFamily('nunito')
                         .color(colorName.primary)
                         .make(),
-                    "8.000"
+                    "18.000"
                         .text
                         .size(14)
                         .bold

@@ -39,7 +39,7 @@ class _DetailRegisterKgState extends State<DetailRegisterKg> {
                 .color(colorName.button)
                 .size(14)
                 .make(),
-            ''
+            '15.000'
                 .text
                 .fontFamily('nunito')
                 .color(colorName.primary)
@@ -51,24 +51,14 @@ class _DetailRegisterKgState extends State<DetailRegisterKg> {
         ButtonWidget(
           text: 'Continue',
           onPressed: () {
-            ArtSweetAlert.show(
-              context: context,
-              artDialogArgs: ArtDialogArgs(
-                type: ArtSweetAlertType.question,
-                title: "Any special instructions?",
-                text: "Lorem ipsum dolor sit amet",
-                onConfirm: () {
-                  context.goNamed('kgsumary');
-                },
-              ),
-            );
+            Get.off(KgSumary());
           },
         ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
       ]),
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: colorName.background,
-        title: 'Laundry by Kilogram'
+        title: 'Laundry Kilogram'
             .text
             .fontFamily('nunitoexb')
             .color(colorName.button)
@@ -82,7 +72,7 @@ class _DetailRegisterKgState extends State<DetailRegisterKg> {
           children: [
             Row(
               children: [
-                'Receiver Details'
+                'Detail Penerima'
                     .text
                     .size(18)
                     .fontFamily('nunitoexb')
@@ -223,7 +213,7 @@ class _DetailRegisterKgState extends State<DetailRegisterKg> {
             ).wFull(context).pOnly(left: 20, right: 20),
             Row(
               children: [
-                'Select delivery type'
+                'Pilih pengiriman'
                     .text
                     .size(18)
                     .fontFamily('nunitoexb')
@@ -275,7 +265,7 @@ class _DetailRegisterKgState extends State<DetailRegisterKg> {
             ).pOnly(left: 20, right: 20, bottom: 20),
             Row(
               children: [
-                'Any special instructions?  '
+                'Instruksi tambahan  '
                     .text
                     .size(18)
                     .fontFamily('nunitoexb')

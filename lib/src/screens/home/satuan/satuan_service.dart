@@ -95,7 +95,7 @@ class _SatuanServiceState extends State<SatuanService> {
                           color: colorName.layer,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: "By Kilogram"
+                        child: "Kilogram"
                             .richText
                             .color(colorName.grey)
                             .size(14)
@@ -114,7 +114,7 @@ class _SatuanServiceState extends State<SatuanService> {
                           color: colorName.primary,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: "By Pieces"
+                        child: "Satuan"
                             .richText
                             .color(colorName.background)
                             .size(14)
@@ -140,7 +140,7 @@ class _SatuanServiceState extends State<SatuanService> {
               5.heightBox,
               Row(
                 children: [
-                  "Choose the category"
+                  "Pilih Kategori"
                       .richText
                       .color(colorName.button)
                       .fontFamily('nunitoexb')
@@ -161,25 +161,34 @@ class _SatuanServiceState extends State<SatuanService> {
                       leading: Image(
                         image: AssetImage('images/kering.png'),
                         fit: BoxFit.cover,
-                        width: 45,
+                        width: 50,
                       ),
                       title: Column(
                         children: [
-                          "Dry Wash"
-                              .text
-                              .size(14)
-                              .color(colorName.primary)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                          "IDR 2.500/KG"
-                              .text
-                              .size(12)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
+                          Row(
+                            children: [
+                              "Cuci Kering"
+                                  .text
+                                  .size(14)
+                                  .color(colorName.primary)
+                                  .fontFamily('nunito')
+                                  .bold
+                                  .make(),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              "IDR 2.500/KG"
+                                  .text
+                                  .size(12)
+                                  .fontFamily('nunito')
+                                  .color(colorName.button)
+                                  .bold
+                                  .make(),
+                            ],
+                          ),
                         ],
-                      ),
+                      ).pOnly(left: 20),
                       trailing: Radio(
                         value: 1,
                         groupValue: _value,
@@ -190,30 +199,39 @@ class _SatuanServiceState extends State<SatuanService> {
                         },
                       ),
                     ),
-                    15.heightBox,
+                    VxDivider().pOnly(left: 10, right: 10, bottom: 10),
                     ListTile(
                       leading: Image(
                         image: AssetImage('images/setrika.png'),
                         fit: BoxFit.cover,
-                        width: 45,
+                        width: 50,
                       ),
                       title: Column(
                         children: [
-                          "Iron Only"
-                              .text
-                              .size(14)
-                              .color(colorName.primary)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                          "IDR 2.500/KG"
-                              .text
-                              .size(12)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
+                          Row(
+                            children: [
+                              "Setrika Saja"
+                                  .text
+                                  .size(14)
+                                  .color(colorName.primary)
+                                  .fontFamily('nunito')
+                                  .bold
+                                  .make(),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              "IDR 2.500/KG"
+                                  .text
+                                  .size(12)
+                                  .fontFamily('nunito')
+                                  .color(colorName.button)
+                                  .bold
+                                  .make(),
+                            ],
+                          ),
                         ],
-                      ),
+                      ).pOnly(left: 20),
                       trailing: Radio(
                         value: 2,
                         groupValue: _value,
@@ -224,30 +242,39 @@ class _SatuanServiceState extends State<SatuanService> {
                         },
                       ),
                     ),
-                    15.heightBox,
+                    VxDivider().p(10),
                     ListTile(
                       leading: Image(
                         image: AssetImage('images/fullservice.png'),
                         fit: BoxFit.cover,
-                        width: 45,
+                        width: 50,
                       ),
                       title: Column(
                         children: [
-                          "Full Service"
-                              .text
-                              .size(14)
-                              .color(colorName.primary)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                          "IDR 2.500/KG"
-                              .text
-                              .size(12)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
+                          Row(
+                            children: [
+                              "Cuci Lengkap"
+                                  .text
+                                  .size(14)
+                                  .color(colorName.primary)
+                                  .fontFamily('nunito')
+                                  .bold
+                                  .make(),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              "IDR 5.000/KG"
+                                  .text
+                                  .size(12)
+                                  .fontFamily('nunito')
+                                  .color(colorName.button)
+                                  .bold
+                                  .make(),
+                            ],
+                          ),
                         ],
-                      ),
+                      ).pOnly(left: 20),
                       trailing: Radio(
                         value: 3,
                         groupValue: _value,

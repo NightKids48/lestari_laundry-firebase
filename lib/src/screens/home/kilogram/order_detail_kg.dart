@@ -10,7 +10,7 @@ class OrderDetailkg extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: colorName.background,
         elevation: 0,
-        title: "Order Details"
+        title: "Detail Pesanan"
             .text
             .color(colorName.button)
             .fontFamily('nunitoexb')
@@ -27,9 +27,9 @@ class OrderDetailkg extends StatelessWidget {
         color: colorName.background,
         child: VStack([
           ButtonWidget(
-            text: 'Back to Homepage',
+            text: 'Kembali Ke Halaman Utama',
             onPressed: () {
-              context.goNamed('home');
+              Get.off(HomeScreen());
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 10),
         ]),
@@ -45,7 +45,7 @@ class OrderDetailkg extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  "We've received your order!"
+                  "Order kamu di terima!"
                       .text
                       .size(18)
                       .fontFamily('nunitoexb')
@@ -57,7 +57,7 @@ class OrderDetailkg extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  "Please prepare some money with the"
+                  "Jangan lupa siapkan jumlah uang pada "
                       .text
                       .size(14)
                       .fontFamily('nunito')
@@ -68,7 +68,7 @@ class OrderDetailkg extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  "information below"
+                  "iinformasi di bawah"
                       .text
                       .size(14)
                       .fontFamily('nunito')
@@ -85,7 +85,7 @@ class OrderDetailkg extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: colorName.primary),
                     ),
-                    child: "IDR 8.000"
+                    child: "IDR 18.000"
                         .text
                         .size(16)
                         .bold
@@ -115,7 +115,7 @@ class OrderDetailkg extends StatelessWidget {
                       .color(colorName.silver)
                       .make()
                       .pOnly(left: 10, right: 10, top: 10),
-                  "Waiting for payment"
+                  "Di jemput kurir"
                       .text
                       .size(14)
                       .bold
@@ -128,7 +128,7 @@ class OrderDetailkg extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  "Order Number"
+                  "Nomor order"
                       .text
                       .size(14)
                       .bold
@@ -136,7 +136,7 @@ class OrderDetailkg extends StatelessWidget {
                       .color(colorName.silver)
                       .make()
                       .pOnly(left: 10, right: 10, top: 5),
-                  "No.1"
+                  "#1"
                       .text
                       .size(14)
                       .bold
@@ -168,8 +168,53 @@ class OrderDetailkg extends StatelessWidget {
                 ],
               ),
             ]),
-          ).pOnly(left: 20, right: 20),
-          "Delivery details"
+          ).pOnly(left: 20, right: 20, bottom: 20),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: colorName.background,
+            ),
+            child: VStack([
+              HStack([
+                Image(
+                  image: AssetImage('images/fullservice.png'),
+                  fit: BoxFit.cover,
+                  width: 60,
+                ).p(10),
+                VStack([
+                  "Cuci Lengkap"
+                      .text
+                      .size(14)
+                      .color(colorName.primary)
+                      .bold
+                      .make(),
+                  "IDR 5.000/KG".text.size(12).bold.make(),
+                ]).pOnly(left: 20),
+              ]),
+            ]),
+          ).pOnly(left: 20, right: 20).wFull(context),
+          10.heightBox,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: colorName.background,
+            ),
+            child: VStack([
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  "Total Kilogram"
+                      .text
+                      .size(14)
+                      .color(colorName.primary)
+                      .bold
+                      .make(),
+                  "3 KG".text.size(14).color(colorName.black).bold.make(),
+                ],
+              ),
+            ]).p(15),
+          ).pOnly(left: 20, right: 20).wFull(context),
+          "Detail pengiriman"
               .text
               .size(18)
               .bold
@@ -267,7 +312,7 @@ class OrderDetailkg extends StatelessWidget {
               ]),
             ]).pOnly(left: 10, right: 10, top: 20, bottom: 20),
           ).pOnly(left: 20, right: 20).wFull(context),
-          "Payment summary"
+          "Ringkasan pembayaran"
               .text
               .size(18)
               .fontFamily('nunitoexb')
@@ -283,7 +328,7 @@ class OrderDetailkg extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  "Payment Method"
+                  "Metode pembayaran"
                       .text
                       .size(14)
                       .bold
@@ -305,7 +350,69 @@ class OrderDetailkg extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  "Total Payment"
+                  "Cuci lengkap"
+                      .text
+                      .size(14)
+                      .bold
+                      .fontFamily('nunito')
+                      .color(colorName.silver)
+                      .make()
+                      .pOnly(left: 10, top: 10),
+                  "15.000"
+                      .text
+                      .size(14)
+                      .bold
+                      .fontFamily('nunito')
+                      .color(colorName.button)
+                      .make()
+                      .pOnly(right: 10),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  "Ongkos kirim"
+                      .text
+                      .size(14)
+                      .bold
+                      .fontFamily('nunito')
+                      .color(colorName.silver)
+                      .make()
+                      .pOnly(left: 10),
+                  "3.000"
+                      .text
+                      .size(14)
+                      .bold
+                      .fontFamily('nunito')
+                      .color(colorName.button)
+                      .make()
+                      .pOnly(right: 10),
+                ],
+              ),
+              Row(
+                children: [
+                  "* "
+                      .text
+                      .size(12)
+                      .bold
+                      .fontFamily('nunito')
+                      .color(colorName.maroon)
+                      .make()
+                      .pOnly(left: 10, top: 10, bottom: 10),
+                  "Lokasi kamu lebih dari 2km"
+                      .text
+                      .size(12)
+                      .bold
+                      .fontFamily('nunito')
+                      .color(colorName.grey)
+                      .make()
+                      .pOnly(top: 10, bottom: 10)
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  "Total Pembayaran"
                       .text
                       .size(14)
                       .bold
@@ -313,7 +420,7 @@ class OrderDetailkg extends StatelessWidget {
                       .color(colorName.primary)
                       .make()
                       .p(10),
-                  "8.000"
+                  "18.000"
                       .text
                       .size(14)
                       .bold

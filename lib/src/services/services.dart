@@ -5,5 +5,4 @@ import 'package:lestari_laundry/src/models/models.dart';
 import 'package:lestari_laundry/src/utilities/utilities.dart';
 
 part 'user_service.dart';
-part 'order_service.dart';
-part 'product_service.dart';
+part 'firebase_auth_service.dart';
