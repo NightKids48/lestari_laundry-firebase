@@ -4,6 +4,21 @@ class Commons {
   final prefs = SharedPreferences.getInstance();
   final picker = ImagePicker();
 
+  void setToken(String token) async {
+    final storage = await prefs;
+    await storage.setString('token', token);
+  }
+
+  Future<String?> getToken() async {
+    final storage = await prefs;
+    return storage.getString('token');
+  }
+
+  Future<bool> removeToken() async {
+    final storage = await prefs;
+    return storage.remove("token");
+  }
+
   void setUID(String uid) async {
     final storage = await prefs;
     await storage.setString(myUID, uid);

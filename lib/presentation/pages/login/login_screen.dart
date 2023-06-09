@@ -1,4 +1,4 @@
-part of 'screens.dart';
+part of '../../../src/screens/screens.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,6 +10,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool validation() {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
               .make(),
           TextButton(
             onPressed: () {
-              Get.to(RegisterScreen());
+              context.goNamed('register');
             },
             child: "Daftar Disini"
                 .text
@@ -37,14 +45,26 @@ class _LoginScreenState extends State<LoginScreen> {
           )
         ],
       ).pOnly(bottom: 50),
-      body: SafeArea(
-        child: VStack(
-          [
-            _buildText(context),
-            50.heightBox,
-            _buildLoginForm(),
-          ],
-        ),
+      body: BlocConsumer<LoginCubit, LoginStates>(
+        listener: (context, loginState) {
+          if (loginState is LoginIsError) {
+            Commons().showSnackbarError(context, loginState.message!);
+          } else if (loginState is LoginIsSucces) {
+            context.goNamed('location');
+            Commons().showSnackbarInfo(context, 'Login Berhasil');
+          }
+        },
+        builder: (context, loginState) {
+          return SafeArea(
+            child: VStack(
+              [
+                _buildText(context),
+                50.heightBox,
+                _buildLoginForm(),
+              ],
+            ),
+          );
+        },
       ).scrollVertical(),
     );
   }
@@ -142,26 +162,13 @@ class _LoginScreenState extends State<LoginScreen> {
       ).pOnly(right: 20),
       16.heightBox,
       ButtonWidget(
-              onPressed: () async {
-                try {
-                  await FirebaseAuthService().login(emailController.text.trim(),
-                      passwordController.text.trim());
-                  if (FirebaseAuth.instance.currentUser != null) {
-                    if (!mounted) return;
-                    Get.off(LocationScreen());
-                  }
-                } on FirebaseException catch (e) {
-                  debugPrint("error is ${e.message}");
-                  showDialog(
-                    context: context,
-                    builder: (context) => const AlertDialog(
-                      title: Text(
-                        "Email atau password salah",
-                        style: TextStyle(fontFamily: 'nunito'),
-                      ),
-                    ),
-                  );
-                }
+              onPressed: () {
+                BlocProvider.of<LoginCubit>(context).btnlogin(
+                  LoginRequest(
+                    emailController.text,
+                    passwordController.text,
+                  ),
+                );
               },
               text: 'Log In',
               color: colorName.button)

@@ -1,4 +1,4 @@
-part of 'screens.dart';
+part of '../../../src/screens/screens.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -8,10 +8,13 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final usernameController = TextEditingController();
-  final phonenumberController = TextEditingController();
+  final phoneNumberController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final cityController = TextEditingController();
+  final adressDetailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               .make(),
           TextButton(
             onPressed: () {
-              Get.off(LoginScreen());
+              context.goNamed('login');
             },
             child: "Login Disini"
                 .text
@@ -40,14 +43,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
           )
         ],
       ).pOnly(bottom: 50),
-      body: SafeArea(
-        child: VStack(
-          [
-            _buildText(context),
-            25.heightBox,
-            _buildRegisterForm(),
-          ],
-        ),
+      body: BlocConsumer<RegisterCubit, RegisterStates>(
+        listener: (context, registerState) {
+          if (registerState is RegisterIsError) {
+            Commons().showSnackbarError(context, registerState.message!);
+          } else if (registerState is RegisterIsSucces) {
+            context.goNamed('login');
+            Commons().showSnackbarInfo(context, 'Login Berhasil');
+          }
+        },
+        builder: (context, registerState) {
+          return SafeArea(
+            child: VStack(
+              [
+                _buildText(context),
+                25.heightBox,
+                _buildRegisterForm(),
+              ],
+            ),
+          );
+        },
       ).scrollVertical(),
     );
   }
@@ -83,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildRegisterForm() {
     return VStack([
       HStack([
-        "User Name "
+        "User Name"
             .text
             .bold
             .size(16)
@@ -92,10 +107,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
             .make(),
       ]).pOnly(left: 20),
       TextFormField(
-        controller: usernameController,
+        controller: firstNameController,
         keyboardType: TextInputType.name,
         decoration: const InputDecoration(
-          hintText: 'Masukan User Name Anda',
+          hintText: 'Masukan Nama Depan Anda',
+          hintStyle: TextStyle(
+            color: colorName.grey,
+            fontFamily: 'nunito',
+            fontSize: 15,
+          ),
+          border: OutlineInputBorder(),
+        ),
+      ).pOnly(left: 20, right: 20),
+      8.heightBox,
+      HStack([
+        "Nama Belakang "
+            .text
+            .bold
+            .size(16)
+            .color(colorName.black)
+            .fontFamily('nunito')
+            .make(),
+      ]).pOnly(left: 20),
+      TextFormField(
+        controller: lastNameController,
+        keyboardType: TextInputType.name,
+        decoration: const InputDecoration(
+          hintText: 'Masukan Nama Belakang Anda',
           hintStyle: TextStyle(
             color: colorName.grey,
             fontFamily: 'nunito',
@@ -129,6 +167,52 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ).pOnly(left: 20, right: 20),
       8.heightBox,
       HStack([
+        "Alamat Lengkap"
+            .text
+            .bold
+            .size(16)
+            .color(colorName.black)
+            .fontFamily('nunito')
+            .make(),
+      ]).pOnly(left: 20),
+      TextFormField(
+        controller: adressDetailController,
+        keyboardType: TextInputType.emailAddress,
+        decoration: const InputDecoration(
+          hintText: 'Masukan Email Anda',
+          hintStyle: TextStyle(
+            color: colorName.grey,
+            fontFamily: 'nunito',
+            fontSize: 15,
+          ),
+          border: OutlineInputBorder(),
+        ),
+      ).pOnly(left: 20, right: 20),
+      8.heightBox,
+      HStack([
+        "Kota "
+            .text
+            .bold
+            .size(16)
+            .color(colorName.black)
+            .fontFamily('nunito')
+            .make(),
+      ]).pOnly(left: 20),
+      TextFormField(
+        controller: cityController,
+        keyboardType: TextInputType.emailAddress,
+        decoration: const InputDecoration(
+          hintText: 'Masukan Kota Anda',
+          hintStyle: TextStyle(
+            color: colorName.grey,
+            fontFamily: 'nunito',
+            fontSize: 15,
+          ),
+          border: OutlineInputBorder(),
+        ),
+      ).pOnly(left: 20, right: 20),
+      8.heightBox,
+      HStack([
         "Nomor Handphone "
             .text
             .bold
@@ -138,7 +222,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             .make(),
       ]).pOnly(left: 20),
       TextFormField(
-        controller: phonenumberController,
+        controller: phoneNumberController,
         keyboardType: TextInputType.number,
         decoration: const InputDecoration(
           hintText: 'Masukan Nomor Handphone Anda',
@@ -175,28 +259,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ).pOnly(left: 20, right: 20),
       50.heightBox,
       ButtonWidget(
-              onPressed: () async {
-                try {
-                  await FirebaseAuthService().signup(
-                      emailController.text.trim(),
-                      passwordController.text.trim());
-
-                  if (!mounted) return;
-
-                  Get.off(LoginScreen());
-                } on FirebaseException catch (e) {
-                  debugPrint("error is ${e.message}");
-
-                  showDialog(
-                    context: context,
-                    builder: (context) => const AlertDialog(
-                      title: Text(
-                        "Harap masukan data anda",
-                        style: TextStyle(fontFamily: 'nunito'),
-                      ),
-                    ),
-                  );
-                }
+              onPressed: () {
+                BlocProvider.of<RegisterCubit>(context).btnregister(
+                  RegisterRequest(
+                    phoneNumberController.text,
+                    emailController.text,
+                    passwordController.text,
+                    firstNameController.text,
+                    lastNameController.text,
+                    cityController.text,
+                    adressDetailController.text,
+                  ),
+                );
               },
               text: 'Register',
               color: colorName.button)

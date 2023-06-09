@@ -155,7 +155,7 @@ class _DashboardViewState extends State<DashboardView> {
           color: colorName.secondary,
           child: InkWell(
             onTap: () {
-              Get.to(KilogramScreen());
+              context.goNamed('kilogram');
             },
             splashColor: colorName.primary,
             child: Center(
@@ -173,7 +173,7 @@ class _DashboardViewState extends State<DashboardView> {
           color: colorName.secondary,
           child: InkWell(
             onTap: () {
-              Get.to(const SatuanScreen());
+              context.goNamed('satuan');
             },
             splashColor: colorName.primary,
             child: Center(

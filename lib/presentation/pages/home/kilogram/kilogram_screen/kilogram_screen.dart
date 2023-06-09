@@ -1,4 +1,4 @@
-part of '../../screens.dart';
+part of '../../../../../src/screens/screens.dart';
 
 class KilogramScreen extends StatefulWidget {
   const KilogramScreen({super.key});
@@ -51,7 +51,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                       .size(14)
                       .bold
                       .make(),
-                  '${_value * 5000}'
+                  '${_value}'
                       .text
                       .fontFamily('nunito')
                       .color(colorName.primary)
@@ -74,14 +74,23 @@ class _KilogramScreenState extends State<KilogramScreen> {
         iconTheme: IconThemeData(color: colorName.primary),
         elevation: 0,
         backgroundColor: colorName.background,
-        title: "Layanan Kami"
-            .text
-            .size(18)
-            .fontFamily('nunitoexb')
-            .bold
-            .color(colorName.button)
-            .make()
-            .centered(),
+        title: Text(
+          "Layanan Kami",
+          style: TextStyle(
+            fontSize: 18,
+            fontFamily: 'nunitoexb',
+            fontWeight: FontWeight.bold,
+            color: colorName.button,
+          ),
+        ),
+        // title: "Layanan Kami"
+        //     .text
+        //     .size(18)
+        //     .fontFamily('nunitoexb')
+        //     .bold
+        //     .color(colorName.button)
+        //     .make()
+        //     .centered(),
       ),
       body: SafeArea(
         child: Container(
@@ -169,143 +178,66 @@ class _KilogramScreenState extends State<KilogramScreen> {
               ).pOnly(left: 20, right: 20),
               20.heightBox,
               Container(
+                height: 180,
                 decoration: BoxDecoration(
                   color: colorName.background,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
-                  children: [
-                    ListTile(
-                      leading: Image(
-                        image: AssetImage('images/kering.png'),
-                        fit: BoxFit.cover,
-                        width: 50,
-                      ),
-                      title: Column(
-                        children: [
-                          Row(
-                            children: [
-                              "Cuci Kering"
-                                  .text
-                                  .size(14)
-                                  .color(colorName.primary)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              "IDR 2.500/KG"
-                                  .text
-                                  .size(12)
-                                  .fontFamily('nunito')
-                                  .color(colorName.button)
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                        ],
-                      ).pOnly(left: 20),
-                      trailing: Radio(
-                        value: 1,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value = value!;
-                          });
-                        },
-                      ),
-                    ),
-                    VxDivider().pOnly(left: 10, right: 10, bottom: 10),
-                    ListTile(
-                      leading: Image(
-                        image: AssetImage('images/setrika.png'),
-                        fit: BoxFit.cover,
-                        width: 50,
-                      ),
-                      title: Column(
-                        children: [
-                          Row(
-                            children: [
-                              "Setrika Saja"
-                                  .text
-                                  .size(14)
-                                  .color(colorName.primary)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              "IDR 2.500/KG"
-                                  .text
-                                  .size(12)
-                                  .fontFamily('nunito')
-                                  .color(colorName.button)
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                        ],
-                      ).pOnly(left: 20),
-                      trailing: Radio(
-                        value: 2,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value = value!;
-                          });
-                        },
-                      ),
-                    ),
-                    VxDivider().p(10),
-                    ListTile(
-                      leading: Image(
-                        image: AssetImage('images/fullservice.png'),
-                        fit: BoxFit.cover,
-                        width: 50,
-                      ),
-                      title: Column(
-                        children: [
-                          Row(
-                            children: [
-                              "Cuci Lengkap"
-                                  .text
-                                  .size(14)
-                                  .color(colorName.primary)
-                                  .fontFamily('nunito')
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              "IDR 5.000/KG"
-                                  .text
-                                  .size(12)
-                                  .fontFamily('nunito')
-                                  .color(colorName.button)
-                                  .bold
-                                  .make(),
-                            ],
-                          ),
-                        ],
-                      ).pOnly(left: 20),
-                      trailing: Radio(
-                        value: 3,
-                        groupValue: _value,
-                        onChanged: (value) {
-                          setState(() {
-                            _value = value!;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ).pOnly(top: 20, bottom: 20),
-              ).pOnly(left: 20, right: 20),
+                child: BlocBuilder<KilogramCubit, KilogramState>(
+                    builder: (context, state) {
+                  if (state is KilogramIsSuccess) {
+                    return ListView.builder(
+                        itemCount: state.data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var data = state.data![index].attribute;
+                          return ListTile(
+                            leading: Image(
+                              image: AssetImage('images/kering.png'),
+                              fit: BoxFit.cover,
+                              width: 50,
+                            ),
+                            title: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    "${data.productName}"
+                                        .text
+                                        .size(14)
+                                        .color(colorName.primary)
+                                        .fontFamily('nunito')
+                                        .bold
+                                        .make(),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    "IDR ${data.productPrice}/KG"
+                                        .text
+                                        .size(12)
+                                        .fontFamily('nunito')
+                                        .color(colorName.button)
+                                        .bold
+                                        .make(),
+                                  ],
+                                ),
+                              ],
+                            ).pOnly(left: 20),
+                            trailing: Radio(
+                              value: index,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = value as int;
+                                });
+                              },
+                            ),
+                          );
+                        });
+                  }
+                  return Container(child: Text('Kosong'));
+                }),
+                // .paddingSymmetric(vertical: 20),
+              ).paddingSymmetric(horizontal: 20),
               Row(
                 children: [
                   "Jumlah Kilogram"

@@ -38,7 +38,7 @@ dependencies:
   shared_preferences: ^2.0.17
   velocity_x: ^3.6.0
   carousel_slider: ^4.2.1
-  flutter_bloc: ^8.1.2
+  flutter_bloc: ^8.0.1
   cupertino_icons: ^1.0.5
   introduction_screen: ^3.1.4
   smooth_page_indicator: ^1.0.0
@@ -57,10 +57,15 @@ dependencies:
   get: ^4.6.5
   http: ^0.13.5
   google_fonts: 2.1.0
+  equatable: ^2.0.5
+  path_provider: ^2.0.10
+  json_annotation: ^4.8.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.2.3
+  json_serializable: ^6.6.1
 
 flutter_icons:
   android: "launcher_icon"

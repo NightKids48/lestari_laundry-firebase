@@ -57,7 +57,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
           ButtonWidget(
             text: 'Continue',
             onPressed: () {
-              Get.off(KgSumary());
+              context.goNamed('kgsumary');
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
         ]),
@@ -118,7 +118,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
                           setState(
                             () {
                               statusSwitch = !statusSwitch;
-                              Get.off(DetailRegisterKg());
+                              context.goNamed('registerkg');
                             },
                           );
                         },
