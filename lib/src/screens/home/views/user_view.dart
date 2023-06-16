@@ -6,14 +6,14 @@ class UserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: colorName.layer,
-        appBar: AppBar(
-          backgroundColor: colorName.primary,
-          elevation: 0,
-          title: "Profilku".text.fontFamily('nunitoexb').make().centered(),
-        ),
-        body: SafeArea(
-            child: VStack(
+      backgroundColor: colorName.layer,
+      appBar: AppBar(
+        backgroundColor: colorName.primary,
+        elevation: 0,
+        title: "Profilku".text.fontFamily('nunitoexb').make().centered(),
+      ),
+      body: SafeArea(
+        child: VStack(
           [
             5.heightBox,
             Image(
@@ -194,6 +194,8 @@ class UserView extends StatelessWidget {
               ],
             )
           ],
-        )));
+        ),
+      ).scrollVertical(),
+    );
   }
 }

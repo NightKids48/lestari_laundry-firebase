@@ -1,23 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'kilogram_data_response.dart';
+part of 'satuan_data_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-KilogramDataResponse _$KilogramDataResponseFromJson(
-        Map<String, dynamic> json) =>
-    KilogramDataResponse(
+SatuanDataResponse _$SatuanDataResponseFromJson(Map<String, dynamic> json) =>
+    SatuanDataResponse(
       id: json['id'] as int?,
       attributes: json['attributes'] == null
           ? null
-          : KilogramDataAttributesResponse.fromJson(
+          : SatuanDataAttributesResponse.fromJson(
               json['attributes'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$KilogramDataResponseToJson(
-        KilogramDataResponse instance) =>
+Map<String, dynamic> _$SatuanDataResponseToJson(SatuanDataResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,

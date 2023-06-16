@@ -10,15 +10,15 @@ ProductImageDataResponse _$ProductImageDataResponseFromJson(
         Map<String, dynamic> json) =>
     ProductImageDataResponse(
       id: json['id'] as int?,
-      attribute: json['attribute'] == null
+      attributes: json['attributes'] == null
           ? null
           : ProductImageAttributeResponse.fromJson(
-              json['attribute'] as Map<String, dynamic>),
+              json['attributes'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ProductImageDataResponseToJson(
         ProductImageDataResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'attribute': instance.attribute,
+      'attributes': instance.attributes,
     };

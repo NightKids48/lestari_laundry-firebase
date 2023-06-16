@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           TextButton(
             onPressed: () {
-              Get.off(ForgotPassword());
+              context.goNamed('changepassword');
             },
             child: "Lupa Password "
                 .text

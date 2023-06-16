@@ -1,7 +1,9 @@
-part of '../../screens.dart';
+part of '../../../../src/screens/screens.dart';
 
 class DetailRegisterKg extends StatefulWidget {
-  const DetailRegisterKg({super.key});
+  final String item;
+  final String total;
+  DetailRegisterKg({super.key, required this.item, required this.total});
 
   @override
   State<DetailRegisterKg> createState() => _DetailRegisterKgState();
@@ -10,51 +12,66 @@ class DetailRegisterKg extends StatefulWidget {
 class _DetailRegisterKgState extends State<DetailRegisterKg> {
   bool statusSwitch = true;
   String? kelas;
+  final MyController c = Get.put(MyController());
+  final OrderController o = Get.put(OrderController());
+  int _selectedRadio = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorName.rightone,
-      bottomNavigationBar: VStack([
-        Padding(
-          padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-          child: HStack([
-            'Total items:'
-                .text
-                .fontFamily('nunitoexb')
-                .color(colorName.button)
-                .size(14)
-                .make(),
-            5.widthBox,
-            ''
-                .text
-                .fontFamily('nunito')
-                .color(colorName.primary)
-                .size(14)
-                .bold
-                .make(),
-            210.widthBox,
-            'IDR '
-                .text
-                .fontFamily('nunitoexb')
-                .color(colorName.button)
-                .size(14)
-                .make(),
-            '15.000'
-                .text
-                .fontFamily('nunito')
-                .color(colorName.primary)
-                .size(14)
-                .bold
-                .make()
-          ]),
-        ),
-        ButtonWidget(
-          text: 'Continue',
-          onPressed: () {
-            Get.off(KgSumary());
-          },
-        ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
-      ]),
+      bottomNavigationBar: ColoredBox(
+        color: colorName.background,
+        child: VStack([
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: HStack([
+                  'Total items:'
+                      .text
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .size(14)
+                      .bold
+                      .make(),
+                  5.widthBox,
+                  '1'
+                      .text
+                      .fontFamily('nunito')
+                      .color(colorName.primary)
+                      .size(14)
+                      .bold
+                      .make(),
+                ]),
+              ),
+              Container(
+                child: HStack([
+                  'IDR '
+                      .text
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .size(14)
+                      .bold
+                      .make(),
+                  '${widget.total}'
+                      .text
+                      .fontFamily('nunito')
+                      .color(colorName.primary)
+                      .size(14)
+                      .bold
+                      .make()
+                ]),
+              )
+            ],
+          ).pOnly(left: 20, right: 20, top: 10),
+          ButtonWidget(
+            text: 'Continue',
+            onPressed: () {
+              context.goNamed('kgsumary');
+            },
+          ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
+        ]),
+      ),
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: colorName.background,
@@ -105,7 +122,11 @@ class _DetailRegisterKgState extends State<DetailRegisterKg> {
                           setState(
                             () {
                               statusSwitch = !statusSwitch;
-                              context.goNamed('orderkg');
+                              context.goNamed(routeName.orderkg, extra: {
+                                "item": c.shirt.toString(),
+                                "total":
+                                    '${_selectedRadio * int.parse(c.shirt.toString())}'
+                              });
                             },
                           );
                         },

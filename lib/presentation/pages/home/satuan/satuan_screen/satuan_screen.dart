@@ -1,4 +1,4 @@
-part of '../../screens.dart';
+part of '../../../../../src/screens/screens.dart';
 
 class SatuanScreen extends StatefulWidget {
   const SatuanScreen({super.key});
@@ -10,6 +10,8 @@ class SatuanScreen extends StatefulWidget {
 class _SatuanScreenState extends State<SatuanScreen> {
   final MyController c = Get.put(MyController());
   final OrderController o = Get.put(OrderController());
+  int _value = 1;
+  int _selectedRadio = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +118,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                             .makeCentered()
                             .onTap(
                           () {
-                            Get.off(const KilogramScreen());
+                            context.goNamed('kilogram');
                           },
                         ),
                       ),
@@ -169,6 +171,65 @@ class _SatuanScreenState extends State<SatuanScreen> {
                 ),
                 child: Column(
                   children: [
+                    BlocBuilder<SatuanCubit, SatuanState>(
+                      builder: (context, state) {
+                        if (state is SatuanIsSuccess) {
+                          return ListView.builder(
+                              itemCount: state.data!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                var data = state.data![index].attributes;
+                                var dataImage = state.data![index].attributes
+                                    .productImage.data.attributes;
+                                return ListTile(
+                                  leading: SvgPicture.network(
+                                    BaseConfig.BASE_IMAGE_DOMAIN +
+                                        dataImage.url,
+                                    fit: BoxFit.cover,
+                                    height: 50,
+                                  ),
+                                  title: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          "${data.productName}"
+                                              .text
+                                              .size(14)
+                                              .color(colorName.primary)
+                                              .fontFamily('nunito')
+                                              .bold
+                                              .make(),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          "IDR ${data.productPrice}/KG"
+                                              .text
+                                              .size(12)
+                                              .fontFamily('nunito')
+                                              .color(colorName.button)
+                                              .bold
+                                              .make(),
+                                        ],
+                                      ),
+                                    ],
+                                  ).pOnly(left: 20),
+                                  trailing: Radio(
+                                    value: index,
+                                    groupValue: _value,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _selectedRadio =
+                                            int.parse(data.productPrice);
+                                        _value = value as int;
+                                      });
+                                    },
+                                  ),
+                                );
+                              });
+                        }
+                        return Container(child: Text('Kosong'));
+                      },
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

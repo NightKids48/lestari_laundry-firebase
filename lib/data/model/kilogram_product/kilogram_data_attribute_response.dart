@@ -1,17 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lestari_laundry/data/model/kilogram_product/product_image_data_response.dart';
-import '../../../domain/model/data/kilogram_product.dart/kilogram_data_attribute.dart';
+import 'package:lestari_laundry/data/model/kilogram_product/product_image_response.dart';
+import 'package:lestari_laundry/domain/model/data/kilogram_product.dart/product_image.dart';
+import '../../../domain/model/data/kilogram_product.dart/kilogram_data_attributes.dart';
 import '../../../domain/model/data/kilogram_product.dart/product_image_attribute.dart';
 import '../../../domain/model/data/kilogram_product.dart/product_image_data.dart';
 part 'kilogram_data_attribute_response.g.dart';
 
-abstract class KilogramDataAttributeResponseMapper {
-  KilogramDataAttribute toKilogramDataAttribute();
+abstract class KilogramDataAttributesResponseMapper {
+  KilogramDataAttributes toKilogramDataAttributes();
 }
 
 @JsonSerializable()
-class KilogramDataAttributeResponse
-    implements KilogramDataAttributeResponseMapper {
+class KilogramDataAttributesResponse
+    implements KilogramDataAttributesResponseMapper {
   String? productName;
   String? productType;
   String? productDescription;
@@ -21,9 +22,9 @@ class KilogramDataAttributeResponse
   String? updatedAt;
   String? publishedAt;
   List? productVariant;
-  ProductImageDataResponse? productImage;
+  ProductImageResponse? productImage;
 
-  KilogramDataAttributeResponse({
+  KilogramDataAttributesResponse({
     this.productName,
     this.productType,
     this.productDescription,
@@ -36,14 +37,14 @@ class KilogramDataAttributeResponse
     this.productImage,
   });
 
-  factory KilogramDataAttributeResponse.fromJson(Map<String, dynamic> json) =>
-      _$KilogramDataAttributeResponseFromJson(json);
+  factory KilogramDataAttributesResponse.fromJson(Map<String, dynamic> json) =>
+      _$KilogramDataAttributesResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$KilogramDataAttributeResponseToJson(this);
+  Map<String, dynamic> toJson() => _$KilogramDataAttributesResponseToJson(this);
 
   @override
-  KilogramDataAttribute toKilogramDataAttribute() {
-    return KilogramDataAttribute(
+  KilogramDataAttributes toKilogramDataAttributes() {
+    return KilogramDataAttributes(
       productName ?? '',
       productType ?? '',
       productDescription ?? '',
@@ -53,26 +54,28 @@ class KilogramDataAttributeResponse
       updatedAt ?? '',
       publishedAt ?? '',
       productVariant ?? [],
-      productImage?.toProductImageData() ??
-          ProductImageData(
-            0,
-            ProductImageAttribute(
-              '',
-              '',
-              '',
+      productImage?.toProductImage() ??
+          ProductImage(
+            ProductImageData(
               0,
-              0,
-              '',
-              '',
-              '',
-              '',
-              0,
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
+              ProductImageAttribute(
+                "",
+                "",
+                "",
+                0,
+                0,
+                "",
+                "",
+                "",
+                "",
+                0,
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+              ),
             ),
           ),
     );

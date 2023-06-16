@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of '../../screens.dart';
+part of '../../../../../src/screens/screens.dart';
 
 class DetailOrderKilogram extends StatefulWidget {
-  const DetailOrderKilogram({super.key});
+  final String item;
+  final String total;
+  DetailOrderKilogram({super.key, required this.item, required this.total});
 
   @override
   State<DetailOrderKilogram> createState() => _DetailOrderKilogramState();
@@ -11,6 +13,9 @@ class DetailOrderKilogram extends StatefulWidget {
 class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
   bool statusSwitch = false;
   String? kelas;
+  final MyController c = Get.put(MyController());
+  final OrderController o = Get.put(OrderController());
+  int _selectedRadio = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -19,41 +24,48 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
       bottomNavigationBar: ColoredBox(
         color: colorName.background,
         child: VStack([
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-            child: HStack([
-              'Total items:'
-                  .text
-                  .fontFamily('nunitoexb')
-                  .color(colorName.button)
-                  .size(14)
-                  .bold
-                  .make(),
-              5.widthBox,
-              ''
-                  .text
-                  .fontFamily('nunito')
-                  .color(colorName.primary)
-                  .size(14)
-                  .bold
-                  .make(),
-              210.widthBox,
-              'IDR '
-                  .text
-                  .fontFamily('nunitoexb')
-                  .color(colorName.button)
-                  .size(14)
-                  .bold
-                  .make(),
-              ''
-                  .text
-                  .fontFamily('nunito')
-                  .color(colorName.primary)
-                  .size(14)
-                  .bold
-                  .make()
-            ]),
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: HStack([
+                  'Total items:'
+                      .text
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .size(14)
+                      .bold
+                      .make(),
+                  5.widthBox,
+                  '1'
+                      .text
+                      .fontFamily('nunito')
+                      .color(colorName.primary)
+                      .size(14)
+                      .bold
+                      .make(),
+                ]),
+              ),
+              Container(
+                child: HStack([
+                  'IDR '
+                      .text
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .size(14)
+                      .bold
+                      .make(),
+                  '${widget.total}'
+                      .text
+                      .fontFamily('nunito')
+                      .color(colorName.primary)
+                      .size(14)
+                      .bold
+                      .make()
+                ]),
+              )
+            ],
+          ).pOnly(left: 20, right: 20, top: 10),
           ButtonWidget(
             text: 'Continue',
             onPressed: () {
@@ -118,7 +130,11 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
                           setState(
                             () {
                               statusSwitch = !statusSwitch;
-                              context.goNamed('registerkg');
+                              context.goNamed(routeName.registerkg, extra: {
+                                "item": c.shirt.toString(),
+                                "total":
+                                    '${_selectedRadio * int.parse(c.shirt.toString())}'
+                              });
                             },
                           );
                         },

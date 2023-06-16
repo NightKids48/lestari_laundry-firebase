@@ -11,11 +11,11 @@ abstract class ProductImageDataResponseMapper {
 @JsonSerializable()
 class ProductImageDataResponse implements ProductImageDataResponseMapper {
   int? id;
-  ProductImageAttributeResponse? attribute;
+  ProductImageAttributeResponse? attributes;
 
   ProductImageDataResponse({
     this.id,
-    this.attribute,
+    this.attributes,
   });
 
   factory ProductImageDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -26,25 +26,26 @@ class ProductImageDataResponse implements ProductImageDataResponseMapper {
   @override
   ProductImageData toProductImageData() {
     return ProductImageData(
-        id ?? 0,
-        attribute?.toProductImageAttribute() ??
-            ProductImageAttribute(
-              '',
-              '',
-              '',
-              0,
-              0,
-              '',
-              '',
-              '',
-              '',
-              0,
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-            ));
+      id ?? 0,
+      attributes?.toProductImageAttribute() ??
+          ProductImageAttribute(
+            '',
+            '',
+            '',
+            0,
+            0,
+            '',
+            '',
+            '',
+            '',
+            0,
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+          ),
+    );
   }
 }

@@ -5,4 +5,7 @@ abstract class BaseConfig {
   static const String LOGIN = "/api/auth/local/";
   static const String REGISTER = "/api/auth/local/register";
   static const String KILOGRAM = "/api/products";
+  static const String PIECE = "/api/products";
+  static const String BASE_IMAGE_DOMAIN = "https://lestari.mahrusrohisyam.com";
+  static const String CHANGE_PASSWORD = "/auth/change-password";
 }

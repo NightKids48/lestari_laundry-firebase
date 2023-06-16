@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lestari_laundry/domain/model/data/kilogram_product.dart/product_image.dart';
 import '../../../domain/model/data/kilogram_product.dart/kilogram_data.dart';
-import '../../../domain/model/data/kilogram_product.dart/kilogram_data_attribute.dart';
+import '../../../domain/model/data/kilogram_product.dart/kilogram_data_attributes.dart';
 import '../../../domain/model/data/kilogram_product.dart/product_image_attribute.dart';
 import '../../../domain/model/data/kilogram_product.dart/product_image_data.dart';
 import 'kilogram_data_attribute_response.dart';
@@ -13,11 +14,11 @@ abstract class KilogramDataResponseMapper {
 @JsonSerializable()
 class KilogramDataResponse implements KilogramDataResponseMapper {
   int? id;
-  KilogramDataAttributeResponse? attribute;
+  KilogramDataAttributesResponse? attributes;
 
   KilogramDataResponse({
     this.id,
-    this.attribute,
+    this.attributes,
   });
 
   factory KilogramDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -29,8 +30,8 @@ class KilogramDataResponse implements KilogramDataResponseMapper {
   KilogramData toKilogramData() {
     return KilogramData(
       id ?? 0,
-      attribute?.toKilogramDataAttribute() ??
-          KilogramDataAttribute(
+      attributes?.toKilogramDataAttributes() ??
+          KilogramDataAttributes(
             '',
             '',
             '',
@@ -40,25 +41,27 @@ class KilogramDataResponse implements KilogramDataResponseMapper {
             '',
             '',
             [],
-            ProductImageData(
-              0,
-              ProductImageAttribute(
-                '',
-                '',
-                '',
+            ProductImage(
+              ProductImageData(
                 0,
-                0,
-                '',
-                '',
-                '',
-                '',
-                0,
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
+                ProductImageAttribute(
+                  '',
+                  '',
+                  '',
+                  0,
+                  0,
+                  '',
+                  '',
+                  '',
+                  '',
+                  0,
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                ),
               ),
             ),
           ),

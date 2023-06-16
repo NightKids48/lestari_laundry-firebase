@@ -9,6 +9,7 @@ class KilogramScreen extends StatefulWidget {
 
 class _KilogramScreenState extends State<KilogramScreen> {
   int _value = 1;
+  int _selectedRadio = 0;
   bool isButtonActive = true;
   var count = 0.obs;
   final MyController c = Get.put(MyController());
@@ -51,13 +52,13 @@ class _KilogramScreenState extends State<KilogramScreen> {
                       .size(14)
                       .bold
                       .make(),
-                  '${_value}'
+                  Obx(() => "${_selectedRadio * int.parse(c.shirt.toString())}"
                       .text
                       .fontFamily('nunito')
                       .color(colorName.primary)
                       .size(14)
                       .bold
-                      .make(),
+                      .make()),
                 ]),
               ),
             ],
@@ -65,7 +66,10 @@ class _KilogramScreenState extends State<KilogramScreen> {
           ButtonWidget(
             text: "Continue",
             onPressed: () {
-              Get.off(DetailOrderKilogram());
+              context.goNamed(routeName.orderkg, extra: {
+                "item": c.shirt.toString(),
+                "total": '${_selectedRadio * int.parse(c.shirt.toString())}'
+              });
             },
           ).p(20),
         ]),
@@ -75,22 +79,14 @@ class _KilogramScreenState extends State<KilogramScreen> {
         elevation: 0,
         backgroundColor: colorName.background,
         title: Text(
-          "Layanan Kami",
+          "Service Kami",
           style: TextStyle(
             fontSize: 18,
             fontFamily: 'nunitoexb',
             fontWeight: FontWeight.bold,
             color: colorName.button,
           ),
-        ),
-        // title: "Layanan Kami"
-        //     .text
-        //     .size(18)
-        //     .fontFamily('nunitoexb')
-        //     .bold
-        //     .color(colorName.button)
-        //     .make()
-        //     .centered(),
+        ).centered(),
       ),
       body: SafeArea(
         child: Container(
@@ -143,7 +139,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                             .makeCentered()
                             .onTap(
                           () {
-                            Get.off(const SatuanScreen());
+                            context.goNamed('satuan');
                           },
                         ),
                       ),
@@ -184,58 +180,63 @@ class _KilogramScreenState extends State<KilogramScreen> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: BlocBuilder<KilogramCubit, KilogramState>(
-                    builder: (context, state) {
-                  if (state is KilogramIsSuccess) {
-                    return ListView.builder(
-                        itemCount: state.data!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          var data = state.data![index].attribute;
-                          return ListTile(
-                            leading: Image(
-                              image: AssetImage('images/kering.png'),
-                              fit: BoxFit.cover,
-                              width: 50,
-                            ),
-                            title: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    "${data.productName}"
-                                        .text
-                                        .size(14)
-                                        .color(colorName.primary)
-                                        .fontFamily('nunito')
-                                        .bold
-                                        .make(),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    "IDR ${data.productPrice}/KG"
-                                        .text
-                                        .size(12)
-                                        .fontFamily('nunito')
-                                        .color(colorName.button)
-                                        .bold
-                                        .make(),
-                                  ],
-                                ),
-                              ],
-                            ).pOnly(left: 20),
-                            trailing: Radio(
-                              value: index,
-                              groupValue: _value,
-                              onChanged: (value) {
-                                setState(() {
-                                  _value = value as int;
-                                });
-                              },
-                            ),
-                          );
-                        });
-                  }
-                  return Container(child: Text('Kosong'));
-                }),
+                  builder: (context, state) {
+                    if (state is KilogramIsSuccess) {
+                      return ListView.builder(
+                          itemCount: state.data!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            var data = state.data![index].attribute;
+                            var dataImage = state.data![index].attribute
+                                .productImage.data.attribute;
+                            return ListTile(
+                              leading: SvgPicture.network(
+                                BaseConfig.BASE_IMAGE_DOMAIN + dataImage.url,
+                                fit: BoxFit.cover,
+                                height: 50,
+                              ),
+                              title: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      "${data.productName}"
+                                          .text
+                                          .size(14)
+                                          .color(colorName.primary)
+                                          .fontFamily('nunito')
+                                          .bold
+                                          .make(),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      "IDR ${data.productPrice}/KG"
+                                          .text
+                                          .size(12)
+                                          .fontFamily('nunito')
+                                          .color(colorName.button)
+                                          .bold
+                                          .make(),
+                                    ],
+                                  ),
+                                ],
+                              ).pOnly(left: 20),
+                              trailing: Radio(
+                                value: index,
+                                groupValue: _value,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedRadio =
+                                        int.parse(data.productPrice);
+                                    _value = value as int;
+                                  });
+                                },
+                              ),
+                            );
+                          });
+                    }
+                    return Container(child: Text('Kosong'));
+                  },
+                ),
                 // .paddingSymmetric(vertical: 20),
               ).paddingSymmetric(horizontal: 20),
               Row(

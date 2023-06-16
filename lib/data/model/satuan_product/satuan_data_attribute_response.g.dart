@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'kilogram_data_attribute_response.dart';
+part of 'satuan_data_attribute_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-KilogramDataAttributesResponse _$KilogramDataAttributesResponseFromJson(
+SatuanDataAttributesResponse _$SatuanDataAttributesResponseFromJson(
         Map<String, dynamic> json) =>
-    KilogramDataAttributesResponse(
+    SatuanDataAttributesResponse(
       productName: json['productName'] as String?,
       productType: json['productType'] as String?,
       productDescription: json['productDescription'] as String?,
@@ -20,12 +20,12 @@ KilogramDataAttributesResponse _$KilogramDataAttributesResponseFromJson(
       productVariant: json['productVariant'] as List<dynamic>?,
       productImage: json['productImage'] == null
           ? null
-          : ProductImageResponse.fromJson(
+          : ProductImagePieceResponse.fromJson(
               json['productImage'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$KilogramDataAttributesResponseToJson(
-        KilogramDataAttributesResponse instance) =>
+Map<String, dynamic> _$SatuanDataAttributesResponseToJson(
+        SatuanDataAttributesResponse instance) =>
     <String, dynamic>{
       'productName': instance.productName,
       'productType': instance.productType,
