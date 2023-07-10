@@ -1,8 +1,14 @@
-part of '../../screens.dart';
+part of '../../../../src/screens/screens.dart';
 
-class OrderDetailkg extends StatelessWidget {
-  const OrderDetailkg({super.key});
+class KilogramOrder extends StatefulWidget {
+  const KilogramOrder({super.key});
 
+  @override
+  State<KilogramOrder> createState() => _KilogramOrderState();
+}
+
+class _KilogramOrderState extends State<KilogramOrder> {
+  final OrderController orderController = Get.find<OrderController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,146 +35,14 @@ class OrderDetailkg extends StatelessWidget {
           ButtonWidget(
             text: 'Kembali Ke Halaman Utama',
             onPressed: () {
-              Get.off(HomeScreen());
+              context.goNamed('home');
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 10),
         ]),
       ),
       body: SafeArea(
         child: VStack([
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: colorName.background,
-            ),
-            child: VStack([
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  "Order kamu di terima!"
-                      .text
-                      .size(18)
-                      .fontFamily('nunitoexb')
-                      .color(colorName.button)
-                      .make()
-                      .p(10),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  "Jangan lupa siapkan jumlah uang pada "
-                      .text
-                      .size(14)
-                      .fontFamily('nunito')
-                      .color(colorName.button)
-                      .make()
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  "iinformasi di bawah"
-                      .text
-                      .size(14)
-                      .fontFamily('nunito')
-                      .color(colorName.button)
-                      .make()
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: colorName.scndprimary,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: colorName.primary),
-                    ),
-                    child: "IDR 18.000"
-                        .text
-                        .size(16)
-                        .bold
-                        .fontFamily('nunito')
-                        .color(colorName.primary)
-                        .make()
-                        .pOnly(left: 20, right: 20, top: 5, bottom: 5),
-                  )
-                ],
-              ).p(10),
-            ]),
-          ).p(20),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: colorName.background,
-            ),
-            child: VStack([
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  "Status"
-                      .text
-                      .size(14)
-                      .bold
-                      .fontFamily('nunito')
-                      .color(colorName.silver)
-                      .make()
-                      .pOnly(left: 10, right: 10, top: 10),
-                  "Di jemput kurir"
-                      .text
-                      .size(14)
-                      .bold
-                      .fontFamily('nunito')
-                      .color(colorName.secondary)
-                      .make()
-                      .pOnly(left: 10, right: 10, top: 10),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  "Nomor order"
-                      .text
-                      .size(14)
-                      .bold
-                      .fontFamily('nunito')
-                      .color(colorName.silver)
-                      .make()
-                      .pOnly(left: 10, right: 10, top: 5),
-                  "#1"
-                      .text
-                      .size(14)
-                      .bold
-                      .fontFamily('nunito')
-                      .color(colorName.button)
-                      .make()
-                      .pOnly(left: 10, right: 10, top: 5),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  "Date"
-                      .text
-                      .size(14)
-                      .bold
-                      .fontFamily('nunito')
-                      .color(colorName.silver)
-                      .make()
-                      .pOnly(left: 10, right: 10, top: 5, bottom: 10),
-                  "13 March 2023. 11.15 WIB"
-                      .text
-                      .size(14)
-                      .bold
-                      .fontFamily('nunito')
-                      .color(colorName.grey)
-                      .make()
-                      .pOnly(left: 10, right: 10, top: 5, bottom: 10),
-                ],
-              ),
-            ]),
-          ).pOnly(left: 20, right: 20, bottom: 20),
+          10.heightBox,
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -176,19 +50,22 @@ class OrderDetailkg extends StatelessWidget {
             ),
             child: VStack([
               HStack([
-                Image(
-                  image: AssetImage('images/fullservice.png'),
-                  fit: BoxFit.cover,
-                  width: 60,
-                ).p(10),
+                SvgPicture.network('${orderController.layananData?.image}')
+                    .p(10),
                 VStack([
-                  "Cuci Lengkap"
+                  "${orderController.layananData?.name}"
                       .text
-                      .size(14)
+                      .size(18)
                       .color(colorName.primary)
+                      .fontFamily('nunitoexb')
                       .bold
                       .make(),
-                  "IDR 5.000/KG".text.size(12).bold.make(),
+                  "${orderController.layananData?.price}/Kg"
+                      .text
+                      .size(16)
+                      .fontFamily('nunitoexb')
+                      .bold
+                      .make(),
                 ]).pOnly(left: 20),
               ]),
             ]),
@@ -205,11 +82,18 @@ class OrderDetailkg extends StatelessWidget {
                 children: [
                   "Total Kilogram"
                       .text
-                      .size(14)
+                      .size(16)
                       .color(colorName.primary)
+                      .fontFamily('nunitoexb')
                       .bold
                       .make(),
-                  "3 KG".text.size(14).color(colorName.black).bold.make(),
+                  "${orderController.totalData?.totalKilogram} KG"
+                      .text
+                      .color(colorName.black)
+                      .fontFamily('nunitoexb')
+                      .size(18)
+                      .bold
+                      .make(),
                 ],
               ),
             ]).p(15),
@@ -234,7 +118,7 @@ class OrderDetailkg extends StatelessWidget {
                       .text
                       .size(14)
                       .bold
-                      .fontFamily('nunito')
+                      .fontFamily('nunitoexb')
                       .color(colorName.primary)
                       .make()
                       .p(10),
@@ -268,7 +152,7 @@ class OrderDetailkg extends StatelessWidget {
                     .fontFamily('nunito')
                     .color(colorName.button)
                     .make(),
-                "Vaiz"
+                "${orderController.detailPenerima?.name}"
                     .text
                     .size(14)
                     .bold
@@ -285,7 +169,7 @@ class OrderDetailkg extends StatelessWidget {
                     .fontFamily('nunito')
                     .color(colorName.button)
                     .make(),
-                "+6289866653849"
+                "${orderController.detailPenerima?.phoneNumber}"
                     .text
                     .size(14)
                     .bold
@@ -302,7 +186,7 @@ class OrderDetailkg extends StatelessWidget {
                     .fontFamily('nunito')
                     .color(colorName.button)
                     .make(),
-                "Jl. Kemang Timur No.34"
+                "${orderController.detailPenerima?.address}"
                     .text
                     .size(14)
                     .bold
@@ -350,7 +234,7 @@ class OrderDetailkg extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  "Cuci lengkap"
+                  "${orderController.layananData?.name}"
                       .text
                       .size(14)
                       .bold
@@ -358,7 +242,7 @@ class OrderDetailkg extends StatelessWidget {
                       .color(colorName.silver)
                       .make()
                       .pOnly(left: 10, top: 10),
-                  "15.000"
+                  "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                       .text
                       .size(14)
                       .bold
@@ -420,7 +304,7 @@ class OrderDetailkg extends StatelessWidget {
                       .color(colorName.primary)
                       .make()
                       .p(10),
-                  "18.000"
+                  "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                       .text
                       .size(14)
                       .bold

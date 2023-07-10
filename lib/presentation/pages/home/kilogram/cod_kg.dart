@@ -1,4 +1,4 @@
-part of '../../screens.dart';
+part of '../../../../src/screens/screens.dart';
 
 class CodKg extends StatefulWidget {
   const CodKg({super.key});
@@ -8,6 +8,7 @@ class CodKg extends StatefulWidget {
 }
 
 class _CodKgState extends State<CodKg> {
+  final OrderController orderController = Get.find<OrderController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,14 +62,7 @@ class _CodKgState extends State<CodKg> {
                 Container(
                   child: Row(
                     children: [
-                      'IDR '
-                          .text
-                          .fontFamily('nunitoexb')
-                          .color(colorName.button)
-                          .size(14)
-                          .bold
-                          .make(),
-                      '18.000'
+                      "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                           .text
                           .fontFamily('nunitoexb')
                           .color(colorName.primary)
@@ -84,7 +78,7 @@ class _CodKgState extends State<CodKg> {
           ButtonWidget(
             text: 'Continue',
             onPressed: () {
-              Get.off(OrderDetailkg());
+              context.goNamed('orderdetailkg');
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
         ]),
@@ -150,7 +144,7 @@ class _CodKgState extends State<CodKg> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "Cuci lengkap"
+                    "${orderController.layananData?.name}"
                         .text
                         .size(12)
                         .bold
@@ -158,7 +152,7 @@ class _CodKgState extends State<CodKg> {
                         .color(colorName.grey)
                         .make()
                         .p(10),
-                    "15.000"
+                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                         .text
                         .size(12)
                         .bold
@@ -220,7 +214,7 @@ class _CodKgState extends State<CodKg> {
                         .fontFamily('nunito')
                         .color(colorName.primary)
                         .make(),
-                    "18.000"
+                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                         .text
                         .size(14)
                         .bold

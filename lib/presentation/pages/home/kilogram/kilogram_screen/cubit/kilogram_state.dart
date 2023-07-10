@@ -12,9 +12,9 @@ class KilogramInitial extends KilogramState {}
 
 class KilogramIsLoading extends KilogramState {}
 
-class KilogramIsSuccess extends KilogramState {
+class KilogramIsSucces extends KilogramState {
   List<KilogramData>? data;
-  KilogramIsSuccess({
+  KilogramIsSucces({
     this.data,
   });
 }

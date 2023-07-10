@@ -21,9 +21,12 @@ class Page1 extends StatelessWidget {
       ),
       body: SafeArea(
         child: VStack(
-          [_buildImage(context), _buildText(context)],
+          [
+            _buildImage(context),
+            _buildText(context),
+          ],
         ),
-      ),
+      ).scrollVertical(),
     );
   }
 

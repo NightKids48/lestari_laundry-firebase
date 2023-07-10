@@ -21,6 +21,7 @@ class LoginCubit extends Cubit<LoginStates> {
         LoginIsSucces(data: (response as ResultSuccess).data),
       );
       final data = (state as LoginIsSucces).data;
+      print('Token Login${data.jwt}');
       Commons().setUID(data.jwt.toString());
     } else {
       emit(LoginIsError(message: (response as ResultError).message));

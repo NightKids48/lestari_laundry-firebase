@@ -1,8 +1,15 @@
-part of '../../screens.dart';
+part of '../../../../src/screens/screens.dart';
 
-class KgSumary extends StatelessWidget {
-  const KgSumary({super.key});
+class KgSumary extends StatefulWidget {
+  KgSumary({super.key});
 
+  @override
+  State<KgSumary> createState() => _KgSumaryState();
+}
+
+class _KgSumaryState extends State<KgSumary> {
+  final OrderController orderController = Get.find<OrderController>();
+  final instruksiTambahanController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,40 +34,12 @@ class KgSumary extends StatelessWidget {
       bottomNavigationBar: ColoredBox(
         color: colorName.background,
         child: VStack([
-          Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                'Total'
-                    .text
-                    .fontFamily('nunitoexb')
-                    .color(colorName.button)
-                    .size(14)
-                    .make(),
-                220.widthBox,
-                'IDR '
-                    .text
-                    .fontFamily('nunitoexb')
-                    .color(colorName.button)
-                    .size(14)
-                    .make(),
-                '18.000'
-                    .text
-                    .fontFamily('nunito')
-                    .color(colorName.primary)
-                    .size(14)
-                    .bold
-                    .make()
-              ],
-            ),
-          ),
           ButtonWidget(
             text: 'Payment',
             onPressed: () {
-              Get.off(KgPayment());
+              context.goNamed('kgpayment');
             },
-          ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
+          ).pOnly(left: 20, right: 20, bottom: 20, top: 10),
         ]),
       ),
       body: SafeArea(
@@ -95,19 +74,19 @@ class KgSumary extends StatelessWidget {
               ),
               child: VStack([
                 HStack([
-                  Image(
-                    image: AssetImage('images/fullservice.png'),
-                    fit: BoxFit.cover,
-                    width: 60,
-                  ).p(10),
+                  SvgPicture.network('${orderController.layananData?.image}'),
                   VStack([
-                    "Cuci Lengkap"
+                    "${orderController.layananData?.name}"
                         .text
-                        .size(14)
+                        .size(15)
                         .color(colorName.primary)
                         .bold
                         .make(),
-                    "IDR 5.000/KG".text.size(12).bold.make(),
+                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}/KG"
+                        .text
+                        .size(13)
+                        .bold
+                        .make(),
                   ]).pOnly(left: 20),
                 ]),
               ]),
@@ -128,7 +107,12 @@ class KgSumary extends StatelessWidget {
                         .color(colorName.primary)
                         .bold
                         .make(),
-                    "3 KG".text.size(14).color(colorName.black).bold.make(),
+                    "${orderController.totalData?.totalKilogram}KG"
+                        .text
+                        .size(14)
+                        .color(colorName.black)
+                        .bold
+                        .make(),
                   ],
                 ),
               ]).p(15),
@@ -150,7 +134,8 @@ class KgSumary extends StatelessWidget {
                       .bold
                       .fontFamily('nunito')
                       .color(colorName.primary)
-                      .make(),
+                      .make()
+                      .onTap(() {})
                 ],
               ),
             ),
@@ -160,6 +145,7 @@ class KgSumary extends StatelessWidget {
                 color: colorName.background,
               ),
               child: TextFormField(
+                controller: instruksiTambahanController,
                 decoration: const InputDecoration(
                   hintText:
                       'e.g Lorem ipsum dolor sit amet consectetur adipiscing',
@@ -227,7 +213,7 @@ class KgSumary extends StatelessWidget {
                       .fontFamily('nunito')
                       .color(colorName.button)
                       .make(),
-                  "Vaiz"
+                  "${orderController.detailPenerima?.name}"
                       .text
                       .size(14)
                       .bold
@@ -244,7 +230,7 @@ class KgSumary extends StatelessWidget {
                       .fontFamily('nunito')
                       .color(colorName.button)
                       .make(),
-                  "+6289866653849"
+                  "${orderController.detailPenerima?.phoneNumber}"
                       .text
                       .size(14)
                       .bold
@@ -261,7 +247,7 @@ class KgSumary extends StatelessWidget {
                       .fontFamily('nunito')
                       .color(colorName.button)
                       .make(),
-                  "Jl. Kemang Timur No.34"
+                  "${orderController.detailPenerima?.address}"
                       .text
                       .size(14)
                       .bold
@@ -294,14 +280,14 @@ class KgSumary extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "Cuci lengkap"
+                    "${orderController.layananData?.name}"
                         .text
                         .size(14)
                         .bold
                         .fontFamily('nunito')
                         .color(colorName.button)
                         .make(),
-                    "15.000"
+                    "IDR ${orderController.totalData?.totalPrice}"
                         .text
                         .size(14)
                         .bold
@@ -360,7 +346,7 @@ class KgSumary extends StatelessWidget {
                         .bold
                         .fontFamily('nunito')
                         .make(),
-                    "18.000"
+                    "IDR ${orderController.totalData?.totalPrice}"
                         .text
                         .size(14)
                         .bold

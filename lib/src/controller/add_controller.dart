@@ -1,6 +1,7 @@
 part of 'controllers.dart';
 
 class MyController extends GetxController {
+  var totalkilogram = 1.obs;
   var order = 1.obs;
   var shirt = 0.obs;
   var tshirt = 0.obs;
@@ -16,6 +17,17 @@ class MyController extends GetxController {
     if (order.value <= 0) {
     } else {
       order.value--;
+    }
+  }
+
+  totalkilogramplus() {
+    totalkilogram.value++;
+  }
+
+  totalkilogrammin() {
+    if (totalkilogram.value <= 1) {
+    } else {
+      totalkilogram.value--;
     }
   }
 
@@ -65,7 +77,27 @@ class MyController extends GetxController {
 }
 
 class OrderController extends GetxController {
-  var drywash = 2500.obs;
-  var irononly = 2500.obs;
-  var fullservice = 5000.obs;
+  OrderData? orderData;
+  TotalData? totalData;
+  LayananData? layananData;
+  DetailPenerima? detailPenerima;
+  void setOrderData(OrderData newOrderData) {
+    orderData = newOrderData;
+    update();
+  }
+
+  void setTotalData(TotalData newTotalData) {
+    totalData = newTotalData;
+    update();
+  }
+
+  void setLayananData(LayananData newLayananData) {
+    layananData = newLayananData;
+    update();
+  }
+
+  void setDetailPenerima(DetailPenerima newDetailPenerima) {
+    detailPenerima = newDetailPenerima;
+    update();
+  }
 }

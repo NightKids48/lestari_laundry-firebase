@@ -132,7 +132,9 @@ class _DetailRegisterKgState extends State<DetailRegisterKg> {
                         },
                       ),
                     ],
-                  ).pOnly(left: 20, right: 20, top: 10, bottom: 5),
+                  )
+                      .pOnly(left: 20, right: 20, top: 10, bottom: 5)
+                      .scrollHorizontal(),
                   const VxDivider().pOnly(left: 20, right: 20),
                   Row(
                     children: [

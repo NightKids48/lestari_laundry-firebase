@@ -10,8 +10,7 @@ class SatuanScreen extends StatefulWidget {
 class _SatuanScreenState extends State<SatuanScreen> {
   final MyController c = Get.put(MyController());
   final OrderController o = Get.put(OrderController());
-  int _value = 1;
-  int _selectedRadio = 0;
+  int selectedItem = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +31,13 @@ class _SatuanScreenState extends State<SatuanScreen> {
                       .size(14)
                       .bold
                       .make(),
-                  Obx(
-                    () => "${c.sum.toString()}"
-                        .text
-                        .fontFamily('nunito')
-                        .color(colorName.primary)
-                        .size(14)
-                        .bold
-                        .make(),
-                  ),
+                  Obx(() => "${c.shirt}"
+                      .text
+                      .fontFamily('nunito')
+                      .color(colorName.primary)
+                      .size(14)
+                      .bold
+                      .make()),
                 ]),
               ),
               Container(
@@ -52,23 +49,22 @@ class _SatuanScreenState extends State<SatuanScreen> {
                       .size(14)
                       .bold
                       .make(),
-                  Obx(
-                    () => "${c.sum.toString()}"
-                        .text
-                        .fontFamily('nunito')
-                        .color(colorName.primary)
-                        .size(14)
-                        .bold
-                        .make(),
-                  ),
+                  Obx(() => "${c.shirt * selectedItem}"
+                      .text
+                      .fontFamily('nunito')
+                      .color(colorName.primary)
+                      .size(14)
+                      .bold
+                      .make()),
                 ]),
               ),
             ],
           ).pOnly(left: 20, right: 20, top: 10),
           ButtonWidget(
-            text: "Continue",
+            color: colorName.primary,
+            text: 'Continue',
             onPressed: () {},
-          ).p(20),
+          ).p(10)
         ]),
       ),
       appBar: AppBar(
@@ -93,7 +89,6 @@ class _SatuanScreenState extends State<SatuanScreen> {
               HStack([
                 Container(
                   height: 45,
-                  width: 325,
                   decoration: BoxDecoration(
                     color: colorName.layer,
                     borderRadius: BorderRadius.circular(50),
@@ -104,7 +99,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                       10.heightBox,
                       Container(
                         height: 45,
-                        width: 160,
+                        width: 150,
                         decoration: BoxDecoration(
                           color: colorName.layer,
                           borderRadius: BorderRadius.circular(50),
@@ -125,7 +120,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                       5.widthBox,
                       Container(
                         height: 45,
-                        width: 160,
+                        width: 150,
                         decoration: BoxDecoration(
                           color: colorName.primary,
                           borderRadius: BorderRadius.circular(50),
@@ -143,15 +138,9 @@ class _SatuanScreenState extends State<SatuanScreen> {
                       ),
                     ],
                   ),
-                ).pOnly(left: 20, right: 20),
-              ]),
-              20.heightBox,
-              HStack([
-                Image(
-                  image: AssetImage('images/banerkiloan.png'),
                 ),
-              ]),
-              10.heightBox,
+              ]).scrollHorizontal().pOnly(left: 20, right: 20),
+              20.heightBox,
               Row(
                 children: [
                   "Tambah Item"
@@ -171,10 +160,12 @@ class _SatuanScreenState extends State<SatuanScreen> {
                 ),
                 child: Column(
                   children: [
-                    BlocBuilder<SatuanCubit, SatuanState>(
-                      builder: (context, state) {
-                        if (state is SatuanIsSuccess) {
-                          return ListView.builder(
+                    Container(
+                      height: 150,
+                      child: BlocBuilder<SatuanCubit, SatuanState>(
+                        builder: (context, state) {
+                          if (state is SatuanIsSuccess) {
+                            return ListView.builder(
                               itemCount: state.data!.length,
                               itemBuilder: (BuildContext context, int index) {
                                 var data = state.data![index].attributes;
@@ -202,7 +193,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          "IDR ${data.productPrice}/KG"
+                                          "IDR ${data.productPrice}/Piece"
                                               .text
                                               .size(12)
                                               .fontFamily('nunito')
@@ -212,225 +203,43 @@ class _SatuanScreenState extends State<SatuanScreen> {
                                         ],
                                       ),
                                     ],
-                                  ).pOnly(left: 20),
-                                  trailing: Radio(
-                                    value: index,
-                                    groupValue: _value,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _selectedRadio =
-                                            int.parse(data.productPrice);
-                                        _value = value as int;
-                                      });
-                                    },
                                   ),
+                                  trailing: HStack([
+                                    IconButton(
+                                      onPressed: () => c.shirtmin(),
+                                      icon: Image(
+                                        image: AssetImage('images/min.png'),
+                                      ),
+                                    ),
+                                    5.widthBox,
+                                    Obx(() => "${c.shirt.toString()}"
+                                        .text
+                                        .fontFamily('nunitoexb')
+                                        .size(16)
+                                        .make()),
+                                    5.widthBox,
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          c.shirtplus();
+                                          selectedItem =
+                                              int.parse(data.productPrice);
+                                        });
+                                      },
+                                      icon: Image(
+                                        image: AssetImage('images/plus.png'),
+                                      ),
+                                    ),
+                                  ]),
                                 );
-                              });
-                        }
-                        return Container(child: Text('Kosong'));
-                      },
+                              },
+                            );
+                          }
+                          return Container(child: Text(''));
+                        },
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image(
-                          image: AssetImage('images/shirt.png'),
-                          fit: BoxFit.cover,
-                          height: 40,
-                          width: 40,
-                        ),
-                        VStack([
-                          "Shirt"
-                              .text
-                              .size(14)
-                              .color(colorName.primary)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                          "IDR 7.000/Pieces"
-                              .text
-                              .size(12)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                        ]),
-                        Container(
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: () => c.shirtmin(),
-                                icon: Image(
-                                  image: AssetImage('images/min.png'),
-                                ),
-                              ),
-                              5.widthBox,
-                              Obx(() => "${c.shirt.toString()}"
-                                  .text
-                                  .fontFamily('nunitoexb')
-                                  .size(16)
-                                  .make()),
-                              5.widthBox,
-                              IconButton(
-                                onPressed: () => c.shirtplus(),
-                                icon: Image(
-                                  image: AssetImage('images/plus.png'),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ).pOnly(left: 20, right: 20),
                     15.heightBox,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image(
-                          image: AssetImage('images/tshirt.png'),
-                          fit: BoxFit.cover,
-                          height: 40,
-                          width: 35,
-                        ),
-                        VStack([
-                          "T-Shirt"
-                              .text
-                              .size(14)
-                              .color(colorName.primary)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                          "IDR 5.000/Pieces"
-                              .text
-                              .size(12)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                        ]),
-                        Container(
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: () => c.tshirtmin(),
-                                icon:
-                                    Image(image: AssetImage('images/min.png')),
-                              ),
-                              5.widthBox,
-                              Obx(() => "${c.tshirt.toString()}"
-                                  .text
-                                  .fontFamily('nunitoexb')
-                                  .size(16)
-                                  .make()),
-                              5.widthBox,
-                              IconButton(
-                                onPressed: () => c.tshirtplus(),
-                                icon:
-                                    Image(image: AssetImage('images/plus.png')),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ).pOnly(left: 20, right: 20),
-                    15.heightBox,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image(
-                          image: AssetImage('images/underwear.png'),
-                          fit: BoxFit.cover,
-                          height: 40,
-                          width: 35,
-                        ),
-                        VStack([
-                          "Underwear"
-                              .text
-                              .size(14)
-                              .color(colorName.primary)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                          "IDR 3.000/Pieces"
-                              .text
-                              .size(12)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                        ]),
-                        Container(
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: () => c.underwearmin(),
-                                icon:
-                                    Image(image: AssetImage('images/min.png')),
-                              ),
-                              5.widthBox,
-                              Obx(() => "${c.underwear.toString()}"
-                                  .text
-                                  .fontFamily('nunitoexb')
-                                  .size(16)
-                                  .make()),
-                              5.widthBox,
-                              IconButton(
-                                onPressed: () => c.underwearplus(),
-                                icon:
-                                    Image(image: AssetImage('images/plus.png')),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ).pOnly(left: 20, right: 20),
-                    15.heightBox,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image(
-                          image: AssetImage('images/pants.png'),
-                          fit: BoxFit.cover,
-                          height: 40,
-                          width: 35,
-                        ),
-                        VStack([
-                          "Pants"
-                              .text
-                              .size(14)
-                              .color(colorName.primary)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                          "IDR 8.000/Pieces"
-                              .text
-                              .size(12)
-                              .fontFamily('nunito')
-                              .bold
-                              .make(),
-                        ]),
-                        Container(
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: () => c.pantsmin(),
-                                icon:
-                                    Image(image: AssetImage('images/min.png')),
-                              ),
-                              5.widthBox,
-                              Obx(() => "${c.pants.toString()}"
-                                  .text
-                                  .fontFamily('nunitoexb')
-                                  .size(16)
-                                  .make()),
-                              5.widthBox,
-                              IconButton(
-                                onPressed: () => c.pantsplus(),
-                                icon:
-                                    Image(image: AssetImage('images/plus.png')),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ).pOnly(left: 20, right: 20),
                   ],
                 ).pOnly(top: 20, bottom: 20),
               ).pOnly(left: 20, right: 20, bottom: 20),

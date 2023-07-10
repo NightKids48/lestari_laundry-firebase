@@ -28,7 +28,10 @@ class Page2 extends StatelessWidget {
       ),
       body: SafeArea(
         child: VStack(
-          [_buildImage(context), _buildText(context)],
+          [
+            _buildImage(context),
+            _buildText(context),
+          ],
         ),
       ),
     );

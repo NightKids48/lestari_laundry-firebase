@@ -3,9 +3,9 @@ import 'package:lestari_laundry/domain/model/data/kilogram_product.dart/kilogram
 
 class KilogramData {
   int id;
-  KilogramDataAttributes attribute;
+  KilogramDataAttributes attributes;
   KilogramData(
     this.id,
-    this.attribute,
+    this.attributes,
   );
 }

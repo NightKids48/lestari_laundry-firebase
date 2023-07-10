@@ -29,7 +29,7 @@ class KilogramRepositoryImpl implements KilogramRepository {
                 List.empty();
         print('Data: ${data.length}');
         print(
-            'Nama produk : ${data.isNotEmpty ? data[0].attribute.productName : 'data tidak ada'}');
+            'Nama produk : ${data.isNotEmpty ? data[0].attributes.productName : 'data tidak ada'}');
         return ResultSuccess<List<KilogramData>>(data);
       } else {
         return ResultError<List<KilogramData>>(message: response.body);

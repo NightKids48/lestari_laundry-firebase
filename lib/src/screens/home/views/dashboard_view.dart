@@ -13,20 +13,57 @@ class _DashboardViewState extends State<DashboardView> {
     return Scaffold(
       backgroundColor: colorName.background,
       body: SafeArea(
-        child: VStack([
-          10.heightBox,
-          _buildText(),
-          10.heightBox,
-          //_buildSearch(context),
-          20.heightBox,
-          _buildAlamat(context),
-          20.heightBox,
-          _buildPromo(),
-          25.heightBox,
-          _buildText1(),
-          5.heightBox,
-          _buildListProduct(),
-        ]).pOnly(left: 20, right: 20),
+        child:
+            BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
+          if (state is ProfileIsLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is ProfileIsSuccess)
+            return VStack([
+              Row(
+                children: [
+                  10.heightBox,
+                  "Hallo, "
+                      .richText
+                      .size(18)
+                      .fontFamily('nunito')
+                      .color(colorName.button)
+                      .bold
+                      .make(),
+                  Row(
+                    children: [
+                      state.data!.username.text
+                          .size(18)
+                          .fontFamily('nunitoexb')
+                          .color(colorName.secondary)
+                          .bold
+                          .make(),
+                    ],
+                  ),
+                  " !"
+                      .richText
+                      .size(18)
+                      .fontFamily('nunitoexb')
+                      .color(colorName.button)
+                      .bold
+                      .make(),
+                ],
+              ),
+              10.heightBox,
+              _buildText(),
+              20.heightBox,
+              _buildAlamat(context),
+              20.heightBox,
+              _buildPromo(),
+              25.heightBox,
+              _buildText1(),
+              5.heightBox,
+              _buildListProduct(context, state),
+            ]).pOnly(left: 20, right: 20);
+
+          return 0.heightBox;
+        }),
       ),
     );
   }
@@ -64,30 +101,6 @@ class _DashboardViewState extends State<DashboardView> {
           ],
         ),
       ],
-    );
-  }
-
-  Widget _buildSearch(context) {
-    return Container(
-      height: 45,
-      decoration: BoxDecoration(
-        color: colorName.background,
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(color: colorName.silver),
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          prefixIcon: const Icon(Icons.search, color: colorName.primary).onTap(
-            () {},
-          ),
-          hintText: 'Search anything',
-          hintStyle: const TextStyle(
-            color: colorName.silver,
-            fontFamily: 'nunito',
-          ),
-        ),
-      ).centered(),
     );
   }
 
@@ -147,7 +160,7 @@ class _DashboardViewState extends State<DashboardView> {
     );
   }
 
-  Widget _buildListProduct() {
+  Widget _buildListProduct(BuildContext context, state) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -155,6 +168,7 @@ class _DashboardViewState extends State<DashboardView> {
           color: colorName.secondary,
           child: InkWell(
             onTap: () {
+              BlocProvider.of<KilogramCubit>(context).fetchKilogram();
               context.goNamed('kilogram');
             },
             splashColor: colorName.primary,
@@ -190,67 +204,4 @@ class _DashboardViewState extends State<DashboardView> {
       ],
     );
   }
-}
-
-Widget _buildService(index) {
-  return Flexible(
-    child: ListView.builder(
-      itemCount: Product.products.length,
-      itemBuilder: (BuildContext context, int index) {
-        return _catalogProductCard(index);
-      },
-    ),
-  );
-}
-
-Widget _catalogProductCard(index) {
-  final cartController = Get.put(CartController());
-
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      SizedBox(
-        width: 100,
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: colorName.background,
-              backgroundImage: NetworkImage(
-                Product.products[index].imageUrl,
-              ),
-            ).p(5),
-          ],
-        ),
-      ),
-      SizedBox(
-        width: 100,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              Product.products[index].name,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              '${Product.products[index].price}',
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
-      IconButton(
-        onPressed: () {
-          cartController.addProduct(Product.products[index]);
-        },
-        icon: const Image(image: AssetImage('images/plus.png')),
-      ),
-    ],
-  );
 }

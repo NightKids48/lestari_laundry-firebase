@@ -1,4 +1,4 @@
-part of '../../screens.dart';
+part of '../../../../src/screens/screens.dart';
 
 class KgPayment extends StatefulWidget {
   const KgPayment({super.key});
@@ -8,6 +8,7 @@ class KgPayment extends StatefulWidget {
 }
 
 class _KgPaymentState extends State<KgPayment> {
+  final OrderController orderController = Get.find<OrderController>();
   int _value = 1;
   @override
   Widget build(BuildContext context) {
@@ -62,14 +63,7 @@ class _KgPaymentState extends State<KgPayment> {
                 Container(
                   child: Row(
                     children: [
-                      'IDR '
-                          .text
-                          .fontFamily('nunitoexb')
-                          .color(colorName.button)
-                          .size(14)
-                          .bold
-                          .make(),
-                      '18.000'
+                      "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                           .text
                           .fontFamily('nunitoexb')
                           .color(colorName.primary)
@@ -85,7 +79,7 @@ class _KgPaymentState extends State<KgPayment> {
           ButtonWidget(
             text: 'Continue',
             onPressed: () {
-              Get.off(CodKg());
+              context.goNamed('codkg');
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
         ]),
@@ -196,7 +190,7 @@ class _KgPaymentState extends State<KgPayment> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "Cuci lengkap"
+                    "${orderController.layananData?.name}"
                         .text
                         .size(12)
                         .bold
@@ -204,7 +198,7 @@ class _KgPaymentState extends State<KgPayment> {
                         .color(colorName.grey)
                         .make()
                         .p(10),
-                    "15.000"
+                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}/KG"
                         .text
                         .size(12)
                         .bold
@@ -266,7 +260,7 @@ class _KgPaymentState extends State<KgPayment> {
                         .fontFamily('nunito')
                         .color(colorName.primary)
                         .make(),
-                    "18.000"
+                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                         .text
                         .size(14)
                         .bold

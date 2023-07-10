@@ -17,13 +17,13 @@ class KilogramCubit extends Cubit<KilogramState> {
 
     //final token = await Commons().getToken();
     final tokenManual = BaseConfig.TOKEN;
-    if (tokenManual != null) {
+    if (tokenManual != '') {
       final response = await repository.fetchKilogram(
         AuthenticationHeadersRequest(tokenManual),
       );
 
       if (response is ResultSuccess) {
-        emit(KilogramIsSuccess(data: (response as ResultSuccess).data));
+        emit(KilogramIsSucces(data: (response as ResultSuccess).data));
       } else {
         emit(KilogramIsFailed(message: (response as ResultError).message));
       }

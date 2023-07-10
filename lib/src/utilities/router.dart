@@ -7,6 +7,7 @@ class routeName {
   static const home = '/home';
   static const String orderkg = 'orderkg';
   static const String registerkg = 'registerkg';
+  static const String kgsumary = 'kgsumary';
 }
 
 final GoRouter router = GoRouter(
@@ -66,14 +67,23 @@ final GoRouter router = GoRouter(
       path: '/home',
       name: 'home',
       builder: (context, state) {
+        BlocProvider.of<ProfileCubit>(context).fetchProfile();
         return const HomeScreen();
       },
       routes: [
         GoRoute(
+          path: 'profile',
+          name: 'profile',
+          builder: (context, state) {
+            BlocProvider.of<ProfileCubit>(context).fetchProfile();
+            BlocProvider.of<NameDataCubit>(context).fetchNameData();
+            return const InformasiProfile();
+          },
+        ),
+        GoRoute(
           path: 'kilogram',
           name: 'kilogram',
           builder: (context, state) {
-            BlocProvider.of<KilogramCubit>(context).fetchKilogram();
             return KilogramScreen();
           },
           routes: [
@@ -81,18 +91,15 @@ final GoRouter router = GoRouter(
               path: 'orderkg',
               name: routeName.orderkg,
               builder: (context, state) {
-                Map<String, dynamic> data = state.extra as Map<String, dynamic>;
-                return DetailOrderKilogram(
-                  item: data['item'],
-                  total: data['total'],
-                );
+                BlocProvider.of<ProfileCubit>(context).fetchProfile();
+                return DetailOrderKilogram();
               },
               routes: [
                 GoRoute(
                   path: 'kgsumary',
                   name: 'kgsumary',
                   builder: (context, state) {
-                    return const KgSumary();
+                    return KgSumary();
                   },
                   routes: [
                     GoRoute(
@@ -148,6 +155,7 @@ final GoRouter router = GoRouter(
           path: 'satuan',
           name: 'satuan',
           builder: (context, state) {
+            BlocProvider.of<SatuanCubit>(context).fetchSatuan();
             return const SatuanScreen();
           },
           routes: [
@@ -179,7 +187,7 @@ final GoRouter router = GoRouter(
       ],
     ),
   ],
-  initialLocation: '/login',
+  initialLocation: '/register',
   debugLogDiagnostics: true,
   routerNeglect: true,
 );
