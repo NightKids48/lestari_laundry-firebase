@@ -10,7 +10,7 @@ class IntroScreen extends StatelessWidget {
       bottomNavigationBar: VStack([
         ElevatedButton(
           onPressed: () {
-            Get.off(RegisterScreen());
+            context.goNamed('register');
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: colorName.background,
@@ -27,7 +27,7 @@ class IntroScreen extends StatelessWidget {
         ).wFull(context).pOnly(left: 20, right: 20, bottom: 10),
         ElevatedButton(
           onPressed: () {
-            Get.off(LoginScreen());
+            context.goNamed('login');
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: colorName.button,

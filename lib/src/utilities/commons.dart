@@ -3,6 +3,38 @@ part of 'utilities.dart';
 class Commons {
   final prefs = SharedPreferences.getInstance();
   final picker = ImagePicker();
+  Future<double> calculateDistance(
+    double lat1,
+    double lon1,
+    double lat2,
+    double lon2,
+  ) async {
+    try {
+      double distanceInMeters = await Geolocator.distanceBetween(
+        lat1,
+        lon1,
+        lat2,
+        lon2,
+      );
+
+      // Konversi jarak dalam meter menjadi kilometer
+      double distanceInKm = distanceInMeters / 1000;
+
+      return distanceInKm;
+    } catch (e) {
+      print('Error calculating distance: $e');
+      return 0;
+    }
+  }
+
+  int ongkosKirim(
+      {int tarif = 2000, required int totalKilo, required double jarak}) {
+    if (jarak > 2) {
+      tarif = 3000;
+    }
+    final ongkosKirim = (jarak * tarif) + (totalKilo * tarif);
+    return ongkosKirim.toInt();
+  }
 
   void setUID(String uid) async {
     final storage = await prefs;
@@ -19,7 +51,7 @@ class Commons {
     return storage.remove(myUID);
   }
 
-  String setPriceToIDR(double price) {
+  String setPrice(double price) {
     return NumberFormat.currency(locale: 'id_ID', decimalDigits: 0)
         .format(price)
         .toString();

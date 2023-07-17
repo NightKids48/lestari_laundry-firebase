@@ -15,12 +15,13 @@ class UserService {
           .createUserWithEmailAndPassword(email: email!, password: password!);
 
       final userData = UserModel(
-          admin: false,
-          email: userCredential.user!.email,
-          mobile: mobile,
-          photoProfile: '',
-          uid: userCredential.user!.uid,
-          username: username);
+        admin: false,
+        email: userCredential.user!.email,
+        mobile: mobile,
+        photoProfile: '',
+        uid: userCredential.user!.uid,
+        username: username,
+      );
 
       usersCollection.doc(userCredential.user!.uid).set(userData.toMap());
 
