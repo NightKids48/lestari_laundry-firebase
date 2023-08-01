@@ -130,6 +130,11 @@ flutter:
     - images/qris.png
     - images/seru.png
     - images/profil.png
+    - images/dijemput.png
+    - images/diproses.png
+    - images/diantar.png
+    - images/pesanan.png
+    - images/penghasilan.png
 
   fonts:
     - family: nunito

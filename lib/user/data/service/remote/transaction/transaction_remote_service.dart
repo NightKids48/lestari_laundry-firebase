@@ -1,0 +1,24 @@
+import 'dart:convert';
+import 'package:http/http.dart';
+import '../../../../base/base_config/base_config.dart';
+import '../../../../domain/model/request/transaction/transaction_data_request.dart';
+
+class TransactionRemoteService {
+  Client client = Client();
+
+  Future<Response> postTransaction(TransactionDataRequest request) async {
+    final url = Uri.https(
+      BaseConfig.BASE_DOMAIN,
+      BaseConfig.TRANSACTION,
+    );
+
+    print("URL : ${url.toString()}");
+    print('REQUEST : ${jsonEncode(request.toJson())}');
+
+    return client.post(
+      url,
+      body: jsonEncode(request.toJson()),
+      headers: {'content-Type': 'application/json'},
+    );
+  }
+}
