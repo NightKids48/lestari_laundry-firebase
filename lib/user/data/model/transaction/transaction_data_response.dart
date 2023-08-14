@@ -1,5 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lestari_laundry/user/data/model/transaction/transaction_data_attributes_response.dart';
+import 'package:lestari_laundry/user/domain/model/data/transaction/transaction_delivery.dart';
+import 'package:lestari_laundry/user/domain/model/data/transaction/transaction_payment_info.dart';
+import 'package:lestari_laundry/user/domain/model/data/transaction/transaction_user.dart';
+import 'package:lestari_laundry/user/domain/model/data/transaction/transaction_user_attributes.dart';
+import 'package:lestari_laundry/user/domain/model/data/transaction/transaction_user_data.dart';
 import '../../../domain/model/data/transaction/transaction_data.dart';
 import '../../../domain/model/data/transaction/transaction_data_attributes.dart';
 
@@ -35,6 +40,15 @@ class TransactionDataResponse implements TransactionDataResponseMapper {
             '',
             '',
             [],
+            TransactionDelivery(0, '', ''),
+            TransactionPaymentInfo(0, '', ''),
+            TransactionUser(
+              TransactionUserData(
+                0,
+                TransactionUserAttributes(
+                    '', '', '', '', '', '', '', '', '', ''),
+              ),
+            ),
           ),
     );
   }

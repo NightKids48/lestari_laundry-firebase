@@ -8,6 +8,7 @@ class DashboardView extends StatefulWidget {
 }
 
 class _DashboardViewState extends State<DashboardView> {
+  final OrderController orderController = Get.put(OrderController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class _DashboardViewState extends State<DashboardView> {
             return VStack([
               Row(
                 children: [
-                  "Hallo, "
+                  "Hallo,"
                       .richText
                       .size(18)
                       .fontFamily('nunito')

@@ -12,6 +12,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
   int _selectedRadio = 0;
   String? _layananImage;
   String? _layananName;
+  int? _idLayanan;
   var count = 0.obs;
   final MyController c = Get.put(MyController());
   final OrderController orderController = Get.put(OrderController());
@@ -64,7 +65,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                   Obx(() =>
                       "${_selectedRadio * int.parse(c.totalkilogram.toString())}"
                           .text
-                          .fontFamily('nunito')
+                          .fontFamily('nunitoexb')
                           .color(colorName.primary)
                           .size(14)
                           .bold
@@ -74,7 +75,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
             ],
           ).pOnly(left: 20, right: 20, top: 10),
           ButtonWidget(
-            text: "Continue",
+            text: "Lanjutkan",
             onPressed: validationBtn()
                 ? () {
                     TotalData newTotalData = TotalData(
@@ -84,6 +85,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                     );
 
                     LayananData newLayananData = LayananData(
+                      id: _idLayanan!,
                       image: _layananImage.toString(),
                       name: _layananName.toString(),
                       price: _selectedRadio.toString(),
@@ -114,7 +116,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
             fontWeight: FontWeight.bold,
             color: colorName.button,
           ),
-        ),
+        ).centered(),
       ),
       body: SafeArea(
         child: Container(
@@ -188,12 +190,6 @@ class _KilogramScreenState extends State<KilogramScreen> {
                       .makeCentered(),
                 ],
               ).pOnly(left: 20, right: 20, top: 20),
-              Container(
-                decoration: BoxDecoration(
-                  color: colorName.background,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ).pOnly(left: 20, right: 20),
               20.heightBox,
               Container(
                 height: 180,
@@ -202,69 +198,71 @@ class _KilogramScreenState extends State<KilogramScreen> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: BlocBuilder<KilogramCubit, KilogramState>(
-                    builder: (context, state) {
-                  if (state is KilogramIsLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is KilogramIsSucces) {
-                    return ListView.builder(
-                      itemCount: state.data!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var data = state.data![index].attributes;
-                        var dataImage = state.data![index].attributes
-                            .productImage.data.attributes;
-                        return ListTile(
-                          leading: SvgPicture.network(
-                            BaseConfig.BASE_IMAGE_DOMAIN + dataImage.url,
-                            fit: BoxFit.cover,
-                            height: 50,
-                          ),
-                          title: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  "${data.productName}"
-                                      .text
-                                      .size(14)
-                                      .color(colorName.primary)
-                                      .fontFamily('nunito')
-                                      .bold
-                                      .make(),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  "IDR ${data.productPrice}/KG"
-                                      .text
-                                      .size(12)
-                                      .fontFamily('nunito')
-                                      .color(colorName.button)
-                                      .bold
-                                      .make(),
-                                ],
-                              ),
-                            ],
-                          ).pOnly(left: 20),
-                          trailing: Radio(
-                            value: index,
-                            groupValue: _value,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedRadio = int.parse(data.productPrice);
-                                _layananImage = BaseConfig.BASE_IMAGE_DOMAIN +
-                                    dataImage.url;
-                                _layananName = data.productName;
-                                _value = value as int;
-                              });
-                            },
-                          ),
-                        );
-                      },
-                    );
-                  }
-                  return Container(child: Center(child: Text('Kosong')));
-                }),
+                  builder: (context, state) {
+                    if (state is KilogramIsLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is KilogramIsSucces) {
+                      return ListView.builder(
+                        itemCount: state.data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var data = state.data![index].attributes;
+                          var dataImage = state.data![index].attributes
+                              .productImage.data.attributes;
+                          return ListTile(
+                            leading: SvgPicture.network(
+                              BaseConfig.BASE_IMAGE_DOMAIN + dataImage.url,
+                              fit: BoxFit.cover,
+                              height: 50,
+                            ),
+                            title: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    "${data.productName}"
+                                        .text
+                                        .size(14)
+                                        .color(colorName.primary)
+                                        .fontFamily('nunito')
+                                        .bold
+                                        .make(),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    "IDR ${data.productPrice}/KG"
+                                        .text
+                                        .size(12)
+                                        .fontFamily('nunito')
+                                        .color(colorName.button)
+                                        .bold
+                                        .make(),
+                                  ],
+                                ),
+                              ],
+                            ).pOnly(left: 20),
+                            trailing: Radio(
+                              value: index,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _idLayanan = state.data![index].id;
+                                  _selectedRadio = int.parse(data.productPrice);
+                                  _layananImage = BaseConfig.BASE_IMAGE_DOMAIN +
+                                      dataImage.url;
+                                  _layananName = data.productName;
+                                  _value = value as int;
+                                });
+                              },
+                            ),
+                          );
+                        },
+                      );
+                    }
+                    return Container(child: Center(child: Text('Kosong')));
+                  },
+                ),
                 // .paddingSymmetric(vertical: 20),
               ).paddingSymmetric(horizontal: 20),
               Row(

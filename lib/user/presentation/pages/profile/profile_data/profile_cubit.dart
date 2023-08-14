@@ -1,5 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:get/get.dart';
+import 'package:lestari_laundry/user/data/controller/controllers.dart';
+import 'package:lestari_laundry/user/presentation/pages/home/kilogram/model_data/delivery_data.dart';
 import '../../../../data/utilities/utilities.dart';
 import '../../../../base/result_entity/result_entity.dart';
 import '../../../../domain/base/authentication_headers_request.dart';
@@ -23,6 +26,16 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       if (response is ResultSuccess) {
         emit(ProfileIsSuccess(data: (response as ResultSuccess).data));
+        final data = (state as ProfileIsSuccess).data;
+        print('latlong ${data!.address.longitude}');
+        // final jarak = Commons().calculateDistance(
+        //   -6.24027, 106.55387, 0, 0,
+        // int.parse(data!.address.latitude).toDouble(),
+        //int.parse(data.address.longitude).toDouble(),
+        //  );
+        //  Get.put(OrderController()).setCreateOrder(
+        //    CreateOrder(data.id, 0, jarak.toString(), 0),
+        //   );
       } else {
         emit(ProfileIsFailed(message: (response as ResultError).message));
       }

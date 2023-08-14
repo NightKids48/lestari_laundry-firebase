@@ -76,8 +76,24 @@ class _CodKgState extends State<CodKg> {
             ),
           ),
           ButtonWidget(
-            text: 'Continue',
+            text: 'Lanjutkan',
             onPressed: () {
+              BlocProvider.of<TransactionCubit>(context).btntransaction(
+                TransactionDataRequest(
+                  'Dijemput',
+                  [
+                    Orders(
+                      orderController.layananData!.id,
+                      orderController.totalData!.totalKilogram,
+                    ),
+                  ],
+                  [
+                    0,
+                  ],
+                  TransactionsDelivery([0], ''),
+                  TransactionDataPaymentInfo(0, '', ''),
+                ),
+              );
               context.goNamed('orderdetailkg');
             },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
@@ -111,17 +127,6 @@ class _CodKgState extends State<CodKg> {
               ),
             ).pOnly(left: 20, right: 20, top: 20).wFull(context),
             VStack([
-              Row(
-                children: [
-                  "e.g Lorem ipsum dolor sit amet. Consectur adipiscing elit."
-                      .text
-                      .size(12)
-                      .fontFamily('nunito')
-                      .color(colorName.grey)
-                      .make()
-                      .pOnly(left: 20, top: 20)
-                ],
-              ),
               Row(
                 children: [
                   "Ringkasan pembayaran"

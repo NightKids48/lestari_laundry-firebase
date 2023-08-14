@@ -1,15 +1,22 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:lestari_laundry/user/domain/base/authentication_headers_request.dart';
 import '../../../../base/base_config/base_config.dart';
 import '../../../../domain/model/request/transaction/transaction_data_request.dart';
 
 class TransactionRemoteService {
   Client client = Client();
-
-  Future<Response> postTransaction(TransactionDataRequest request) async {
+  Map<String, dynamic> queryParams = {
+    'populate': '*',
+  };
+  Future<Response> postTransaction(
+    TransactionDataRequest request,
+    AuthenticationHeadersRequest header,
+  ) async {
     final url = Uri.https(
       BaseConfig.BASE_DOMAIN,
       BaseConfig.TRANSACTION,
+      queryParams,
     );
 
     print("URL : ${url.toString()}");
@@ -18,7 +25,7 @@ class TransactionRemoteService {
     return client.post(
       url,
       body: jsonEncode(request.toJson()),
-      headers: {'content-Type': 'application/json'},
+      headers: header.toHeader(),
     );
   }
 }

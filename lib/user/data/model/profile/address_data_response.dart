@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 import '../../../domain/model/data/profile/address_data.dart';
 
 part 'address_data_response.g.dart';
@@ -17,6 +16,8 @@ class AddressDataResponse implements AddressDataResponseMapper {
   String? province;
   String? zipcode;
   String? adressDetail;
+  String? longitude;
+  String? latitude;
   AddressDataResponse({
     this.id,
     this.rt,
@@ -25,6 +26,8 @@ class AddressDataResponse implements AddressDataResponseMapper {
     this.province,
     this.zipcode,
     this.adressDetail,
+    this.longitude,
+    this.latitude,
   });
 
   factory AddressDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -42,6 +45,8 @@ class AddressDataResponse implements AddressDataResponseMapper {
       province ?? '',
       zipcode ?? '',
       adressDetail ?? '',
+      longitude ?? '',
+      latitude ?? '',
     );
   }
 }

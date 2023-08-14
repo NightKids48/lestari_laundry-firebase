@@ -194,7 +194,7 @@ final GoRouter router = GoRouter(
       ],
     ),
   ],
-  initialLocation: '/adminhome',
+  initialLocation: '/home',
   debugLogDiagnostics: true,
   routerNeglect: true,
 );

@@ -9,7 +9,7 @@ part of 'transaction_delivery.dart';
 TransactionsDelivery _$TransactionsDeliveryFromJson(
         Map<String, dynamic> json) =>
     TransactionsDelivery(
-      json['deliveryProvider'] as List<dynamic>,
+      (json['deliveryProvider'] as List<dynamic>).map((e) => e as int).toList(),
       json['userDistance'] as String,
     );
 

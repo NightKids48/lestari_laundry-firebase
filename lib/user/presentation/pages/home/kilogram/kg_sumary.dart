@@ -35,7 +35,7 @@ class _KgSumaryState extends State<KgSumary> {
         color: colorName.background,
         child: VStack([
           ButtonWidget(
-            text: 'Payment',
+            text: 'Lanjutkan',
             onPressed: () {
               context.goNamed('kgpayment');
             },
@@ -73,22 +73,27 @@ class _KgSumaryState extends State<KgSumary> {
                 color: colorName.background,
               ),
               child: VStack([
-                HStack([
-                  SvgPicture.network('${orderController.layananData?.image}'),
-                  VStack([
-                    "${orderController.layananData?.name}"
-                        .text
-                        .size(15)
-                        .color(colorName.primary)
-                        .bold
-                        .make(),
-                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}/KG"
-                        .text
-                        .size(13)
-                        .bold
-                        .make(),
-                  ]).pOnly(left: 20),
-                ]),
+                Row(
+                  children: [
+                    SvgPicture.network('${orderController.layananData?.image}')
+                        .p(10),
+                    VStack([
+                      "${orderController.layananData?.name}"
+                          .text
+                          .size(15)
+                          .fontFamily('nunito')
+                          .color(colorName.primary)
+                          .bold
+                          .make(),
+                      "${Commons().setPrice(double.parse(orderController.layananData?.price ?? '0'))}/KG"
+                          .text
+                          .size(13)
+                          .fontFamily('nunito')
+                          .bold
+                          .make(),
+                    ]).pOnly(left: 20),
+                  ],
+                )
               ]),
             ).pOnly(left: 20, right: 20).wFull(context),
             10.heightBox,
@@ -104,15 +109,18 @@ class _KgSumaryState extends State<KgSumary> {
                     "Total Kilogram"
                         .text
                         .size(14)
+                        .fontFamily('nunito')
                         .color(colorName.primary)
                         .bold
                         .make(),
-                    "${orderController.totalData?.totalKilogram}KG"
+                    "${orderController.totalData?.totalKilogram} KG"
                         .text
                         .size(14)
+                        .fontFamily('nunito')
                         .color(colorName.black)
                         .bold
-                        .make(),
+                        .make()
+                        .pOnly(right: 20),
                   ],
                 ),
               ]).p(15),
@@ -147,12 +155,10 @@ class _KgSumaryState extends State<KgSumary> {
               child: TextFormField(
                 controller: instruksiTambahanController,
                 decoration: const InputDecoration(
-                  hintText:
-                      'e.g Lorem ipsum dolor sit amet consectetur adipiscing',
                   border: InputBorder.none,
                   hintStyle: TextStyle(color: colorName.grey, fontSize: 14),
                 ),
-              ).p(20),
+              ).p(10),
             ).pOnly(left: 20, right: 20).wFull(context),
             Padding(
               padding: const EdgeInsets.all(20),
@@ -287,7 +293,7 @@ class _KgSumaryState extends State<KgSumary> {
                         .fontFamily('nunito')
                         .color(colorName.button)
                         .make(),
-                    "IDR ${orderController.totalData?.totalPrice}"
+                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                         .text
                         .size(14)
                         .bold
@@ -346,7 +352,7 @@ class _KgSumaryState extends State<KgSumary> {
                         .bold
                         .fontFamily('nunito')
                         .make(),
-                    "IDR ${orderController.totalData?.totalPrice}"
+                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                         .text
                         .size(14)
                         .bold

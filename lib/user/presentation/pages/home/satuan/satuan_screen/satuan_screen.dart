@@ -154,95 +154,86 @@ class _SatuanScreenState extends State<SatuanScreen> {
               ).pOnly(left: 20, right: 20),
               10.heightBox,
               Container(
+                height: 300,
                 decoration: BoxDecoration(
                   color: colorName.background,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 150,
-                      child: BlocBuilder<SatuanCubit, SatuanState>(
-                        builder: (context, state) {
-                          if (state is SatuanIsSuccess) {
-                            return ListView.builder(
-                              itemCount: state.data!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                var data = state.data![index].attributes;
-                                var dataImage = state.data![index].attributes
-                                    .productImage.data.attributes;
-                                return ListTile(
-                                  leading: SvgPicture.network(
-                                    BaseConfig.BASE_IMAGE_DOMAIN +
-                                        dataImage.url,
-                                    fit: BoxFit.cover,
-                                    height: 50,
-                                  ),
-                                  title: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          "${data.productName}"
-                                              .text
-                                              .size(14)
-                                              .color(colorName.primary)
-                                              .fontFamily('nunito')
-                                              .bold
-                                              .make(),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          "IDR ${data.productPrice}/Piece"
-                                              .text
-                                              .size(12)
-                                              .fontFamily('nunito')
-                                              .color(colorName.button)
-                                              .bold
-                                              .make(),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  trailing: HStack([
-                                    IconButton(
-                                      onPressed: () => c.shirtmin(),
-                                      icon: Image(
-                                        image: AssetImage('images/min.png'),
-                                      ),
-                                    ),
-                                    5.widthBox,
-                                    Obx(() => "${c.shirt.toString()}"
+                child: BlocBuilder<SatuanCubit, SatuanState>(
+                  builder: (context, state) {
+                    if (state is SatuanIsSuccess) {
+                      return ListView.builder(
+                        itemCount: state.data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var data = state.data![index].attributes;
+                          var dataImage = state.data![index].attributes
+                              .productImage.data.attributes;
+                          return ListTile(
+                            leading: SvgPicture.network(
+                              BaseConfig.BASE_IMAGE_DOMAIN + dataImage.url,
+                              fit: BoxFit.cover,
+                              height: 50,
+                            ),
+                            title: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    "${data.productName}"
                                         .text
-                                        .fontFamily('nunitoexb')
-                                        .size(16)
-                                        .make()),
-                                    5.widthBox,
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          c.shirtplus();
-                                          selectedItem =
-                                              int.parse(data.productPrice);
-                                        });
-                                      },
-                                      icon: Image(
-                                        image: AssetImage('images/plus.png'),
-                                      ),
-                                    ),
-                                  ]),
-                                );
-                              },
-                            );
-                          }
-                          return Container(child: Text(''));
+                                        .size(14)
+                                        .color(colorName.primary)
+                                        .fontFamily('nunito')
+                                        .bold
+                                        .make(),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    "IDR ${data.productPrice}/Piece"
+                                        .text
+                                        .size(12)
+                                        .fontFamily('nunito')
+                                        .color(colorName.button)
+                                        .bold
+                                        .make(),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            trailing: HStack([
+                              IconButton(
+                                onPressed: () => c.shirtmin(),
+                                icon: Image(
+                                  image: AssetImage('images/min.png'),
+                                ),
+                              ),
+                              5.widthBox,
+                              Obx(() => "${c.shirt.toString()}"
+                                  .text
+                                  .fontFamily('nunitoexb')
+                                  .size(16)
+                                  .make()),
+                              5.widthBox,
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    c.shirtplus();
+                                    selectedItem = int.parse(data.productPrice);
+                                  });
+                                },
+                                icon: Image(
+                                  image: AssetImage('images/plus.png'),
+                                ),
+                              ),
+                            ]),
+                          );
                         },
-                      ),
-                    ),
-                    15.heightBox,
-                  ],
-                ).pOnly(top: 20, bottom: 20),
-              ).pOnly(left: 20, right: 20, bottom: 20),
+                      );
+                    }
+                    return Container(child: Text(''));
+                  },
+                ).paddingSymmetric(vertical: 10),
+              ).paddingSymmetric(horizontal: 20),
             ],
           ),
         ),

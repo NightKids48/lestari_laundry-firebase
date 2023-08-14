@@ -17,6 +17,9 @@ ProfileDataResponse _$ProfileDataResponseFromJson(Map<String, dynamic> json) =>
       updatedAt: json['updatedAt'] as String?,
       username: json['username'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
+      fullname: json['fullname'] as String?,
+      userRole: json['userRole'] as String?,
+      avatar: json['avatar'] as String?,
       name: json['name'] == null
           ? null
           : NameDataResponse.fromJson(json['name'] as Map<String, dynamic>),
@@ -38,6 +41,9 @@ Map<String, dynamic> _$ProfileDataResponseToJson(
       'updatedAt': instance.updatedAt,
       'username': instance.username,
       'phoneNumber': instance.phoneNumber,
+      'fullname': instance.fullname,
+      'userRole': instance.userRole,
+      'avatar': instance.avatar,
       'name': instance.name,
       'address': instance.address,
     };

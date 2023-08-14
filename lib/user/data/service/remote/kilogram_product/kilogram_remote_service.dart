@@ -22,6 +22,9 @@ class KilogramRemoteService {
     print("URL DECODE : ${urlDecode.toString()}");
     print("HEADER : ${header.accesToken}");
 
-    return client.get(Uri.parse(urlDecode), headers: header.toHeader());
+    return client.get(
+      Uri.parse(urlDecode),
+      headers: header.toHeader(),
+    );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lestari_laundry/user/data/repository/transaction/transaction_repository_impl.dart';
 import 'package:lestari_laundry/user/data/utilities/utilities.dart';
+import 'package:lestari_laundry/user/presentation/pages/transaction/cubit/transaction_cubit.dart';
 import 'user/data/repository/change_password.dart/change_password_repository_impl.dart';
 import 'user/data/repository/kilogram/kilogram_repository_impl.dart';
 import 'user/data/repository/login/login_repository_impl.dart';
@@ -49,6 +51,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LocationCubit(),
+        ),
+        BlocProvider(
+          create: (context) => TransactionCubit(TransactionRepositoryImpl()),
         ),
       ],
       child: MaterialApp.router(

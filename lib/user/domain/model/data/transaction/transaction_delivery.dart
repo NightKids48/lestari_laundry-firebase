@@ -2,10 +2,10 @@
 class TransactionDelivery {
   int id;
   String userDistance;
-  String totalDeliverCost;
+  String totalDeliveryCost;
   TransactionDelivery(
     this.id,
     this.userDistance,
-    this.totalDeliverCost,
+    this.totalDeliveryCost,
   );
 }

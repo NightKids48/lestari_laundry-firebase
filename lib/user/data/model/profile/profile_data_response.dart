@@ -1,9 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 import '../../../domain/model/data/profile/address_data.dart';
 import '../../../domain/model/data/profile/name_data.dart';
 import '../../../domain/model/data/profile/profile_data.dart';
 import 'address_data_response.dart';
 import 'name_data_response.dart';
+
 part 'profile_data_response.g.dart';
 
 abstract class ProfileDataResponseMapper {
@@ -21,6 +23,9 @@ class ProfileDataResponse implements ProfileDataResponseMapper {
   String? updatedAt;
   String? username;
   String? phoneNumber;
+  String? fullname;
+  String? userRole;
+  String? avatar;
   NameDataResponse? name;
   AddressDataResponse? address;
   ProfileDataResponse({
@@ -33,6 +38,9 @@ class ProfileDataResponse implements ProfileDataResponseMapper {
     this.updatedAt,
     this.username,
     this.phoneNumber,
+    this.fullname,
+    this.userRole,
+    this.avatar,
     this.name,
     this.address,
   });
@@ -54,10 +62,15 @@ class ProfileDataResponse implements ProfileDataResponseMapper {
       updatedAt ?? '',
       username ?? '',
       phoneNumber ?? '',
+      fullname ?? '',
+      userRole ?? '',
+      avatar ?? '',
       name?.toNameData() ?? NameData(0, '', ''),
       address?.toAddressData() ??
           AddressData(
             0,
+            '',
+            '',
             '',
             '',
             '',

@@ -81,6 +81,8 @@ class OrderController extends GetxController {
   TotalData? totalData;
   LayananData? layananData;
   DetailPenerima? detailPenerima;
+  CreateOrder? createOrder;
+
   void setOrderData(OrderData newOrderData) {
     orderData = newOrderData;
     update();
@@ -98,6 +100,11 @@ class OrderController extends GetxController {
 
   void setDetailPenerima(DetailPenerima newDetailPenerima) {
     detailPenerima = newDetailPenerima;
+    update();
+  }
+
+  void setCreateOrder(CreateOrder newCreateOrder) {
+    createOrder = newCreateOrder;
     update();
   }
 }

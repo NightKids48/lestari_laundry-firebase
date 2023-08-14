@@ -71,7 +71,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
             ],
           ).pOnly(left: 20, right: 20, top: 10),
           ButtonWidget(
-            text: 'Continue',
+            text: 'Lanjutkan',
             onPressed: () {
               DetailPenerima newDetailPenerima = DetailPenerima(
                 name: nameController.text,

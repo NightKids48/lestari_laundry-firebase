@@ -52,7 +52,7 @@ class Commons {
   }
 
   String setPrice(double price) {
-    return NumberFormat.currency(locale: 'id_ID', decimalDigits: 0)
+    return NumberFormat.currency(locale: 'id_ID ', decimalDigits: 0)
         .format(price)
         .toString();
   }

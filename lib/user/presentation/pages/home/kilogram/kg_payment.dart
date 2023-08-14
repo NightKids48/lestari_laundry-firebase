@@ -9,7 +9,9 @@ class KgPayment extends StatefulWidget {
 
 class _KgPaymentState extends State<KgPayment> {
   final OrderController orderController = Get.find<OrderController>();
-  int _value = 1;
+  int? _value;
+  int _selectedRadio = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +79,7 @@ class _KgPaymentState extends State<KgPayment> {
             ),
           ),
           ButtonWidget(
-            text: 'Continue',
+            text: 'Lanjutkan',
             onPressed: () {
               context.goNamed('codkg');
             },
@@ -101,74 +103,67 @@ class _KgPaymentState extends State<KgPayment> {
               ),
             ),
             Container(
-              height: 120,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: colorName.background),
-              child: VStack([
-                ListTile(
-                  leading: Image(
-                    image: AssetImage('images/cod.png'),
-                    fit: BoxFit.cover,
-                    width: 50,
+              child: VStack(
+                [
+                  ListTile(
+                    leading: Image(
+                      image: AssetImage('images/cod.png'),
+                      fit: BoxFit.cover,
+                      width: 50,
+                    ),
+                    title: "Cash on Delivery"
+                        .text
+                        .size(14)
+                        .color(colorName.primary)
+                        .fontFamily('nunito')
+                        .bold
+                        .make(),
+                    trailing: Radio(
+                      value: 1,
+                      groupValue: _value,
+                      onChanged: (value) {
+                        setState(
+                          () {
+                            _value = value!;
+                          },
+                        );
+                      },
+                    ),
                   ),
-                  title: "Cash on Delivery"
-                      .text
-                      .size(14)
-                      .color(colorName.primary)
-                      .fontFamily('nunito')
-                      .bold
-                      .make(),
-                  trailing: Radio(
-                    value: 1,
-                    groupValue: _value,
-                    onChanged: (value) {
-                      setState(
-                        () {
-                          _value = value!;
-                        },
-                      );
-                    },
-                  ),
-                ),
-                VxDivider().pOnly(left: 10, right: 10),
-                ListTile(
-                  leading: Image(
-                    image: AssetImage('images/qris.png'),
-                    fit: BoxFit.cover,
-                    width: 50,
-                  ),
-                  title: "Bank Transfer/QRIS"
-                      .text
-                      .size(14)
-                      .color(colorName.primary)
-                      .fontFamily('nunito')
-                      .bold
-                      .make(),
-                  trailing: Radio(
-                    value: 2,
-                    groupValue: _value,
-                    onChanged: (value) {
-                      setState(() {
-                        _value = value!;
-                      });
-                    },
-                  ),
-                ),
-              ]),
-            ).pOnly(left: 20, right: 20),
-            VStack([
-              Row(
-                children: [
-                  "e.g Lorem ipsum dolor sit amet. Consectur adipiscing elit."
-                      .text
-                      .size(12)
-                      .fontFamily('nunito')
-                      .color(colorName.grey)
-                      .make()
-                      .pOnly(left: 20, top: 20)
                 ],
               ),
+            ).pOnly(left: 20, right: 20),
+            // VxDivider().pOnly(left: 10, right: 10),
+            //  ListTile(
+            //   leading: Image(
+            //   image: AssetImage('images/qris.png'),
+            //   fit: BoxFit.cover,
+            //   width: 50,
+            //     ),
+            //    title: "Bank Transfer/QRIS"
+            //        .text
+            //     .size(14)
+            //    .color(colorName.primary)
+            //   .fontFamily('nunito')
+            // .bold
+            //  .make(),
+            //  trailing: Radio(
+            //   value: 2,
+            //    groupValue: _value,
+            //    onChanged: (value) {
+            //      setState(() {
+            //      _value = value!;
+            //   });
+            //    },
+            //   ),
+            //   ),
+            // ]),
+            //   ).pOnly(left: 20, right: 20),
+            10.heightBox,
+            VStack([
               Row(
                 children: [
                   "Ringkasan Pembayaran"
@@ -198,7 +193,7 @@ class _KgPaymentState extends State<KgPayment> {
                         .color(colorName.grey)
                         .make()
                         .p(10),
-                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}/KG"
+                    "${Commons().setPrice(double.parse(orderController.totalData?.totalPrice ?? '0'))}"
                         .text
                         .size(12)
                         .bold

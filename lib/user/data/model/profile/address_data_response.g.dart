@@ -15,6 +15,8 @@ AddressDataResponse _$AddressDataResponseFromJson(Map<String, dynamic> json) =>
       province: json['province'] as String?,
       zipcode: json['zipcode'] as String?,
       adressDetail: json['adressDetail'] as String?,
+      longitude: json['longitude'] as String?,
+      latitude: json['latitude'] as String?,
     );
 
 Map<String, dynamic> _$AddressDataResponseToJson(
@@ -27,4 +29,6 @@ Map<String, dynamic> _$AddressDataResponseToJson(
       'province': instance.province,
       'zipcode': instance.zipcode,
       'adressDetail': instance.adressDetail,
+      'longitude': instance.longitude,
+      'latitude': instance.latitude,
     };

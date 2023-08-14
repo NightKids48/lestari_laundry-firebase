@@ -22,12 +22,6 @@ class _KilogramOrderState extends State<KilogramOrder> {
             .fontFamily('nunitoexb')
             .size(18)
             .makeCentered(),
-        actions: [
-          Icon(
-            Icons.cancel,
-            color: colorName.grey,
-          ).pOnly(right: 20)
-        ],
       ),
       bottomNavigationBar: ColoredBox(
         color: colorName.background,

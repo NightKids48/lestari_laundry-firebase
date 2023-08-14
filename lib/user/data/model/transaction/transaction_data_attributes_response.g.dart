@@ -14,7 +14,22 @@ TransactionDataAttributesResponse _$TransactionDataAttributesResponseFromJson(
       json['updateAt'] as String?,
       json['publishedAt'] as String?,
       json['specialNotes'] as String?,
-      json['orders'] as List<dynamic>?,
+      (json['orders'] as List<dynamic>?)
+          ?.map((e) =>
+              TransactionDataOrderResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['delivery'] == null
+          ? null
+          : TransactionDataDeliveryResponse.fromJson(
+              json['delivery'] as Map<String, dynamic>),
+      json['paymentInfo'] == null
+          ? null
+          : TransactionDataPaymentInfoResponse.fromJson(
+              json['paymentInfo'] as Map<String, dynamic>),
+      json['user'] == null
+          ? null
+          : TransactionUserResponse.fromJson(
+              json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TransactionDataAttributesResponseToJson(
@@ -26,4 +41,7 @@ Map<String, dynamic> _$TransactionDataAttributesResponseToJson(
       'publishedAt': instance.publishedAt,
       'specialNotes': instance.specialNotes,
       'orders': instance.orders,
+      'delivery': instance.delivery,
+      'paymentInfo': instance.paymentInfo,
+      'user': instance.user,
     };

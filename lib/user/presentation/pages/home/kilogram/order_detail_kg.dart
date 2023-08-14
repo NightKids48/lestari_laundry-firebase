@@ -22,12 +22,6 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             .fontFamily('nunitoexb')
             .size(18)
             .makeCentered(),
-        actions: [
-          Icon(
-            Icons.cancel,
-            color: colorName.grey,
-          ).pOnly(right: 20)
-        ],
       ),
       bottomNavigationBar: ColoredBox(
         color: colorName.background,
@@ -183,17 +177,20 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             ),
             child: VStack([
               HStack([
-                SvgPicture.network('${orderController.layananData?.image}'),
+                SvgPicture.network('${orderController.layananData?.image}')
+                    .p(10),
                 VStack([
                   "${orderController.layananData?.name}"
                       .text
-                      .size(14)
+                      .size(15)
+                      .fontFamily('nunito')
                       .color(colorName.primary)
                       .bold
                       .make(),
                   "${orderController.layananData?.price}/Kg"
                       .text
-                      .size(12)
+                      .fontFamily('nunito')
+                      .size(13)
                       .bold
                       .make(),
                 ]).pOnly(left: 20),
@@ -216,7 +213,7 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
                       .color(colorName.primary)
                       .bold
                       .make(),
-                  "${orderController.totalData?.totalKilogram}KG"
+                  "${orderController.totalData?.totalKilogram} KG"
                       .text
                       .color(colorName.black)
                       .bold

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class AddressData {
   int id;
   String rt;
@@ -6,6 +7,8 @@ class AddressData {
   String province;
   String zipcode;
   String adressDetail;
+  String longitude;
+  String latitude;
   AddressData(
     this.id,
     this.rt,
@@ -14,5 +17,7 @@ class AddressData {
     this.province,
     this.zipcode,
     this.adressDetail,
+    this.longitude,
+    this.latitude,
   );
 }

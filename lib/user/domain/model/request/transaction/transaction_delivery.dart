@@ -4,7 +4,7 @@ part 'transaction_delivery.g.dart';
 
 @JsonSerializable()
 class TransactionsDelivery {
-  List deliveryProvider;
+  List<int> deliveryProvider;
   String userDistance;
   TransactionsDelivery(
     this.deliveryProvider,

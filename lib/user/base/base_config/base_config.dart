@@ -9,5 +9,5 @@ abstract class BaseConfig {
   static const String BASE_IMAGE_DOMAIN = "https://lestari.mahrusrohisyam.com";
   static const String CHANGE_PASSWORD = "/auth/change-password";
   static const String PROFILE = "/api/users/me";
-  static const String TRANSACTION = "/api/transsactions";
+  static const String TRANSACTION = "/api/transactions";
 }
