@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lestari_laundry/user/domain/model/data/profile/avatar_data.dart';
 import '../../../domain/model/data/profile/address_data.dart';
 import '../../../domain/model/data/profile/name_data.dart';
 import '../../../domain/model/data/profile/profile_data.dart';
 import 'address_data_response.dart';
+import 'avatar_data_response.dart';
 import 'name_data_response.dart';
 
 part 'profile_data_response.g.dart';
@@ -25,7 +27,7 @@ class ProfileDataResponse implements ProfileDataResponseMapper {
   String? phoneNumber;
   String? fullname;
   String? userRole;
-  String? avatar;
+  AvatarDataResponse? avatar;
   NameDataResponse? name;
   AddressDataResponse? address;
   ProfileDataResponse({
@@ -64,7 +66,7 @@ class ProfileDataResponse implements ProfileDataResponseMapper {
       phoneNumber ?? '',
       fullname ?? '',
       userRole ?? '',
-      avatar ?? '',
+      avatar?.toAvatarData() ?? Avatar(0, '', ''),
       name?.toNameData() ?? NameData(0, '', ''),
       address?.toAddressData() ??
           AddressData(

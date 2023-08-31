@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:lestari_laundry/user/domain/model/data/profile/avatar_data.dart';
 import 'package:lestari_laundry/user/domain/model/data/profile/name_data.dart';
 
 import 'address_data.dart';
@@ -15,7 +16,7 @@ class ProfileData {
   String phoneNumber;
   String fullname;
   String userRole;
-  String avatar;
+  Avatar avatar;
   NameData name;
   AddressData address;
   ProfileData(

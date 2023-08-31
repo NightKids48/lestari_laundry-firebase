@@ -89,7 +89,6 @@ final GoRouter router = GoRouter(
           name: 'profile',
           builder: (context, state) {
             BlocProvider.of<ProfileCubit>(context).fetchProfile();
-            BlocProvider.of<NameDataCubit>(context).fetchNameData();
             return const InformasiProfile();
           },
         ),

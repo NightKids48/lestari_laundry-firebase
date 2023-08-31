@@ -12,7 +12,6 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import '../../presentation/pages/home/satuan/satuan_screen/cubit/satuan_cubit.dart';
-import '../../presentation/pages/profile/name_data/name_data_cubit.dart';
 import '../../presentation/pages/profile/profile_data/profile_cubit.dart';
 import '../../presentation/screens.dart';
 import 'auth/auth_cubit.dart';

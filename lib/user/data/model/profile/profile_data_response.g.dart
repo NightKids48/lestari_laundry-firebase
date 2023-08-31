@@ -19,7 +19,9 @@ ProfileDataResponse _$ProfileDataResponseFromJson(Map<String, dynamic> json) =>
       phoneNumber: json['phoneNumber'] as String?,
       fullname: json['fullname'] as String?,
       userRole: json['userRole'] as String?,
-      avatar: json['avatar'] as String?,
+      avatar: json['avatar'] == null
+          ? null
+          : AvatarDataResponse.fromJson(json['avatar'] as Map<String, dynamic>),
       name: json['name'] == null
           ? null
           : NameDataResponse.fromJson(json['name'] as Map<String, dynamic>),

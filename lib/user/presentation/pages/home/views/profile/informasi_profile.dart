@@ -129,7 +129,7 @@ class InformasiProfile extends StatelessWidget {
                       ).pOnly(left: 20),
                       Row(
                         children: [
-                          state.data!.createdAt.text
+                          state.data!.address.adressDetail.text
                               .color(colorName.primary)
                               .size(14)
                               .fontFamily('nunito')

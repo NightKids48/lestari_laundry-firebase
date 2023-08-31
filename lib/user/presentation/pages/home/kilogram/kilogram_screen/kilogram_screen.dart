@@ -265,7 +265,6 @@ class _KilogramScreenState extends State<KilogramScreen> {
                     return Container(child: Center(child: Text('Kosong')));
                   },
                 ),
-                // .paddingSymmetric(vertical: 20),
               ).paddingSymmetric(horizontal: 20),
               Container(
                 decoration: BoxDecoration(

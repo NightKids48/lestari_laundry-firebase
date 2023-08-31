@@ -19,7 +19,7 @@ import 'user/presentation/pages/home/kilogram/kilogram_screen/cubit/kilogram_cub
 import 'user/presentation/pages/home/satuan/satuan_screen/cubit/satuan_cubit.dart';
 import 'user/presentation/pages/location/cubit/location_cubit.dart';
 import 'user/presentation/pages/login/cubit/login/login_cubit.dart';
-import 'user/presentation/pages/profile/name_data/name_data_cubit.dart';
+// import 'user/presentation/pages/profile/name_data/name_data_cubit.dart';
 import 'user/presentation/pages/profile/profile_data/profile_cubit.dart';
 import 'user/presentation/pages/register/cubit/register/register_cubit.dart';
 
@@ -56,9 +56,9 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => ProfileCubit(ProfileRepositoryImpl()),
         ),
-        BlocProvider(
-          create: (context) => NameDataCubit(NameDataRepositoryImpl()),
-        ),
+        // BlocProvider(
+        //   create: (context) => NameDataCubit(NameDataRepositoryImpl()),
+        // ),
         BlocProvider(
           create: (context) => LocationCubit(),
         ),
