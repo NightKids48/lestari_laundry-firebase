@@ -78,25 +78,9 @@ class _CodKgState extends State<CodKg> {
           ButtonWidget(
             text: 'Lanjutkan',
             onPressed: () {
-              BlocProvider.of<TransactionCubit>(context).btntransaction(
-                TransactionDataRequest(
-                  'Dijemput',
-                  [
-                    Orders(
-                      orderController.layananData!.id,
-                      orderController.totalData!.totalKilogram,
-                    ),
-                  ],
-                  [
-                    0,
-                  ],
-                  TransactionsDelivery([0], ''),
-                  TransactionDataPaymentInfo(0, '', ''),
-                ),
-              );
-              context.goNamed('orderdetailkg');
+              _displayBottomSheet(context);
             },
-          ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
+          ).pOnly(left: 20, right: 20, bottom: 10, top: 10)
         ]),
       ),
       body: SafeArea(
@@ -144,6 +128,7 @@ class _CodKgState extends State<CodKg> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: colorName.background,
+                border: Border.all(color: colorName.greys),
               ),
               child: VStack([
                 Row(
@@ -232,6 +217,63 @@ class _CodKgState extends State<CodKg> {
             ).pOnly(left: 20, right: 20),
           ],
         ),
+      ),
+    );
+  }
+
+  Future _displayBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        height: 150,
+        child: VStack([
+          "Lanjutkan Pesanan"
+              .text
+              .fontFamily('nunitoexb')
+              .size(18)
+              .color(colorName.button)
+              .makeCentered()
+              .pOnly(top: 10),
+          20.heightBox,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  context.goNamed('home');
+                },
+                child: Text('Tidak'),
+                style:
+                    ElevatedButton.styleFrom(backgroundColor: colorName.button),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  BlocProvider.of<TransactionCubit>(context)
+                      .btntransaction(TransactionCollectionRequest(
+                    TransactionDataRequest(
+                      'Dijemput',
+                      [
+                        TransactionDataOrders(
+                          orderController.layananData!.id,
+                          orderController.totalData!.totalKilogram,
+                        ),
+                      ],
+                      [
+                        TransactionDataUser([0]),
+                      ],
+                      TransactionsDelivery([0], ''),
+                      TransactionDataPaymentInfo(0, '', ''),
+                    ),
+                  ));
+                  context.goNamed('orderdetailkg');
+                },
+                child: Text('Iya'),
+                style:
+                    ElevatedButton.styleFrom(backgroundColor: colorName.button),
+              )
+            ],
+          )
+        ]),
       ),
     );
   }

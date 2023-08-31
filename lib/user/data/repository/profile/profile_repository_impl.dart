@@ -16,7 +16,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       final response = await profileRemoteService.fetchProfile(
         header,
       );
-      print('error status code profile${response.statusCode}');
+      print('${response.statusCode}');
       if (response.statusCode == 200) {
         var data = ProfileDataResponse.fromJson(jsonDecode(response.body))
             .toProfileData();

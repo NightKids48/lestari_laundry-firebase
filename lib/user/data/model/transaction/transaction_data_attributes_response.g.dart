@@ -9,9 +9,9 @@ part of 'transaction_data_attributes_response.dart';
 TransactionDataAttributesResponse _$TransactionDataAttributesResponseFromJson(
         Map<String, dynamic> json) =>
     TransactionDataAttributesResponse(
-      json['transactionStatus'] as String?,
       json['createdAt'] as String?,
       json['updateAt'] as String?,
+      json['transactionStatus'] as String?,
       json['publishedAt'] as String?,
       json['specialNotes'] as String?,
       (json['orders'] as List<dynamic>?)
@@ -35,9 +35,9 @@ TransactionDataAttributesResponse _$TransactionDataAttributesResponseFromJson(
 Map<String, dynamic> _$TransactionDataAttributesResponseToJson(
         TransactionDataAttributesResponse instance) =>
     <String, dynamic>{
-      'transactionStatus': instance.transactionStatus,
       'createdAt': instance.createdAt,
       'updateAt': instance.updateAt,
+      'transactionStatus': instance.transactionStatus,
       'publishedAt': instance.publishedAt,
       'specialNotes': instance.specialNotes,
       'orders': instance.orders,

@@ -17,6 +17,7 @@ class SatuanCubit extends Cubit<SatuanState> {
 
     //final token = await Commons().getToken();
     final tokenManual = BaseConfig.TOKEN;
+    // ignore: unnecessary_null_comparison
     if (tokenManual != null) {
       final response = await repository.fetchSatuan(
         AuthenticationHeadersRequest(tokenManual),

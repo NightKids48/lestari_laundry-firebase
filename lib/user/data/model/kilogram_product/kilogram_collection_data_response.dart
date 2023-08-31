@@ -13,8 +13,10 @@ class KilogramCollectionDataResponse
     implements KilogramCollectionDataResponseMapper {
   List<KilogramDataResponse>? data;
   ProductMetaDataResponse? meta;
-
-  KilogramCollectionDataResponse({this.data, this.meta});
+  KilogramCollectionDataResponse({
+    this.data,
+    this.meta,
+  });
 
   factory KilogramCollectionDataResponse.fromJson(Map<String, dynamic> json) =>
       _$KilogramCollectionDataResponseFromJson(json);

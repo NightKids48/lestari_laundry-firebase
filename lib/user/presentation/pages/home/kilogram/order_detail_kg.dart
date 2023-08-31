@@ -22,6 +22,7 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             .fontFamily('nunitoexb')
             .size(18)
             .makeCentered(),
+        actions: [],
       ),
       bottomNavigationBar: ColoredBox(
         color: colorName.background,
@@ -40,6 +41,7 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(
@@ -103,6 +105,7 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(
@@ -174,6 +177,7 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               HStack([
@@ -202,6 +206,7 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(
@@ -234,6 +239,7 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(
@@ -266,6 +272,7 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               HStack([
@@ -331,6 +338,7 @@ class _OrderDetailkgState extends State<OrderDetailkg> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(

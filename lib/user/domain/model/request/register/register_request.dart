@@ -1,7 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lestari_laundry/user/domain/model/request/register/register_adress.dart';
-import 'package:lestari_laundry/user/domain/model/request/register/register_adress_coordinates.dart';
 import 'package:lestari_laundry/user/domain/model/request/register/register_name.dart';
+import 'package:lestari_laundry/user/domain/model/request/register/register_request_address.dart';
 
 part 'register_request.g.dart';
 
@@ -11,17 +12,19 @@ class RegisterRequest {
   String phoneNumber;
   String email;
   String password;
-  RegisterAdressCoordinates coordinates;
-  RegisterAdress adress;
+  String userRole;
+  RegisterRequestAddress address;
   RegisterName name;
+  RegisterAdress adress;
   RegisterRequest(
     this.username,
     this.phoneNumber,
     this.email,
     this.password,
-    this.coordinates,
-    this.adress,
+    this.userRole,
+    this.address,
     this.name,
+    this.adress,
   );
 
   factory RegisterRequest.fromJson(Map<String, dynamic> json) =>

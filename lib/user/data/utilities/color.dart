@@ -9,6 +9,7 @@ mixin colorName {
   static const Color secondary = Color(0xFFFEB624);
   static const Color black = Color.fromARGB(255, 14, 15, 15);
   static const Color grey = Color(0xFF7f8fa6);
+  static const Color greys = Color.fromARGB(255, 221, 226, 236);
   static const Color white = Color(0xFFFFFFFF);
   static const Color accentGreen = Color(0xFF1dd1a1);
   static const Color accentRed = Color(0xFFff6b6b);

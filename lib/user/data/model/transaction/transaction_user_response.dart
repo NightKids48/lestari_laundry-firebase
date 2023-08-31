@@ -12,8 +12,9 @@ abstract class TransactionUserResponseMapper {
 @JsonSerializable()
 class TransactionUserResponse implements TransactionUserResponseMapper {
   TransactionUserDataResponse? data;
-
-  TransactionUserResponse(this.data);
+  TransactionUserResponse(
+    this.data,
+  );
 
   factory TransactionUserResponse.fromJson(Map<String, dynamic> json) =>
       _$TransactionUserResponseFromJson(json);

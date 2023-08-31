@@ -77,7 +77,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
           ButtonWidget(
             text: "Lanjutkan",
             onPressed: validationBtn()
-                ? () {
+                ? () async {
                     TotalData newTotalData = TotalData(
                       totalPrice:
                           '${_selectedRadio * int.parse(c.totalkilogram.toString())}',
@@ -130,6 +130,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                     decoration: BoxDecoration(
                       color: colorName.layer,
                       borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: colorName.greys),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -196,6 +197,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                 decoration: BoxDecoration(
                   color: colorName.background,
                   borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: colorName.greys),
                 ),
                 child: BlocBuilder<KilogramCubit, KilogramState>(
                   builder: (context, state) {
@@ -265,29 +267,20 @@ class _KilogramScreenState extends State<KilogramScreen> {
                 ),
                 // .paddingSymmetric(vertical: 20),
               ).paddingSymmetric(horizontal: 20),
-              Row(
-                children: [
-                  "Jumlah Kilogram"
-                      .richText
-                      .color(colorName.button)
-                      .fontFamily('nunitoexb')
-                      .size(18)
-                      .bold
-                      .makeCentered(),
-                ],
-              ).pOnly(left: 20, right: 20, top: 20),
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: colorName.background),
+                  borderRadius: BorderRadius.circular(10),
+                  color: colorName.background,
+                  border: Border.all(color: colorName.greys),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     VStack([
-                      "Kilogram"
+                      "Jumlah Kilogram"
                           .richText
                           .color(colorName.primary)
-                          .fontFamily('nunito')
+                          .fontFamily('nunitoexb')
                           .size(16)
                           .bold
                           .makeCentered(),

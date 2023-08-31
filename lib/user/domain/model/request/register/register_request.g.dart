@@ -12,10 +12,10 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
       json['phoneNumber'] as String,
       json['email'] as String,
       json['password'] as String,
-      RegisterAdressCoordinates.fromJson(
-          json['coordinates'] as Map<String, dynamic>),
-      RegisterAdress.fromJson(json['adress'] as Map<String, dynamic>),
+      json['userRole'] as String,
+      RegisterRequestAddress.fromJson(json['address'] as Map<String, dynamic>),
       RegisterName.fromJson(json['name'] as Map<String, dynamic>),
+      RegisterAdress.fromJson(json['adress'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
@@ -24,7 +24,8 @@ Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
       'phoneNumber': instance.phoneNumber,
       'email': instance.email,
       'password': instance.password,
-      'coordinates': instance.coordinates,
-      'adress': instance.adress,
+      'userRole': instance.userRole,
+      'address': instance.address,
       'name': instance.name,
+      'adress': instance.adress,
     };

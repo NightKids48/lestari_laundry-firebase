@@ -11,6 +11,7 @@ class TransactionInitial extends TransactionState {}
 
 class TransactionIsLoading extends TransactionState {}
 
+// ignore: must_be_immutable
 class TransactionIsSuccess extends TransactionState {
   TransactionData data;
   TransactionIsSuccess({
@@ -18,6 +19,7 @@ class TransactionIsSuccess extends TransactionState {
   });
 }
 
+// ignore: must_be_immutable
 class TransactionIsFailed extends TransactionState {
   String? message;
   TransactionIsFailed({

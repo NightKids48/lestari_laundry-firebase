@@ -8,9 +8,23 @@ class SatuanScreen extends StatefulWidget {
 }
 
 class _SatuanScreenState extends State<SatuanScreen> {
+  int? _value;
+  int _selectedRadio = 0;
+  String? _layananImage;
+  String? _layananName;
+  int? _idLayanan;
+  var count = 0.obs;
+
   final MyController c = Get.put(MyController());
   final OrderController o = Get.put(OrderController());
   int selectedItem = 0;
+  bool validationBtn() {
+    if (c.totalsatuan != 0 && _selectedRadio != 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +45,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                       .size(14)
                       .bold
                       .make(),
-                  Obx(() => "${c.shirt}"
+                  Obx(() => "${c.totalsatuan}"
                       .text
                       .fontFamily('nunito')
                       .color(colorName.primary)
@@ -49,22 +63,22 @@ class _SatuanScreenState extends State<SatuanScreen> {
                       .size(14)
                       .bold
                       .make(),
-                  Obx(() => "${c.shirt * selectedItem}"
-                      .text
-                      .fontFamily('nunito')
-                      .color(colorName.primary)
-                      .size(14)
-                      .bold
-                      .make()),
+                  Obx(() =>
+                      "${_selectedRadio * int.parse(c.totalsatuan.toString())}"
+                          .text
+                          .fontFamily('nunitoexb')
+                          .color(colorName.primary)
+                          .size(14)
+                          .bold
+                          .make()),
                 ]),
               ),
             ],
           ).pOnly(left: 20, right: 20, top: 10),
           ButtonWidget(
-            color: colorName.primary,
-            text: 'Continue',
-            onPressed: () {},
-          ).p(10)
+            text: "Lanjutkan",
+            onPressed: validationBtn() ? () async {} : null,
+          ).p(20),
         ]),
       ),
       appBar: AppBar(
@@ -96,7 +110,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      10.heightBox,
+                      50.heightBox,
                       Container(
                         height: 45,
                         width: 150,
@@ -140,10 +154,10 @@ class _SatuanScreenState extends State<SatuanScreen> {
                   ),
                 ),
               ]).scrollHorizontal().pOnly(left: 20, right: 20),
-              20.heightBox,
+              10.heightBox,
               Row(
                 children: [
-                  "Tambah Item"
+                  "Tambah Items"
                       .richText
                       .color(colorName.button)
                       .fontFamily('nunitoexb')
@@ -158,6 +172,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                 decoration: BoxDecoration(
                   color: colorName.background,
                   borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: colorName.greys),
                 ),
                 child: BlocBuilder<SatuanCubit, SatuanState>(
                   builder: (context, state) {
@@ -200,32 +215,20 @@ class _SatuanScreenState extends State<SatuanScreen> {
                                 ),
                               ],
                             ),
-                            trailing: HStack([
-                              IconButton(
-                                onPressed: () => c.shirtmin(),
-                                icon: Image(
-                                  image: AssetImage('images/min.png'),
-                                ),
-                              ),
-                              5.widthBox,
-                              Obx(() => "${c.shirt.toString()}"
-                                  .text
-                                  .fontFamily('nunitoexb')
-                                  .size(16)
-                                  .make()),
-                              5.widthBox,
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    c.shirtplus();
-                                    selectedItem = int.parse(data.productPrice);
-                                  });
-                                },
-                                icon: Image(
-                                  image: AssetImage('images/plus.png'),
-                                ),
-                              ),
-                            ]),
+                            trailing: Radio(
+                              value: index,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _idLayanan = state.data![index].id;
+                                  _selectedRadio = int.parse(data.productPrice);
+                                  _layananImage = BaseConfig.BASE_IMAGE_DOMAIN +
+                                      dataImage.url;
+                                  _layananName = data.productName;
+                                  _value = value as int;
+                                });
+                              },
+                            ),
                           );
                         },
                       );
@@ -233,7 +236,53 @@ class _SatuanScreenState extends State<SatuanScreen> {
                     return Container(child: Text(''));
                   },
                 ).paddingSymmetric(vertical: 10),
-              ).paddingSymmetric(horizontal: 20),
+              ).pOnly(left: 20, right: 20, top: 5, bottom: 10),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: colorName.background,
+                  border: Border.all(color: colorName.greys),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    VStack([
+                      "Jumlah Items"
+                          .richText
+                          .color(colorName.primary)
+                          .fontFamily('nunitoexb')
+                          .size(16)
+                          .bold
+                          .makeCentered(),
+                    ]).p(10),
+                    Container(
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: () => c.totalsatuanmin(),
+                            icon: Image(
+                              image: AssetImage('images/min.png'),
+                            ),
+                          ),
+                          5.widthBox,
+                          Obx(() => "${c.totalsatuan.toString()}"
+                              .text
+                              .fontFamily('nunitoexb')
+                              .size(16)
+                              .make()),
+                          5.widthBox,
+                          IconButton(
+                            onPressed: () => c.totalsatuanplus(),
+                            icon: Image(
+                              image: AssetImage('images/plus.png'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ).pOnly(left: 20, right: 20, bottom: 20),
             ],
           ),
         ),

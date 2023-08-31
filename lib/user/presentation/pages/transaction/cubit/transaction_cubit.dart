@@ -1,10 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:lestari_laundry/user/domain/base/authentication_headers_request.dart';
 import '../../../../base/result_entity/result_entity.dart';
 import '../../../../data/utilities/utilities.dart';
 import '../../../../domain/model/data/transaction/transaction_data.dart';
+import '../../../../domain/model/request/transaction/transaction_collection_request.dart';
 import '../../../../domain/model/request/transaction/transaction_data_request.dart';
 import '../../../../domain/repository/transaction/transaction_repository.dart';
 
@@ -15,7 +15,7 @@ class TransactionCubit extends Cubit<TransactionState> {
   TransactionCubit(
     this.repository,
   ) : super(TransactionInitial());
-  Future<void> btntransaction(TransactionDataRequest request) async {
+  Future<void> btntransaction(TransactionCollectionRequest request) async {
     emit(TransactionIsLoading());
     final token = await Commons().getUID();
     final response = await repository.submitTransaction(

@@ -45,6 +45,7 @@ class _DetailOrderState extends State<DetailOrder> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(
@@ -108,6 +109,7 @@ class _DetailOrderState extends State<DetailOrder> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(
@@ -179,6 +181,7 @@ class _DetailOrderState extends State<DetailOrder> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               HStack([
@@ -204,6 +207,7 @@ class _DetailOrderState extends State<DetailOrder> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(
@@ -215,7 +219,7 @@ class _DetailOrderState extends State<DetailOrder> {
                       .color(colorName.primary)
                       .bold
                       .make(),
-                  "${orderController.totalData?.totalKilogram}KG"
+                  "${orderController.totalData?.totalKilogram} KG"
                       .text
                       .color(colorName.black)
                       .bold
@@ -236,6 +240,7 @@ class _DetailOrderState extends State<DetailOrder> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(
@@ -268,6 +273,7 @@ class _DetailOrderState extends State<DetailOrder> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               HStack([
@@ -333,6 +339,7 @@ class _DetailOrderState extends State<DetailOrder> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               Row(

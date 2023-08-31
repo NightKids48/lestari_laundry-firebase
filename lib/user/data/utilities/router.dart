@@ -15,9 +15,15 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/onboard',
       name: 'onboard',
-      builder: (context, state) {
-        return const OnboardScreen();
+      redirect: (context, state) async {
+        final isAuth = context.read<AuthCubit>().checkToken();
+        if (await isAuth) {
+          return '/home';
+        } else {
+          return '/login';
+        }
       },
+      builder: (context, state) => const OnboardScreen(),
     ),
     GoRoute(
       path: '/register',
@@ -194,7 +200,7 @@ final GoRouter router = GoRouter(
       ],
     ),
   ],
-  initialLocation: '/home',
+  initialLocation: '/onboard',
   debugLogDiagnostics: true,
   routerNeglect: true,
 );

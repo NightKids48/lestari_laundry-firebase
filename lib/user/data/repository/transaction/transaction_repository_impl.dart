@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:lestari_laundry/user/domain/base/authentication_headers_request.dart';
 import 'package:lestari_laundry/user/domain/model/data/transaction/transaction_data.dart';
 import '../../../base/result_entity/result_entity.dart';
-import '../../../domain/model/request/transaction/transaction_data_request.dart';
+import '../../../domain/model/request/transaction/transaction_collection_request.dart';
 import '../../../domain/repository/transaction/transaction_repository.dart';
 import '../../model/transaction/transaction_data_response.dart';
 import '../../service/remote/transaction/transaction_remote_service.dart';
@@ -12,7 +12,7 @@ class TransactionRepositoryImpl implements TransactionRepository {
 
   @override
   Future<ResultEntity<TransactionData>> submitTransaction(
-      TransactionDataRequest request,
+      TransactionCollectionRequest request,
       AuthenticationHeadersRequest header) async {
     try {
       final response =

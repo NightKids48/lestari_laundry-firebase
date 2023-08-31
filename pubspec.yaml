@@ -75,7 +75,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "images/launch.png"
+  image_path: "images/diproses.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -135,6 +135,7 @@ flutter:
     - images/diantar.png
     - images/pesanan.png
     - images/penghasilan.png
+    - images/newlogo.png
 
   fonts:
     - family: nunito

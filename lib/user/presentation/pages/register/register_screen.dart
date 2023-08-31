@@ -158,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ]).pOnly(left: 20),
       TextFormField(
         controller: lastNameController,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.name,
         decoration: const InputDecoration(
           hintText: 'Masukan Nama Belakang anda',
           hintStyle: TextStyle(
@@ -311,28 +311,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
       50.heightBox,
       ButtonWidget(
         onPressed: () {
-          BlocProvider.of<RegisterCubit>(context).btnregister(
-            RegisterRequest(
-              userNameController.text,
-              phoneNumberController.text,
-              emailController.text,
-              passwordController.text,
+          BlocProvider.of<RegisterCubit>(context).btnregister(RegisterRequest(
+            userNameController.text,
+            phoneNumberController.text,
+            emailController.text,
+            passwordController.text,
+            '',
+            RegisterRequestAddress('', ''),
+            RegisterName(firstNameController.text, lastNameController.text),
+            RegisterAdress(
+              rtController.text,
+              rwController.text,
+              widget.city,
+              widget.province,
+              widget.zipcode,
+              adressDetailController.text,
               RegisterAdressCoordinates('', ''),
-              RegisterAdress(
-                rtController.text,
-                rwController.text,
-                adressDetailController.text,
-                widget.city,
-                widget.province,
-                widget.zipcode,
-                RegisterAdressCoordinates('', ''),
-              ),
-              RegisterName(
-                firstNameController.text,
-                lastNameController.text,
-              ),
             ),
-          );
+          ));
         },
         text: 'Register',
         color: colorName.button,

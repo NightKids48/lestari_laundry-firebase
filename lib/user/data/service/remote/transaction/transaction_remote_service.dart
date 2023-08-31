@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:lestari_laundry/user/domain/base/authentication_headers_request.dart';
 import '../../../../base/base_config/base_config.dart';
-import '../../../../domain/model/request/transaction/transaction_data_request.dart';
+import '../../../../domain/model/request/transaction/transaction_collection_request.dart';
 
 class TransactionRemoteService {
   Client client = Client();
@@ -10,7 +10,7 @@ class TransactionRemoteService {
     'populate': '*',
   };
   Future<Response> postTransaction(
-    TransactionDataRequest request,
+    TransactionCollectionRequest request,
     AuthenticationHeadersRequest header,
   ) async {
     final url = Uri.https(

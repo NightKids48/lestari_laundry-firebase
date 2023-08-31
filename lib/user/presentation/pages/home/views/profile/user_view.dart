@@ -180,9 +180,10 @@ class UserView extends StatelessWidget {
                     ),
                     title: "Log Out"
                         .text
-                        .size(15)
+                        .size(16)
+                        .color(colorName.button)
                         .bold
-                        .fontFamily('nunito')
+                        .fontFamily('nunitoexb')
                         .make(),
                     trailing: const Icon(
                       Icons.arrow_forward_ios,
@@ -220,11 +221,18 @@ class UserView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
+                style:
+                    ElevatedButton.styleFrom(backgroundColor: colorName.maroon),
                 onPressed: () {},
                 child: Text('Tidak'),
               ),
               ElevatedButton(
-                onPressed: () {},
+                style:
+                    ElevatedButton.styleFrom(backgroundColor: colorName.maroon),
+                onPressed: () {
+                  context.read<AuthCubit>().logout();
+                  context.goNamed('login');
+                },
                 child: Text('Oke'),
               )
             ],

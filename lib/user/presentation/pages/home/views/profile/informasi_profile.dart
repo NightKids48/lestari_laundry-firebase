@@ -16,7 +16,8 @@ class InformasiProfile extends StatelessWidget {
             .size(18)
             .fontFamily('nunitoexb')
             .color(colorName.button)
-            .make(),
+            .make()
+            .centered(),
         actions: [
           "Edit"
               .text
@@ -52,7 +53,7 @@ class InformasiProfile extends StatelessWidget {
                     VStack([
                       Row(
                         children: [
-                          "Nama Depan"
+                          "User Name"
                               .text
                               .color(colorName.button)
                               .size(14)
@@ -62,7 +63,7 @@ class InformasiProfile extends StatelessWidget {
                       ).pOnly(left: 20),
                       Row(
                         children: [
-                          state.data!.name.firstName.text
+                          state.data!.username.text
                               .color(colorName.primary)
                               .size(14)
                               .fontFamily('nunito')
@@ -74,7 +75,7 @@ class InformasiProfile extends StatelessWidget {
                     VStack([
                       Row(
                         children: [
-                          "Nama Belakang"
+                          "Email"
                               .text
                               .color(colorName.button)
                               .size(14)
@@ -84,7 +85,7 @@ class InformasiProfile extends StatelessWidget {
                       ).pOnly(left: 20),
                       Row(
                         children: [
-                          state.data!.name.lastName.text
+                          state.data!.email.text
                               .color(colorName.primary)
                               .size(14)
                               .fontFamily('nunito')
@@ -128,7 +129,7 @@ class InformasiProfile extends StatelessWidget {
                       ).pOnly(left: 20),
                       Row(
                         children: [
-                          state.data!.address.id.text
+                          state.data!.createdAt.text
                               .color(colorName.primary)
                               .size(14)
                               .fontFamily('nunito')

@@ -6,7 +6,7 @@ class IntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorName.juneBud,
+      backgroundColor: colorName.primary,
       bottomNavigationBar: VStack([
         ElevatedButton(
           onPressed: () {
@@ -30,7 +30,7 @@ class IntroScreen extends StatelessWidget {
             context.goNamed('login');
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: colorName.pixelated,
+            backgroundColor: colorName.button,
             padding: const EdgeInsets.all(20.0),
             shape: const StadiumBorder(),
           ),
@@ -45,16 +45,9 @@ class IntroScreen extends StatelessWidget {
       ]),
       body: Column(
         children: [
-          VxBox(
-            child: const Image(
-              image: AssetImage('images/intro_4.png'),
-            ).expand(),
-          )
-              .size(context.screenWidth, context.percentHeight * 50)
-              .color(colorName.background)
-              .bottomRounded(value: 25)
-              .make(),
-          100.heightBox,
+          Image(
+            image: AssetImage('images/newlogo.png'),
+          ).expand(),
         ],
       ),
     );

@@ -20,7 +20,6 @@ class KilogramRepositoryImpl implements KilogramRepository {
       print("DATA: ${response.body}");
 
       if (response.statusCode == 200) {
-        print('Disini Error');
         var data =
             KilogramCollectionDataResponse.fromJson(jsonDecode(response.body))
                     .data

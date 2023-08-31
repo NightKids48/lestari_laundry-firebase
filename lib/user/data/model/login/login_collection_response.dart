@@ -1,7 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:json_annotation/json_annotation.dart';
+
 import '../../../domain/model/data/login/login_data.dart';
 import '../../../domain/model/data/login/login_data_user.dart';
 import 'login_data_response.dart';
-import 'package:json_annotation/json_annotation.dart';
+
 part 'login_collection_response.g.dart';
 
 abstract class LoginCollectionResponseMapper {

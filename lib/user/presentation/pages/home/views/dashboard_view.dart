@@ -24,7 +24,7 @@ class _DashboardViewState extends State<DashboardView> {
             return VStack([
               Row(
                 children: [
-                  "Hallo,"
+                  "Hallo, "
                       .richText
                       .size(18)
                       .fontFamily('nunito')
@@ -87,7 +87,7 @@ class _DashboardViewState extends State<DashboardView> {
                 .color(colorName.button)
                 .bold
                 .make(),
-            "Lestari Laundry!"
+            "Loksa Laundry!"
                 .richText
                 .size(18)
                 .fontFamily('nunitoexb')
@@ -106,42 +106,46 @@ class _DashboardViewState extends State<DashboardView> {
         if (state is LocationIsLoading) {
           return Center(child: CircularProgressIndicator());
         } else if (state is LocationIsSuccess) {
-          return Container(
-            alignment: Alignment.centerRight,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(7),
-              color: colorName.button,
-            ),
-            child: ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: colorName.secondary,
-              ),
-              title: Column(
-                children: [
-                  Row(
+          return Column(
+            children: [
+              Container(
+                alignment: Alignment.centerRight,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: colorName.button,
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.location_on_rounded,
+                    color: colorName.secondary,
+                  ),
+                  title: Column(
                     children: [
-                      "Lokasi Kamu Sekarang"
-                          .text
-                          .color(colorName.grey)
-                          .fontFamily('nunito')
-                          .size(10)
-                          .make(),
+                      Row(
+                        children: [
+                          'Lokasi kamu sekarang'
+                              .text
+                              .color(colorName.grey)
+                              .fontFamily('nunito')
+                              .size(14)
+                              .make(),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          '${state.address}'
+                              .text
+                              .color(colorName.rightone)
+                              .fontFamily('nunitoexb')
+                              .size(15)
+                              .make(),
+                        ],
+                      ).scrollHorizontal(),
                     ],
                   ),
-                  Row(
-                    children: [
-                      '${state.address}'
-                          .text
-                          .color(colorName.rightone)
-                          .fontFamily('nunitoexb')
-                          .size(18)
-                          .make(),
-                    ],
-                  ).scrollHorizontal(),
-                ],
+                ),
               ),
-            ),
+            ],
           );
         } else if (state is LocationIsError) {
           return Center(

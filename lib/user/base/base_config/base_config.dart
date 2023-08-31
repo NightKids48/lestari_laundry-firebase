@@ -10,4 +10,5 @@ abstract class BaseConfig {
   static const String CHANGE_PASSWORD = "/auth/change-password";
   static const String PROFILE = "/api/users/me";
   static const String TRANSACTION = "/api/transactions";
+  static const String TRANSACTION_GET_ALL = "/api/transactions";
 }

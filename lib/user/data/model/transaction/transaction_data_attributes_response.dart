@@ -19,9 +19,9 @@ abstract class TransactionDataAttributesResponseMapper {
 @JsonSerializable()
 class TransactionDataAttributesResponse
     implements TransactionDataAttributesResponseMapper {
-  String? transactionStatus;
   String? createdAt;
   String? updateAt;
+  String? transactionStatus;
   String? publishedAt;
   String? specialNotes;
   List<TransactionDataOrderResponse>? orders;
@@ -29,9 +29,9 @@ class TransactionDataAttributesResponse
   TransactionDataPaymentInfoResponse? paymentInfo;
   TransactionUserResponse? user;
   TransactionDataAttributesResponse(
-    this.transactionStatus,
     this.createdAt,
     this.updateAt,
+    this.transactionStatus,
     this.publishedAt,
     this.specialNotes,
     this.orders,
@@ -63,7 +63,18 @@ class TransactionDataAttributesResponse
           TransactionUser(
             TransactionUserData(
               0,
-              TransactionUserAttributes('', '', '', '', '', '', '', '', '', ''),
+              TransactionUserAttributes(
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+              ),
             ),
           ),
     );

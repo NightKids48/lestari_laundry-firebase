@@ -15,6 +15,7 @@ import '../../presentation/pages/home/satuan/satuan_screen/cubit/satuan_cubit.da
 import '../../presentation/pages/profile/name_data/name_data_cubit.dart';
 import '../../presentation/pages/profile/profile_data/profile_cubit.dart';
 import '../../presentation/screens.dart';
+import 'auth/auth_cubit.dart';
 
 part 'color.dart';
 part 'constanta.dart';

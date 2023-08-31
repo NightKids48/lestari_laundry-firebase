@@ -18,6 +18,7 @@ class LoginIsSucces extends LoginStates {
   });
 }
 
+// ignore: must_be_immutable
 class LoginIsError extends LoginStates {
   String? message;
   LoginIsError({this.message});

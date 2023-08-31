@@ -1,4 +1,4 @@
-part of '../../../../screens.dart';
+part of '../../../screens.dart';
 
 class DetailOrderKilogram extends StatefulWidget {
   DetailOrderKilogram({Key? key}) : super(key: key);
@@ -146,6 +146,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
                       decoration: BoxDecoration(
                         color: colorName.background,
                         borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: colorName.greys),
                       ),
                       child: Column(
                         children: [
@@ -303,7 +304,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
                       decoration: BoxDecoration(
                         color: colorName.background,
                         borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: colorName.grey),
+                        border: Border.all(color: colorName.greys),
                       ),
                       child: DropdownButton<String?>(
                         isExpanded: true,
@@ -358,7 +359,7 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
                       decoration: BoxDecoration(
                         color: colorName.background,
                         borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: colorName.grey),
+                        border: Border.all(color: colorName.greys),
                       ),
                       child: TextFormField(
                         enabled: statusSwitch ? false : true,

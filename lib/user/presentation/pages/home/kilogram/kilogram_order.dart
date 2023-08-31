@@ -41,6 +41,7 @@ class _KilogramOrderState extends State<KilogramOrder> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorName.background,
+              border: Border.all(color: colorName.greys),
             ),
             child: VStack([
               HStack([

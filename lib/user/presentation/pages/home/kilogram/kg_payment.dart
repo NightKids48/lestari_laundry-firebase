@@ -9,8 +9,25 @@ class KgPayment extends StatefulWidget {
 
 class _KgPaymentState extends State<KgPayment> {
   final OrderController orderController = Get.find<OrderController>();
-  int? _value;
+
   int _selectedRadio = 0;
+  bool validationBtn() {
+    if (_selectedRadio != 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  int selectedRadio = 1;
+  bool isButtonDisabled = true;
+
+  setSelectedRadio(int val) {
+    setState(() {
+      selectedRadio = val;
+      isButtonDisabled = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +97,11 @@ class _KgPaymentState extends State<KgPayment> {
           ),
           ButtonWidget(
             text: 'Lanjutkan',
-            onPressed: () {
-              context.goNamed('codkg');
-            },
+            onPressed: isButtonDisabled
+                ? null // Button is disabled if isButtonDisabled is true
+                : () {
+                    context.goNamed('codkg');
+                  },
           ).pOnly(left: 20, right: 20, bottom: 20, top: 5),
         ]),
       ),
@@ -104,8 +123,10 @@ class _KgPaymentState extends State<KgPayment> {
             ),
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: colorName.background),
+                borderRadius: BorderRadius.circular(10),
+                color: colorName.background,
+                border: Border.all(color: colorName.greys),
+              ),
               child: VStack(
                 [
                   ListTile(
@@ -122,15 +143,9 @@ class _KgPaymentState extends State<KgPayment> {
                         .bold
                         .make(),
                     trailing: Radio(
-                      value: 1,
-                      groupValue: _value,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            _value = value!;
-                          },
-                        );
-                      },
+                      value: 0,
+                      groupValue: selectedRadio,
+                      onChanged: (val) => setSelectedRadio(val!),
                     ),
                   ),
                 ],
@@ -180,6 +195,7 @@ class _KgPaymentState extends State<KgPayment> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: colorName.background,
+                border: Border.all(color: colorName.greys),
               ),
               child: VStack([
                 Row(
@@ -268,7 +284,7 @@ class _KgPaymentState extends State<KgPayment> {
             ).pOnly(left: 20, right: 20),
           ],
         ),
-      ),
+      ).scrollVertical(),
     );
   }
 }

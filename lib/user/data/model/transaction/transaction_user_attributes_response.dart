@@ -21,16 +21,17 @@ class TransactionUserAttributesResponse
   String? fullname;
   String? userRole;
   TransactionUserAttributesResponse(
-      this.email,
-      this.provider,
-      this.confirmed,
-      this.blocked,
-      this.createdAt,
-      this.updatedAt,
-      this.username,
-      this.phoneNumber,
-      this.fullname,
-      this.userRole);
+    this.email,
+    this.provider,
+    this.confirmed,
+    this.blocked,
+    this.createdAt,
+    this.updatedAt,
+    this.username,
+    this.phoneNumber,
+    this.fullname,
+    this.userRole,
+  );
 
   factory TransactionUserAttributesResponse.fromJson(
           Map<String, dynamic> json) =>

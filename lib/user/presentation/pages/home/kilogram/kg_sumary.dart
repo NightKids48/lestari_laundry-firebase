@@ -71,6 +71,7 @@ class _KgSumaryState extends State<KgSumary> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: colorName.background,
+                border: Border.all(color: colorName.greys),
               ),
               child: VStack([
                 Row(
@@ -85,7 +86,7 @@ class _KgSumaryState extends State<KgSumary> {
                           .color(colorName.primary)
                           .bold
                           .make(),
-                      "${Commons().setPrice(double.parse(orderController.layananData?.price ?? '0'))}/KG"
+                      "${Commons().setPrice(double.parse(orderController.layananData?.price ?? '0'))} / KG"
                           .text
                           .size(13)
                           .fontFamily('nunito')
@@ -101,6 +102,7 @@ class _KgSumaryState extends State<KgSumary> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: colorName.background,
+                border: Border.all(color: colorName.greys),
               ),
               child: VStack([
                 Row(
@@ -151,6 +153,7 @@ class _KgSumaryState extends State<KgSumary> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: colorName.background,
+                border: Border.all(color: colorName.greys),
               ),
               child: TextFormField(
                 controller: instruksiTambahanController,
@@ -185,6 +188,7 @@ class _KgSumaryState extends State<KgSumary> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: colorName.background,
+                border: Border.all(color: colorName.greys),
               ),
               child: VStack([
                 "Lestari Delivery"
@@ -209,6 +213,7 @@ class _KgSumaryState extends State<KgSumary> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: colorName.background,
+                border: Border.all(color: colorName.greys),
               ),
               child: VStack([
                 HStack([
@@ -281,6 +286,7 @@ class _KgSumaryState extends State<KgSumary> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: colorName.background,
+                border: Border.all(color: colorName.greys),
               ),
               child: VStack([
                 Row(
