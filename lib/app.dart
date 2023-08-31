@@ -9,7 +9,6 @@ import 'package:lestari_laundry/user/presentation/pages/transaction/cubit/transa
 import 'user/data/repository/change_password.dart/change_password_repository_impl.dart';
 import 'user/data/repository/kilogram/kilogram_repository_impl.dart';
 import 'user/data/repository/login/login_repository_impl.dart';
-import 'user/data/repository/profile/name_data_repository_impl.dart';
 import 'user/data/repository/profile/profile_repository_impl.dart';
 import 'user/data/repository/register/register_repository_impl.dart';
 import 'user/data/repository/satuan/satuan_repository_impl.dart';
