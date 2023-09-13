@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1084924740025",
+    "project_id": "lestari-laundry-firebase",
+    "storage_bucket": "lestari-laundry-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084924740025:android:d24d7365ce5c0bd4f27668",
+        "android_client_info": {
+          "package_name": "com.example.lestari_laundry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084924740025-40baus4rbb7iqh5cjknt54kt5dfih8lh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lestari_laundry",
+            "certificate_hash": "c68b23e51f2e3c6b5b4ff1180626d8d7f0cf4448"
+          }
+        },
+        {
+          "client_id": "1084924740025-gfe9p3lb1mclp1g0hvh67a4ptf004hhu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv7JUy2ouaYAkeWtF0NZKgi4BaWQed9Ug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084924740025-gfe9p3lb1mclp1g0hvh67a4ptf004hhu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
