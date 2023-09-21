@@ -74,34 +74,37 @@ class _KilogramScreenState extends State<KilogramScreen> {
               ),
             ],
           ).pOnly(left: 20, right: 20, top: 10),
-          ButtonWidget(
-            text: "Lanjutkan",
-            onPressed: validationBtn()
-                ? () async {
-                    TotalData newTotalData = TotalData(
-                      totalPrice:
-                          '${_selectedRadio * int.parse(c.totalkilogram.toString())}',
-                      totalKilogram: c.totalkilogram.toString(),
-                    );
+          BlocBuilder<KilogramCubit, KilogramState>(builder: (context, state) {
+            return ButtonWidget(
+              text: "Lanjutkan",
+              isLoading: (state is LoginIsLoading) ? true : false,
+              onPressed: validationBtn()
+                  ? () async {
+                      TotalData newTotalData = TotalData(
+                        totalPrice:
+                            '${_selectedRadio * int.parse(c.totalkilogram.toString())}',
+                        totalKilogram: c.totalkilogram.toString(),
+                      );
 
-                    LayananData newLayananData = LayananData(
-                      id: _idLayanan!,
-                      image: _layananImage.toString(),
-                      name: _layananName.toString(),
-                      price: _selectedRadio.toString(),
-                    );
-                    orderController.setTotalData(newTotalData);
-                    orderController.setLayananData(newLayananData);
-                    context.goNamed(
-                      routeName.orderkg,
-                      extra: {
-                        'totalData': newTotalData,
-                        'layananData': newLayananData,
-                      },
-                    );
-                  }
-                : null,
-          ).p(20),
+                      LayananData newLayananData = LayananData(
+                        id: _idLayanan!,
+                        image: _layananImage.toString(),
+                        name: _layananName.toString(),
+                        price: _selectedRadio.toString(),
+                      );
+                      orderController.setTotalData(newTotalData);
+                      orderController.setLayananData(newLayananData);
+                      context.goNamed(
+                        routeName.orderkg,
+                        extra: {
+                          'totalData': newTotalData,
+                          'layananData': newLayananData,
+                        },
+                      );
+                    }
+                  : null,
+            ).p(20);
+          }),
         ]),
       ),
       appBar: AppBar(
@@ -202,13 +205,13 @@ class _KilogramScreenState extends State<KilogramScreen> {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: colorName.greys),
                 ),
-                child: BlocBuilder<SatuanCubit, SatuanState>(
+                child: BlocBuilder<KilogramCubit, KilogramState>(
                   builder: (context, state) {
-                    if (state is SatuanIsLoading) {
+                    if (state is KilogramIsLoading) {
                       return Center(
                         child: CircularProgressIndicator(),
                       );
-                    } else if (state is SatuanIsSuccess) {
+                    } else if (state is KilogramIsSucces) {
                       return ListView.builder(
                         itemCount: state.data!.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -227,9 +230,9 @@ class _KilogramScreenState extends State<KilogramScreen> {
                                   children: [
                                     "${data.productName}"
                                         .text
-                                        .size(14)
+                                        .size(16)
                                         .color(colorName.primary)
-                                        .fontFamily('nunito')
+                                        .fontFamily('nunitoexb')
                                         .bold
                                         .make(),
                                   ],
@@ -238,6 +241,7 @@ class _KilogramScreenState extends State<KilogramScreen> {
                                   children: [
                                     "IDR ${data.productPrice}/Piece"
                                         .text
+                                        .bold
                                         .size(12)
                                         .fontFamily('nunito')
                                         .color(colorName.button)

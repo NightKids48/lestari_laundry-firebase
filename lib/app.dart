@@ -1,9 +1,12 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lestari_laundry/user/data/repository/delivery_provider_impl.dart/delivery_provider_repository_impl.dart';
 import 'package:lestari_laundry/user/data/repository/get_all_transaction/get_all_transaction_repository_impl.dart';
 import 'package:lestari_laundry/user/data/repository/transaction/transaction_repository_impl.dart';
 import 'package:lestari_laundry/user/data/utilities/utilities.dart';
+import 'package:lestari_laundry/user/domain/model/data/delivery_provider/delivery_provider.dart';
+import 'package:lestari_laundry/user/presentation/pages/delivery_provider/cubit/delivery_provider_cubit.dart';
 import 'package:lestari_laundry/user/presentation/pages/home/views/aktivitas/activity_screen/cubit/get_all_transaction_cubit.dart';
 import 'package:lestari_laundry/user/presentation/pages/transaction/cubit/transaction_cubit.dart';
 import 'user/data/repository/change_password.dart/change_password_repository_impl.dart';
@@ -31,6 +34,10 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => AuthCubit(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              DeliveryProviderCubit(DeliveryProviderRepositoryImpl()),
         ),
         BlocProvider(
           create: (context) =>

@@ -2,7 +2,7 @@ part of 'controllers.dart';
 
 class MyController extends GetxController {
   var totalkilogram = 2.obs;
-  var totalsatuan = 1.obs;
+  var totalsatuan = 2.obs;
   var order = 2.obs;
   var shirt = 0.obs;
   var tshirt = 0.obs;

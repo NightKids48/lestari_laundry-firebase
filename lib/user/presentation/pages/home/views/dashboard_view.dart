@@ -55,9 +55,7 @@ class _DashboardViewState extends State<DashboardView> {
               10.heightBox,
               _buildText(),
               20.heightBox,
-              _buildLokasii(),
-              20.heightBox,
-              //_buildLokasi(),
+              _buildLokasi(),
               20.heightBox,
               _buildPromo(),
               25.heightBox,
@@ -109,61 +107,6 @@ class _DashboardViewState extends State<DashboardView> {
   }
 
   Widget _buildLokasi() {
-    return Container(
-      decoration: BoxDecoration(
-        color: colorName.background,
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: colorName.greys),
-      ),
-      child: BlocBuilder<LocationCubit, LocationState>(
-        builder: (context, state) {
-          if (state is LocationIsLoading) {
-            return Center(child: CircularProgressIndicator());
-          } else if (state is LocationIsSuccess) {
-            return DropdownButton<String?>(
-              isExpanded: true,
-              value: kelas,
-              style: TextStyle(
-                color: colorName.button,
-                fontFamily: 'nunitoexb',
-                fontSize: 13,
-              ),
-              underline: Container(),
-              items: [
-                '${state.address}',
-              ]
-                  .map(
-                    (element) => DropdownMenuItem<String?>(
-                      child: Text('$element'),
-                      value: element,
-                    ),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                setState(
-                  () {
-                    if (value != null) {
-                      kelas = value;
-                    }
-                  },
-                );
-              },
-            ).pOnly(left: 10, top: 5, bottom: 5);
-          } else if (state is LocationIsError) {
-            return Center(
-              child: Text(state.message),
-            );
-          } else {
-            return Center(
-              child: Container(),
-            );
-          }
-        },
-      ),
-    );
-  }
-
-  Widget _buildLokasii() {
     return BlocBuilder<LocationCubit, LocationState>(
       builder: (context, state) {
         if (state is LocationIsLoading) {
@@ -172,8 +115,9 @@ class _DashboardViewState extends State<DashboardView> {
           return Column(
             children: [
               Container(
+                alignment: Alignment.centerRight,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(7),
                   color: colorName.button,
                 ),
                 child: ListTile(
@@ -189,7 +133,8 @@ class _DashboardViewState extends State<DashboardView> {
                               .text
                               .color(colorName.grey)
                               .fontFamily('nunito')
-                              .size(15)
+                              .bold
+                              .size(14)
                               .make(),
                         ],
                       ),
@@ -199,10 +144,10 @@ class _DashboardViewState extends State<DashboardView> {
                               .text
                               .color(colorName.rightone)
                               .fontFamily('nunitoexb')
-                              .size(13)
+                              .size(15)
                               .make(),
                         ],
-                      ).scrollHorizontal()
+                      ).scrollHorizontal(),
                     ],
                   ),
                 ),
@@ -245,7 +190,6 @@ class _DashboardViewState extends State<DashboardView> {
                 .size(18)
                 .fontFamily('nunitoexb')
                 .color(colorName.button)
-                .bold
                 .make(),
           ],
         ),
@@ -270,6 +214,7 @@ class _DashboardViewState extends State<DashboardView> {
                 children: const [
                   Image(
                     image: AssetImage('images/kg.png'),
+                    height: 150,
                   ),
                 ],
               ),
@@ -288,6 +233,7 @@ class _DashboardViewState extends State<DashboardView> {
                 children: const [
                   Image(
                     image: AssetImage('images/piece.png'),
+                    height: 150,
                   ),
                 ],
               ),

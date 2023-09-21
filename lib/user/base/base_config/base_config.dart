@@ -12,4 +12,5 @@ abstract class BaseConfig {
   static const String TRANSACTION = "/api/transactions";
   static const String TRANSACTION_GET_ALL = "/api/transactions";
   static const String TRANSACTION_USER = "/api/transactions";
+  static const String DELIVERY_PROVIDER = "/api/deliveries";
 }

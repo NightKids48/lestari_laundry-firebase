@@ -5,12 +5,13 @@ class ButtonWidget extends StatelessWidget {
   final String text;
   final Color? color;
   final bool? isLoading;
-  const ButtonWidget(
-      {super.key,
-      this.onPressed,
-      this.text = 'Button',
-      this.isLoading = false,
-      this.color = colorName.primary});
+  const ButtonWidget({
+    super.key,
+    this.onPressed,
+    this.text = 'Button',
+    this.isLoading = false,
+    this.color = colorName.primary,
+  });
 
   @override
   Widget build(BuildContext context) {

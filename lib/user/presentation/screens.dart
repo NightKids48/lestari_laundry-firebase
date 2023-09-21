@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lestari_laundry/user/presentation/pages/change_password/cubit/change_password_cubit.dart';
+import 'package:lestari_laundry/user/presentation/pages/delivery_provider/cubit/delivery_provider_cubit.dart';
 import 'package:lestari_laundry/user/presentation/pages/home/kilogram/model_data/detail_penerima.dart';
 import 'package:lestari_laundry/user/presentation/pages/home/satuan/satuan_screen/cubit/satuan_cubit.dart';
 import 'package:lestari_laundry/user/presentation/pages/home/views/aktivitas/activity_screen/cubit/get_all_transaction_cubit.dart';

@@ -409,11 +409,11 @@ class _DetailOrderKilogramState extends State<DetailOrderKilogram> {
                         enabled: statusSwitch ? false : true,
                         controller: instruksiTambahanController,
                         decoration: const InputDecoration(
-                          hintText: 'Ketik pesan ...',
+                          hintText: 'Ketik pesan .....',
                           hintStyle: TextStyle(
                             color: colorName.grey,
-                            fontSize: 13,
-                            fontFamily: 'nunitoexb',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
                           border: InputBorder.none,
                         ),

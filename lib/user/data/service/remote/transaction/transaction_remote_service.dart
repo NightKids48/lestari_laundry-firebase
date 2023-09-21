@@ -6,7 +6,7 @@ import '../../../../base/base_config/base_config.dart';
 
 class TransactionRemoteService {
   Client client = Client();
-  Map<String, dynamic> queryParams = {
+  Map<String, String> queryParams = {
     'populate': '*',
   };
   Future<Response> postTransaction(

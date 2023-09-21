@@ -176,7 +176,11 @@ class _SatuanScreenState extends State<SatuanScreen> {
                 ),
                 child: BlocBuilder<SatuanCubit, SatuanState>(
                   builder: (context, state) {
-                    if (state is SatuanIsSuccess) {
+                    if (state is SatuanIsLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is SatuanIsSuccess) {
                       return ListView.builder(
                         itemCount: state.data!.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -195,9 +199,9 @@ class _SatuanScreenState extends State<SatuanScreen> {
                                   children: [
                                     "${data.productName}"
                                         .text
-                                        .size(14)
+                                        .size(16)
                                         .color(colorName.primary)
-                                        .fontFamily('nunito')
+                                        .fontFamily('nunitoexb')
                                         .bold
                                         .make(),
                                   ],
@@ -206,6 +210,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                                   children: [
                                     "IDR ${data.productPrice}/Piece"
                                         .text
+                                        .bold
                                         .size(12)
                                         .fontFamily('nunito')
                                         .color(colorName.button)
@@ -233,7 +238,7 @@ class _SatuanScreenState extends State<SatuanScreen> {
                         },
                       );
                     }
-                    return Container(child: Text(''));
+                    return Container(child: Text('Kosong'));
                   },
                 ).paddingSymmetric(vertical: 10),
               ).pOnly(left: 20, right: 20, top: 5, bottom: 10),

@@ -156,18 +156,23 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ).pOnly(right: 20),
       16.heightBox,
-      ButtonWidget(
-              onPressed: () {
-                BlocProvider.of<LoginCubit>(context).btnlogin(
-                  LoginRequest(
-                    emailController.text,
-                    passwordController.text,
-                  ),
-                );
-              },
-              text: 'Log In',
-              color: colorName.button)
-          .p(20),
+      BlocBuilder<LoginCubit, LoginStates>(
+        builder: (context, state) {
+          return ButtonWidget(
+            onPressed: () {
+              BlocProvider.of<LoginCubit>(context).btnlogin(
+                LoginRequest(
+                  emailController.text,
+                  passwordController.text,
+                ),
+              );
+            },
+            isLoading: (state is LoginIsLoading) ? true : false,
+            text: 'Log In',
+            color: colorName.button,
+          ).p(20);
+        },
+      ),
     ]);
   }
 }
